@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5-Sheet Methodology | Vellett Industrial Catalog Engineering</title>
+  <meta name="description" content="Deep dive into the 5-Sheet Catalog Engineering deliverable. Unrolling part matrices, auditing footnote de-ratings, and ERP-ready item masters for Prophet 21 and Infor.">
+  <link rel="canonical" href="https://vellett.com/methodology/">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vellett.com/methodology/">
+  <meta property="og:title" content="5-Sheet Methodology | Vellett Industrial Catalog Engineering">
+  <meta property="og:description" content="Deep dive into the 5-Sheet Catalog Engineering deliverable. Unrolling part matrices, auditing footnote de-ratings, and ERP-ready item masters for Prophet 21 and Infor.">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="5-Sheet Methodology | Vellett Industrial Catalog Engineering">
+  <meta name="twitter:description" content="Deep dive into the 5-Sheet Catalog Engineering deliverable. Unrolling part matrices, auditing footnote de-ratings, and ERP-ready item masters for Prophet 21 and Infor.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: {
+              850: '#18181B',
+              900: '#09090B',
+              950: '#040405',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    .border-subtle { border-color: #E4E4E7; }
+    .bg-parchment { background-color: #FBFBF9; }
+    .bg-parchment-subtle { background-color: #F4F4F0; }
+    table th, table td { vertical-align: top; }
+  </style>
+  
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "The 5-Sheet Catalog Engineering Methodology for Industrial Distributors",
+  "description": "Comprehensive engineering standard for transforming dense manufacturer PDF datasheets into audited, 20-attribute item masters for ERP and B2B eCommerce.",
+  "author": {
+    "@type": "Person",
+    "name": "Ayush Bijalwan",
+    "jobTitle": "Principal Catalog Engineer & Managing Director"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Vellett Industrial Catalog Engineering LLC",
+    "url": "https://vellett.com/"
+  },
+  "mainEntityOfPage": "https://vellett.com/methodology/"
+}
+  </script>
+
+</head>
+<body class="bg-parchment text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden md:inline text-zinc-700">|</span>
+        <span class="hidden md:inline">Principal: Ayush Bijalwan</span>
+        <span class="hidden md:inline text-zinc-700">|</span>
+        <span class="hidden md:inline">Delaware, USA</span>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="tel:+19193391208" class="text-zinc-200 hover:text-white font-mono font-semibold flex items-center space-x-1.5 transition-colors">
+          <span>Direct Desk:</span>
+          <span class="text-white underline decoration-zinc-600 underline-offset-2">(919) 339-1208</span>
+        </a>
+        <a href="mailto:inquiries@vellett.com" class="text-zinc-400 hover:text-zinc-200 transition-colors">inquiries@vellett.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="border-b border-zinc-200 bg-white/95 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-8">
+        <a href="/" class="flex flex-col group">
+          <span class="text-2xl font-bold tracking-tight font-sans text-zinc-950 group-hover:text-zinc-700 transition-colors">VELLETT</span>
+          <span class="text-[10px] tracking-widest uppercase text-zinc-500 font-mono -mt-1">Industrial Catalog Engineering</span>
+        </a>
+        <div class="hidden lg:block h-6 w-px bg-zinc-200"></div>
+        <span class="hidden xl:inline-block text-xs text-zinc-500 max-w-xs leading-tight">
+          Manufacturer PDF Datasheets to ERP Item Masters for Industrial Distributors
+        </span>
+      </div>
+      
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="/methodology/" class="text-sm text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Methodology</a>
+        <a href="/services/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Services</a>
+        <a href="/pricing/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Pricing & Retainers</a>
+        <a href="/resources/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Technical Guides</a>
+        <a href="/contact/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Direct Desk</a>
+        
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <a href="tel:+19193391208" class="hidden sm:inline-flex items-center text-xs font-mono font-semibold text-zinc-900 border border-zinc-300 px-3.5 py-2 hover:bg-zinc-100 transition-colors">
+          Call (919) 339-1208
+        </a>
+        <a href="/contact/" class="inline-flex items-center justify-center text-xs font-semibold uppercase tracking-wider text-white bg-zinc-950 hover:bg-zinc-800 px-5 py-2.5 transition-colors shadow-sm">
+          Request 10-SKU Sample
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Page Header -->
+  <section class="border-b border-zinc-200 pt-16 pb-16 px-4 sm:px-8 bg-parchment">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-4xl">
+        <div class="inline-flex items-center space-x-2 border border-zinc-300 bg-white px-3 py-1 text-xs font-mono uppercase tracking-wider text-zinc-700 mb-6">
+          <span>Engineering Standard &bull; Version 4.2</span>
+          <span class="text-zinc-400">|</span>
+          <span class="text-zinc-950 font-semibold">5-Sheet Architecture</span>
+        </div>
+        
+        <h1 class="text-4xl sm:text-5xl font-serif tracking-tight text-zinc-950 leading-[1.15] mb-6">
+          The 5-Sheet Catalog Architecture: From Raw Engineering PDF to Audited Item Master
+        </h1>
+        
+        <p class="text-lg text-zinc-600 font-sans leading-relaxed max-w-3xl mb-8">
+          Generic PIM software and offshore data entry treat manufacturer catalogs as simple text re-typing. We treat catalog preparation as an engineering discipline. Every manufacturer catalog we onboard is delivered as an audited 5-tab workbook structured for automated ERP ingestion and counter sales protection.
+        </p>
+
+        <div class="pt-6 border-t border-zinc-200 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-zinc-500 font-mono">
+          <span>Principal Author: <strong class="text-zinc-900">Ayush Bijalwan</strong></span>
+          <span>&bull;</span>
+          <span>Target ERPs: Prophet 21, Infor CSD, NetSuite, SAP</span>
+          <span>&bull;</span>
+          <span>Direct Desk: <a href="tel:+19193391208" class="text-zinc-900 font-semibold underline">(919) 339-1208</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Executive Summary Table -->
+  <section class="py-16 px-4 sm:px-8 border-b border-zinc-200 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-8">
+        <span class="text-xs font-mono uppercase tracking-widest text-zinc-500">Deliverable Architecture</span>
+        <h2 class="text-2xl sm:text-3xl font-serif text-zinc-950 tracking-tight mt-1">
+          The 5 Tabs Inside Every Vellett Workbook
+        </h2>
+      </div>
+
+      <div class="overflow-x-auto border border-zinc-300 shadow-sm">
+        <table class="w-full text-left text-xs font-sans">
+          <thead class="bg-zinc-950 text-white font-mono text-[11px] uppercase tracking-wider">
+            <tr>
+              <th class="p-4 w-1/5">Tab Name</th>
+              <th class="p-4 w-2/5">Technical Scope &amp; Contents</th>
+              <th class="p-4 w-2/5">Distributor Impact &amp; Problem Solved</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-200">
+            <tr class="hover:bg-zinc-50 transition-colors">
+              <td class="p-4 font-mono font-bold text-zinc-950">1_ERP_And_Web_Import_Ready</td>
+              <td class="p-4 text-zinc-700 leading-relaxed">
+                20 normalized columns: Clean B2B title, unrolled manufacturer part number, exact PDF page citation, embedded product image thumbnail, HTML bullet specifications, category path, and direct datasheet URL.
+              </td>
+              <td class="p-4 text-zinc-600 leading-relaxed">
+                Eliminates manual re-typing. Formatted directly for Prophet 21 DynaChange or Infor CSD item import without CSV reformatting.
+              </td>
+            </tr>
+            <tr class="hover:bg-zinc-50 transition-colors bg-amber-50/30">
+              <td class="p-4 font-mono font-bold text-amber-950">2_Footnote_Exception_Audit</td>
+              <td class="p-4 text-zinc-700 leading-relaxed">
+                Exhaustive extraction of engineering footnotes: temperature de-ratings (e.g. glycerin fill dropping limit from 400&deg;F to 150&deg;F), steam siphon requirements, and seat pressure-temperature curves with exact PDF page quotes.
+              </td>
+              <td class="p-4 text-zinc-600 leading-relaxed">
+                Prevents catastrophic industrial returns, warranty claim disputes, and hazardous misapplications on customer job sites.
+              </td>
+            </tr>
+            <tr class="hover:bg-zinc-50 transition-colors">
+              <td class="p-4 font-mono font-bold text-zinc-950">3_StockOut_Cross_Reference</td>
+              <td class="p-4 text-zinc-700 leading-relaxed">
+                Direct 1:1 cross-reference mapping of every SKU to its primary competitor interchange (e.g., Ashcroft &harr; WIKA, Swagelok &harr; Parker) with form-fit-function compatibility validation notes.
+              </td>
+              <td class="p-4 text-zinc-600 leading-relaxed">
+                Recovers inside sales during factory stockouts and 16-week supplier lead times. Counter reps can quote in-stock alternatives instantly.
+              </td>
+            </tr>
+            <tr class="hover:bg-zinc-50 transition-colors">
+              <td class="p-4 font-mono font-bold text-zinc-950">4_Price_Reconciliation_Ledger</td>
+              <td class="p-4 text-zinc-700 leading-relaxed">
+                Direct side-by-side reconciliation of legacy ERP purchase costs against the manufacturer's newest price sheet. Calculates percentage variance and identifies unannounced price hikes.
+              </td>
+              <td class="p-4 text-zinc-600 leading-relaxed">
+                Halts margin leakage immediately. Prevents quoting customers at outdated 2024 price levels when the manufacturer raised prices by 8%.
+              </td>
+            </tr>
+            <tr class="hover:bg-zinc-50 transition-colors">
+              <td class="p-4 font-mono font-bold text-zinc-950">5_Faceted_Search_Taxonomy</td>
+              <td class="p-4 text-zinc-700 leading-relaxed">
+                Unified attribute taxonomies for B2B e-commerce: normalized connection types (NPT vs BSP), pressure scales (numeric PSI vs bar), wetted materials, and body configurations.
+              </td>
+              <td class="p-4 text-zinc-600 leading-relaxed">
+                Fixes broken faceted search on BigCommerce and Adobe Commerce. Customers find the exact valve or gauge in 2 clicks rather than bouncing.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep Dive Sheet by Sheet -->
+  <section class="py-20 px-4 sm:px-8 border-b border-zinc-200 bg-parchment">
+    <div class="max-w-4xl mx-auto space-y-16">
+      
+      <!-- Sheet 1 Section -->
+      <div id="sheet-1" class="border border-zinc-300 bg-white p-8">
+        <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 1</div>
+        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 1: ERP &amp; Web Import Master Record</h3>
+        <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
+          Most industrial distributors receive supplier data as an unstructured PDF. Our catalog engineers unroll every ordering code matrix into fully realized individual part numbers. If an Ashcroft gauge series has 14 dial ranges, 3 wetted materials, and 2 connection sizes, we unroll the 84 discreet SKUs with normalized attributes.
+        </p>
+        <div class="bg-zinc-950 text-zinc-200 p-4 rounded-none font-mono text-xs overflow-x-auto leading-relaxed mb-6">
+          <div class="text-zinc-500 text-[10px] uppercase tracking-wider mb-2">// 20-Attribute Standard Column Mapping</div>
+          1. MFR_PART_NUMBER       | 8. CONNECTION_SIZE     | 15. EMBEDDED_PHOTO_THUMBNAIL<br>
+          2. CLEAN_WEB_TITLE       | 9. CONNECTION_TYPE     | 16. HIGH_RES_IMAGE_URL<br>
+          3. SHORT_DESCRIPTION     | 10. DIAL_SIZE_OR_PORT   | 17. DATASHEET_PDF_PAGE_NUM<br>
+          4. HTML_BULLET_SPECS     | 11. ACCURACY_CLASS     | 18. DATASHEET_PDF_DIRECT_URL<br>
+          5. CATEGORY_PATH_ERP     | 12. MIN_OPERATING_TEMP | 19. ERP_PRODUCT_CLASS_CODE<br>
+          6. PRESSURE_RANGE_MIN    | 13. MAX_OPERATING_TEMP | 20. ERP_TAX_COMMODITY_CODE<br>
+          7. PRESSURE_RANGE_MAX    | 14. WETTED_MATERIAL
+        </div>
+        <div class="text-xs text-zinc-600 leading-relaxed font-sans">
+          <strong>Prophet 21 Compliance:</strong> Ready for direct ingestion via Prophet 21 Item Maintenance Import (DynaChange) or Infor CSD Item Master Upload.
+        </div>
+      </div>
+
+      <!-- Sheet 2 Section -->
+      <div id="sheet-2" class="border border-zinc-300 bg-white p-8">
+        <div class="text-xs font-mono text-amber-800 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 2</div>
+        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 2: Footnote &amp; Temperature Exception Audit</h3>
+        <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
+          This is where generic data processors and automated AI fail catastrophically. In industrial fluid power, instrumentation, and piping, the safe operating limit is rarely the large bold headline on page 1. It is almost always conditioned by footnotes on page 6 or 8.
+        </p>
+        <div class="border-l-4 border-amber-600 bg-amber-50/60 p-4 text-xs font-mono text-amber-950 space-y-2 mb-6">
+          <div class="font-bold text-[11px] uppercase tracking-wider text-amber-900">[VERBATIM MANUFACTURER FOOTNOTE EXTRACT]</div>
+          <p>"Ashcroft Type 1009: Standard gauge rated to 200&deg;F (93&deg;C) ambient. When specified with liquid glycerin fill, maximum process temperature is de-rated to 150&deg;F (65&deg;C). For process steam applications exceeding 150&deg;F, an external siphon or diaphragm seal is strictly required."</p>
+          <div class="text-amber-800 text-[10px] pt-1">Audited by Vellett: Flagged on Tab 2 with exact PDF page coordinate (Page 6, Footnote Note 3).</div>
+        </div>
+        <p class="text-xs text-zinc-600 leading-relaxed font-sans">
+          Every footnote is transcribed verbatim, cross-referenced against the affected SKU list, and assigned an operational warning code so your sales reps quote the required accessory siphon or PEEK seal upfront.
+        </p>
+      </div>
+
+      <!-- Sheet 3 Section -->
+      <div id="sheet-3" class="border border-zinc-300 bg-white p-8">
+        <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 3</div>
+        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 3: Drop-In Stock-Out Cross-Reference</h3>
+        <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
+          When an industrial customer calls your counter needing a Swagelok 60 Series ball valve or an Ashcroft 1009 pressure gauge, and your warehouse has 0 in stock with a 12-week factory lead time, that order is lost unless your rep can instantly quote an in-stock equivalent.
+        </p>
+        <div class="overflow-x-auto border border-zinc-200 mb-6">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-zinc-100 text-zinc-800">
+              <tr>
+                <th class="p-2.5">Primary Manufacturer SKU</th>
+                <th class="p-2.5">Interchange Competitor SKU</th>
+                <th class="p-2.5">Fit-Form-Function Validation</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-200">
+              <tr>
+                <td class="p-2.5 text-zinc-950 font-semibold">Ashcroft 25 1009 S W 02L 100#</td>
+                <td class="p-2.5 text-zinc-900">WIKA 232.53 2.5 100# 1/4 LM</td>
+                <td class="p-2.5 text-zinc-600 font-sans text-[11px]">100% Drop-in: Same 2.5" dial, 1/4 NPT lower mount, 316SS wetted.</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 text-zinc-950 font-semibold">Swagelok SS-62TS8</td>
+                <td class="p-2.5 text-zinc-900">Parker 8Z-B6LJ2-SSP</td>
+                <td class="p-2.5 text-zinc-600 font-sans text-[11px]">100% Drop-in: 1/2" compression, 316SS 3-piece, PTFE seats.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-zinc-600 leading-relaxed font-sans">
+          Tab 3 provides direct interchange tables ready to import into Prophet 21's Cross-Reference / Substitute Item tables.
+        </p>
+      </div>
+
+      <!-- Sheet 4 Section -->
+      <div id="sheet-4" class="border border-zinc-300 bg-white p-8">
+        <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 4</div>
+        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 4: Annual Price Sheet Reconciliation</h3>
+        <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
+          Suppliers regularly issue annual price adjustments in dense, unformatted spreadsheets or multi-page PDFs. If your purchasing team does not update the ERP cost matrix before sales reps quote contracts, your distributor absorbs the price hike directly out of gross margin.
+        </p>
+        <p class="text-xs text-zinc-600 leading-relaxed font-sans">
+          Tab 4 compares previous distributor purchase cost against new supplier list and multiplier tables, computing dollar variance, percentage delta, and flagging any price increase exceeding your preset alert threshold (e.g., &gt;5%).
+        </p>
+      </div>
+
+      <!-- Sheet 5 Section -->
+      <div id="sheet-5" class="border border-zinc-300 bg-white p-8">
+        <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 5</div>
+        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 5: Faceted Search &amp; Attribute Taxonomies</h3>
+        <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
+          On modern B2B e-commerce sites (BigCommerce, Magento, Adobe Commerce), customer search abandonment rates exceed 35% when attribute filters are fragmented. If one SKU is tagged "1/4 NPT", another "0.25 Inch NPT", and a third "1/4" Male NPT", your faceted search fails.
+        </p>
+        <p class="text-xs text-zinc-600 leading-relaxed font-sans">
+          Tab 5 provides unified, controlled vocabularies for all technical attributes: connection sizes, pressure ranges, wetted metallurgy, dial diameters, and body configurations.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PIM Comparison Section -->
+  <section class="py-20 px-4 sm:px-8 border-b border-zinc-200 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-10 pb-4 border-b border-zinc-200">
+        <span class="text-xs font-mono uppercase tracking-widest text-zinc-500">Industry Contrast</span>
+        <h2 class="text-2xl sm:text-3xl font-serif text-zinc-950 tracking-tight mt-1">
+          Why Buying PIM Software Doesn't Solve the PDF Problem
+        </h2>
+      </div>
+
+      <div class="space-y-6 text-sm text-zinc-700 font-sans leading-relaxed">
+        <p>
+          Distributors frequently spend $40,000 to $90,000 annually on Product Information Management (PIM) software platforms (such as Akeneo, inRiver, or Syndigo), expecting the software to solve their catalog onboarding backlog.
+        </p>
+        <p>
+          Six months later, they discover a painful reality: <strong>PIM software is an empty repository. It does not extract, unroll, audit, or normalize data from 80-page supplier PDFs.</strong>
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+          <div class="border border-zinc-300 bg-parchment p-6">
+            <h4 class="font-mono text-xs uppercase font-bold text-zinc-900 mb-2">PIM Software Only:</h4>
+            <ul class="space-y-2 text-xs text-zinc-600">
+              <li>&bull; Software license fee: $45,000 to $90,000/yr</li>
+              <li>&bull; Requires full-time internal operator ($75k/yr)</li>
+              <li>&bull; Still requires manual matrix unrolling</li>
+              <li>&bull; Zero footnote auditing or de-rating review</li>
+              <li>&bull; 6 to 9 month implementation timeline</li>
+            </ul>
+          </div>
+          <div class="border-2 border-zinc-950 bg-white p-6 shadow-sm">
+            <h4 class="font-mono text-xs uppercase font-bold text-zinc-950 mb-2">Vellett Managed Catalog Engineering:</h4>
+            <ul class="space-y-2 text-xs text-zinc-700">
+              <li>&bull; Predictable monthly retainer ($1,500 - $4,500/mo)</li>
+              <li>&bull; Turnkey execution: You send PDF, we deliver 5 sheets</li>
+              <li>&bull; Complete matrix unrolling &amp; attribute normalization</li>
+              <li>&bull; Human-in-the-loop footnote &amp; safety auditing</li>
+              <li>&bull; 5-Day Sprint delivery per catalog</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Box -->
+  <section class="py-20 px-4 sm:px-8 bg-zinc-950 text-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-xs font-mono uppercase tracking-widest text-zinc-400">Direct Engineering Evaluation</span>
+      <h2 class="text-3xl sm:text-4xl font-serif text-white tracking-tight mt-2 mb-4">
+        Test The 5-Sheet Methodology On Your Own Supplier PDF
+      </h2>
+      <p class="text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed mb-8 font-sans">
+        Send us an unformatted manufacturer PDF datasheet. Principal Catalog Engineer Ayush Bijalwan will extract 10 real SKUs into the complete 5-sheet workbook at zero cost.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="/contact/" class="bg-white text-zinc-950 hover:bg-zinc-200 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm">
+          Request Free 10-SKU Pilot Audit
+        </a>
+        <a href="tel:+19193391208" class="border border-zinc-700 text-zinc-200 hover:text-white px-6 py-3.5 text-xs font-mono transition-colors">
+          Call Direct: (919) 339-1208
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Executive Footer -->
+  <footer class="border-t border-zinc-200 bg-zinc-950 text-zinc-300 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-zinc-800">
+        
+        <div class="lg:col-span-2">
+          <div class="flex flex-col mb-4">
+            <span class="text-2xl font-bold tracking-tight font-sans text-white">VELLETT</span>
+            <span class="text-[10px] tracking-widest uppercase text-zinc-400 font-mono">Industrial Catalog Engineering LLC</span>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed max-w-sm mb-6">
+            We turn dense manufacturer PDF datasheets into audited, 20-attribute item masters ready for Epicor Prophet 21, Infor CSD, and B2B eCommerce. Directed by Ayush Bijalwan.
+          </p>
+          <div class="space-y-2 text-xs font-mono text-zinc-400">
+            <div><span class="text-zinc-500">Corporate HQ:</span> 1201 N Orange St, Suite 700, Wilmington, DE 19801</div>
+            <div><span class="text-zinc-500">Direct Desk:</span> <a href="tel:+19193391208" class="text-zinc-200 hover:text-white underline">(919) 339-1208</a></div>
+            <div><span class="text-zinc-500">Principal Desk:</span> <a href="mailto:ayush@vellett.com" class="text-zinc-200 hover:text-white underline">ayush@vellett.com</a></div>
+            <div><span class="text-zinc-500">Inquiry Desk:</span> <a href="mailto:inquiries@vellett.com" class="text-zinc-200 hover:text-white underline">inquiries@vellett.com</a></div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-white mb-4">Architecture</h4>
+          <ul class="space-y-2.5 text-xs text-zinc-400">
+            <li><a href="/methodology/" class="hover:text-white transition-colors">5-Sheet Methodology</a></li>
+            <li><a href="/methodology/#sheet-1" class="hover:text-white transition-colors">Sheet 1: ERP & Web Master</a></li>
+            <li><a href="/methodology/#sheet-2" class="hover:text-white transition-colors">Sheet 2: Footnote Audit</a></li>
+            <li><a href="/methodology/#sheet-3" class="hover:text-white transition-colors">Sheet 3: Stock-Out Cross-Ref</a></li>
+            <li><a href="/methodology/#sheet-4" class="hover:text-white transition-colors">Sheet 4: Price Sheet Sync</a></li>
+            <li><a href="/methodology/#sheet-5" class="hover:text-white transition-colors">Sheet 5: Faceted Taxonomies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-white mb-4">Engineering Services</h4>
+          <ul class="space-y-2.5 text-xs text-zinc-400">
+            <li><a href="/services/#pdf-onboarding" class="hover:text-white transition-colors">PDF Catalog Onboarding</a></li>
+            <li><a href="/services/#stockout-crossref" class="hover:text-white transition-colors">Drop-In Cross-Referencing</a></li>
+            <li><a href="/services/#price-reconciliation" class="hover:text-white transition-colors">Price Sheet Reconciliation</a></li>
+            <li><a href="/services/#duplicate-cleansing" class="hover:text-white transition-colors">Item Master Deduplication</a></li>
+            <li><a href="/services/#branch-standardization" class="hover:text-white transition-colors">Multi-Branch Harmonization</a></li>
+            <li><a href="/services/#footnote-auditing" class="hover:text-white transition-colors">Footnote Exception Auditing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-white mb-4">Firm & Contact</h4>
+          <ul class="space-y-2.5 text-xs text-zinc-400">
+            <li><a href="/pricing/" class="hover:text-white transition-colors">Pricing & Retainers</a></li>
+            <li><a href="/pricing/#faq" class="hover:text-white transition-colors">Engagement Terms & FAQ</a></li>
+            <li><a href="/resources/" class="hover:text-white transition-colors">Technical Guides Hub</a></li>
+            <li><a href="/contact/" class="hover:text-white transition-colors">Request 10-SKU Sample</a></li>
+            <li><a href="tel:+19193391208" class="text-zinc-200 hover:text-white font-mono transition-colors">Direct Desk: (919) 339-1208</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-500 gap-4">
+        <div>
+          &copy; 2026 Vellett Industrial Catalog Engineering LLC. All rights reserved. Directed by Ayush Bijalwan.
+        </div>
+        <div class="flex space-x-6">
+          <span>Epicor Prophet 21&reg; and Infor&reg; are trademarks of their respective owners.</span>
+          <a href="/sitemap.xml" class="hover:text-zinc-400 transition-colors">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
