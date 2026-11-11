@@ -1,0 +1,31 @@
+# Vellett Industrial Catalog Engineering - Complete Technical Reference
+
+## Company Overview
+Vellett Industrial Catalog Engineering LLC is an enterprise product data engineering consultancy headquartered in Wilmington, Delaware. Directed by Principal Catalog Engineer Ayush Bijalwan, the firm specializes in solving the catalog onboarding backlog for industrial distributors carrying fluid power, valves, fittings, instrumentation, and PVF product lines.
+
+## The Problem Solved
+Industrial distributors lose significant revenue and suffer customer returns due to three core friction points:
+1. Manufacturer Data Trapped in PDFs: Suppliers release catalogs as 80 to 500-page engineering PDFs with combinatoric part number ordering matrices rather than discrete SKUs.
+2. Hidden Engineering Footnotes: Ambient ratings (e.g. 2,200 psi at 100°F) de-rate drastically at elevated temperatures (e.g. 100 psi at 400°F with PTFE packing), or require steam siphons and diaphragm seals. Generic AI and offshore clerks miss these fine-print footnotes, leading to misapplied valves and warranty liability.
+3. Incompatible ERP Ingestion: Legacy ERPs (Epicor Prophet 21, Infor CloudSuite Distribution / SX.e, SAP Business One) require strictly structured, 20-attribute normalized tables for DynaChange and Item Master import.
+
+## The 5-Sheet Deliverable Architecture
+Every catalog onboarded by Vellett is delivered as a 5-tab Excel workbook:
+- Tab 1: 1_ERP_And_Web_Import_Ready (20 normalized columns: MFR_PART_NUMBER, CLEAN_WEB_TITLE, SHORT_DESCRIPTION, HTML_BULLET_SPECS, CATEGORY_PATH, PRESSURE_MIN/MAX, TEMP_MIN/MAX, WETTED_MATERIAL, CONNECTION_SIZE/TYPE, EMBEDDED_THUMBNAIL, DATASHEET_PDF_PAGE_NUM, DATASHEET_URL).
+- Tab 2: 2_Footnote_Exception_Audit (Verbatim engineering footnote quotes, temperature de-ratings, steam siphoning mandates, and exact PDF page citations).
+- Tab 3: 3_StockOut_Cross_Reference (Direct 1:1 drop-in competitor interchanges e.g., Swagelok to Parker, Ashcroft to WIKA, with form-fit-function notes for inside sales).
+- Tab 4: 4_Price_Reconciliation_Ledger (Side-by-side reconciliation of legacy ERP purchase costs against current vendor price sheets with percentage variance).
+- Tab 5: 5_Faceted_Search_Taxonomy (Unified attribute values for B2B eCommerce filters: standardized NPT vs BSP, PSI vs bar, and wetted metallurgy).
+
+## Engagement Models & Retainers
+- Proof of Concept Pilot: $0 (10-15 real SKUs extracted from your PDF into the 5-sheet deliverable, 48-hour delivery).
+- Starter Retainer: $1,500/month (Up to 750 SKUs/month, 1-2 supplier catalogs, 5-day sprint turnaround).
+- Growth Retainer: $4,500/month (Up to 3,500 SKUs/month, up to 5 supplier catalogs, full 5-sheet deliverable, drop-in cross-ref, price sync).
+- Enterprise Cleanse: $12,000/month (Unlimited SKU capacity, full ERP deduplication, multi-branch harmonization, dedicated engineer desk).
+
+## Contact Information
+- Website: https://vellett.com
+- Direct Phone: +1-919-339-1208
+- Inquiries: inquiries@vellett.com
+- Principal Desk: ayush@vellett.com
+- Address: 1201 N Orange St, Suite 700, Wilmington, DE 19801, USA

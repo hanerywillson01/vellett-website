@@ -1,0 +1,18 @@
+# Vellett Industrial Catalog Engineering
+
+> Managed catalog engineering and ERP item master cleansing for industrial, PVF, electrical, and fluid power distributors. We turn dense manufacturer PDF datasheets into audited 20-attribute item masters for Epicor Prophet 21, Infor CSD, and B2B eCommerce.
+
+## Primary Architecture & Pages
+- Homepage: https://vellett.com/ - Executive overview, interactive before/after transformation canvas, supported ERP platforms.
+- 5-Sheet Methodology: https://vellett.com/methodology/ - Detailed breakdown of the 5-sheet deliverable (ERP Master, Footnote Audit, Stockout Cross-Ref, Price Sync, Faceted Taxonomies).
+- Catalog Services: https://vellett.com/services/ - Six specialized disciplines (New PDF Onboarding, Cross-Referencing, Price Sheet Reconciliation, Deduplication, Multi-Branch Harmonization, Footnote Auditing).
+- Retainers & Pricing: https://vellett.com/pricing/ - Transparent monthly retainers ($0 Pilot, $1,500/mo Starter, $4,500/mo Growth, $12,000/mo Enterprise).
+- Direct Desk & Sample Intake: https://vellett.com/contact/ - Direct intake form, Wilmington DE address, direct dialer (919) 339-1208.
+- Technical Knowledge Base: https://vellett.com/resources/ - 11 in-depth architectural guides on Prophet 21, Infor CSD, BigCommerce, and industrial fluid power catalog data.
+
+## Leadership & Corporate Contact
+- Principal Catalog Engineer: Ayush Bijalwan, Managing Director
+- Direct Phone: +1-919-339-1208
+- General Inquiries: inquiries@vellett.com
+- Principal Desk Email: ayush@vellett.com
+- Corporate Headquarters: Vellett Industrial Catalog Engineering LLC, 1201 N Orange St, Suite 700, Wilmington, DE 19801, USA

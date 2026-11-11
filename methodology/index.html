@@ -4,21 +4,28 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5-Sheet Methodology | Vellett Industrial Catalog Engineering</title>
+  <title>5-Sheet Catalog Methodology | Vellett Industrial Engineering</title>
   <meta name="description" content="Deep dive into the 5-Sheet Catalog Engineering deliverable. Unrolling part matrices, auditing footnote de-ratings, and ERP-ready item masters for Prophet 21 and Infor.">
   <link rel="canonical" href="https://vellett.com/methodology/">
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <meta name="theme-color" content="#09090B">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vellett.com/methodology/">
-  <meta property="og:title" content="5-Sheet Methodology | Vellett Industrial Catalog Engineering">
+  <meta property="og:title" content="5-Sheet Catalog Methodology | Vellett Industrial Engineering">
   <meta property="og:description" content="Deep dive into the 5-Sheet Catalog Engineering deliverable. Unrolling part matrices, auditing footnote de-ratings, and ERP-ready item masters for Prophet 21 and Infor.">
   <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+  <meta property="og:image" content="https://vellett.com/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="5-Sheet Methodology | Vellett Industrial Catalog Engineering">
+  <meta name="twitter:title" content="5-Sheet Catalog Methodology | Vellett Industrial Engineering">
   <meta name="twitter:description" content="Deep dive into the 5-Sheet Catalog Engineering deliverable. Unrolling part matrices, auditing footnote de-ratings, and ERP-ready item masters for Prophet 21 and Infor.">
+  <meta name="twitter:image" content="https://vellett.com/og-image.svg">
 
-  <!-- Fonts -->
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -54,7 +61,50 @@
     .bg-parchment-subtle { background-color: #F4F4F0; }
     table th, table td { vertical-align: top; }
   </style>
-  
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Vellett Industrial Catalog Engineering LLC",
+  "url": "https://vellett.com/",
+  "logo": "https://vellett.com/favicon.svg",
+  "image": "https://vellett.com/og-image.svg",
+  "telephone": "+1-919-339-1208",
+  "email": "inquiries@vellett.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1201 N Orange St, Suite 700",
+    "addressLocality": "Wilmington",
+    "addressRegion": "DE",
+    "postalCode": "19801",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 39.7459,
+    "longitude": -75.5466
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "08:00",
+    "closes": "18:00"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Ayush Bijalwan",
+    "jobTitle": "Principal Catalog Engineer & Managing Director"
+  },
+  "areaServed": "United States",
+  "priceRange": "$1,500 - $12,000 / month"
+}
+  </script>
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -74,6 +124,26 @@
   "mainEntityOfPage": "https://vellett.com/methodology/"
 }
   </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://vellett.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Methodology",
+      "item": "https://vellett.com/methodology/"
+    }
+  ]
+}
+  </script>
 
 </head>
 <body class="bg-parchment text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white">
@@ -81,16 +151,14 @@
   <!-- Top Utility Bar -->
   <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center space-x-6 text-zinc-400">
+      <div class="flex items-center space-x-4 text-zinc-400">
         <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
         <span class="hidden md:inline text-zinc-700">|</span>
-        <span class="hidden md:inline">Principal: Ayush Bijalwan</span>
-        <span class="hidden md:inline text-zinc-700">|</span>
-        <span class="hidden md:inline">Delaware, USA</span>
+        <span class="hidden md:inline">Wilmington, DE</span>
       </div>
       <div class="flex items-center space-x-6">
-        <a href="tel:+19193391208" class="text-zinc-200 hover:text-white font-mono font-semibold flex items-center space-x-1.5 transition-colors">
-          <span>Direct Desk:</span>
+        <a href="tel:+19193391208" class="text-zinc-200 hover:text-white font-mono font-semibold flex items-center space-x-1.5 transition-colors group" title="Call Direct: (919) 339-1208">
+          <svg class="w-3.5 h-3.5 text-zinc-400 group-hover:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           <span class="text-white underline decoration-zinc-600 underline-offset-2">(919) 339-1208</span>
         </a>
         <a href="mailto:inquiries@vellett.com" class="text-zinc-400 hover:text-zinc-200 transition-colors">inquiries@vellett.com</a>
@@ -98,34 +166,62 @@
     </div>
   </div>
 
-  <!-- Main Navigation Header -->
+  <!-- Main Navigation Header (Right-Aligned Nav Items) -->
   <header class="border-b border-zinc-200 bg-white/95 backdrop-blur sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
-      <div class="flex items-center space-x-8">
-        <a href="/" class="flex flex-col group">
-          <span class="text-2xl font-bold tracking-tight font-sans text-zinc-950 group-hover:text-zinc-700 transition-colors">VELLETT</span>
-          <span class="text-[10px] tracking-widest uppercase text-zinc-500 font-mono -mt-1">Industrial Catalog Engineering</span>
-        </a>
-        <div class="hidden lg:block h-6 w-px bg-zinc-200"></div>
-        <span class="hidden xl:inline-block text-xs text-zinc-500 max-w-xs leading-tight">
-          Manufacturer PDF Datasheets to ERP Item Masters for Industrial Distributors
-        </span>
-      </div>
       
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="/methodology/" class="text-sm text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Methodology</a>
-        <a href="/services/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Services</a>
-        <a href="/pricing/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Pricing & Retainers</a>
-        <a href="/resources/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Technical Guides</a>
-        <a href="/contact/" class="text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-1">Direct Desk</a>
-        
-      </nav>
+      <!-- Brand Logo on Left -->
+      <a href="/" class="flex flex-col group py-1">
+        <span class="text-2xl font-bold tracking-tight font-sans text-zinc-950 group-hover:text-zinc-700 transition-colors">VELLETT</span>
+        <span class="text-[10px] tracking-widest uppercase text-zinc-500 font-mono -mt-1">Industrial Catalog Engineering</span>
+      </a>
 
-      <div class="flex items-center space-x-4">
-        <a href="tel:+19193391208" class="hidden sm:inline-flex items-center text-xs font-mono font-semibold text-zinc-900 border border-zinc-300 px-3.5 py-2 hover:bg-zinc-100 transition-colors">
-          Call (919) 339-1208
+      <!-- Right-Aligned Navigation Cluster -->
+      <div class="flex items-center space-x-6 lg:space-x-8">
+        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <a href="/methodology/" class="text-xs lg:text-sm text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-0.5">Methodology</a>
+        <a href="/services/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Services</a>
+        <a href="/pricing/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Pricing</a>
+        <a href="/resources/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Guides</a>
+        <a href="/contact/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Contact</a>
+        
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <a href="tel:+19193391208" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-zinc-900 border border-zinc-300 px-3.5 py-2 hover:bg-zinc-100 hover:border-zinc-950 transition-colors" title="Call Direct: (919) 339-1208">
+            <svg class="w-3.5 h-3.5 text-zinc-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>(919) 339-1208</span>
+          </a>
+          
+          <a href="/contact/" class="inline-flex items-center justify-center text-xs font-semibold uppercase tracking-wider text-white bg-zinc-950 hover:bg-zinc-800 px-4 sm:px-5 py-2 sm:py-2.5 transition-colors shadow-sm">
+            Request Sample
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button type="button" onclick="toggleMobileNav()" class="md:hidden inline-flex items-center justify-center p-2 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 border border-zinc-300 focus:outline-none" aria-label="Toggle navigation menu">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-nav-panel" class="hidden md:hidden border-t border-zinc-200 bg-white px-4 sm:px-8 py-6 space-y-4 shadow-lg">
+      <div class="space-y-2">
+        <a href="/methodology/" class="block text-sm text-zinc-950 font-bold py-1.5 hover:text-zinc-950 transition-colors">Methodology</a>
+        <a href="/services/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Services</a>
+        <a href="/pricing/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="/resources/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Guides</a>
+        <a href="/contact/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Contact</a>
+        
+      </div>
+      <div class="pt-4 border-t border-zinc-100 space-y-3">
+        <a href="tel:+19193391208" class="flex items-center justify-center gap-2 w-full text-xs font-mono font-bold text-zinc-950 border border-zinc-950 py-3 bg-zinc-50 hover:bg-zinc-100 transition-colors">
+          <svg class="w-4 h-4 text-zinc-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>Call Direct: (919) 339-1208</span>
         </a>
-        <a href="/contact/" class="inline-flex items-center justify-center text-xs font-semibold uppercase tracking-wider text-white bg-zinc-950 hover:bg-zinc-800 px-5 py-2.5 transition-colors shadow-sm">
+        <a href="/contact/" class="block text-center w-full bg-zinc-950 text-white text-xs font-semibold uppercase tracking-wider py-3 hover:bg-zinc-800 transition-colors">
           Request 10-SKU Sample
         </a>
       </div>
@@ -134,9 +230,16 @@
 
 
   <!-- Page Header -->
-  <section class="border-b border-zinc-200 pt-16 pb-16 px-4 sm:px-8 bg-parchment">
+  <section class="border-b border-zinc-200 pt-12 pb-16 px-4 sm:px-8 bg-parchment">
     <div class="max-w-7xl mx-auto">
       <div class="max-w-4xl">
+
+    <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs text-zinc-500">
+      <div class="flex items-center space-x-2">
+        <a href="/" class="hover:text-zinc-950 transition-colors">Home</a> <span class="text-zinc-300">/</span> <span class="text-zinc-900 font-semibold">Methodology</span>
+      </div>
+    </nav>
+
         <div class="inline-flex items-center space-x-2 border border-zinc-300 bg-white px-3 py-1 text-xs font-mono uppercase tracking-wider text-zinc-700 mb-6">
           <span>Engineering Standard &bull; Version 4.2</span>
           <span class="text-zinc-400">|</span>
@@ -162,7 +265,7 @@
     </div>
   </section>
 
-  <!-- Executive Summary Table -->
+  <!-- Executive Summary Table (Responsive) -->
   <section class="py-16 px-4 sm:px-8 border-b border-zinc-200 bg-white">
     <div class="max-w-7xl mx-auto">
       <div class="mb-8">
@@ -172,8 +275,8 @@
         </h2>
       </div>
 
-      <div class="overflow-x-auto border border-zinc-300 shadow-sm">
-        <table class="w-full text-left text-xs font-sans">
+      <div class="overflow-x-auto w-full border border-zinc-300 shadow-sm">
+        <table class="w-full text-left text-xs font-sans min-w-[640px]">
           <thead class="bg-zinc-950 text-white font-mono text-[11px] uppercase tracking-wider">
             <tr>
               <th class="p-4 w-1/5">Tab Name</th>
@@ -240,7 +343,7 @@
       <!-- Sheet 1 Section -->
       <div id="sheet-1" class="border border-zinc-300 bg-white p-8">
         <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 1</div>
-        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 1: ERP &amp; Web Import Master Record</h3>
+        <h2 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 1: ERP &amp; Web Import Master Record</h2>
         <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
           Most industrial distributors receive supplier data as an unstructured PDF. Our catalog engineers unroll every ordering code matrix into fully realized individual part numbers. If an Ashcroft gauge series has 14 dial ranges, 3 wetted materials, and 2 connection sizes, we unroll the 84 discreet SKUs with normalized attributes.
         </p>
@@ -262,7 +365,7 @@
       <!-- Sheet 2 Section -->
       <div id="sheet-2" class="border border-zinc-300 bg-white p-8">
         <div class="text-xs font-mono text-amber-800 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 2</div>
-        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 2: Footnote &amp; Temperature Exception Audit</h3>
+        <h2 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 2: Footnote &amp; Temperature Exception Audit</h2>
         <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
           This is where generic data processors and automated AI fail catastrophically. In industrial fluid power, instrumentation, and piping, the safe operating limit is rarely the large bold headline on page 1. It is almost always conditioned by footnotes on page 6 or 8.
         </p>
@@ -279,12 +382,12 @@
       <!-- Sheet 3 Section -->
       <div id="sheet-3" class="border border-zinc-300 bg-white p-8">
         <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 3</div>
-        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 3: Drop-In Stock-Out Cross-Reference</h3>
+        <h2 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 3: Drop-In Stock-Out Cross-Reference</h2>
         <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
           When an industrial customer calls your counter needing a Swagelok 60 Series ball valve or an Ashcroft 1009 pressure gauge, and your warehouse has 0 in stock with a 12-week factory lead time, that order is lost unless your rep can instantly quote an in-stock equivalent.
         </p>
-        <div class="overflow-x-auto border border-zinc-200 mb-6">
-          <table class="w-full text-left text-xs font-mono">
+        <div class="overflow-x-auto w-full border border-zinc-200 mb-6">
+          <table class="w-full text-left text-xs font-mono min-w-[500px]">
             <thead class="bg-zinc-100 text-zinc-800">
               <tr>
                 <th class="p-2.5">Primary Manufacturer SKU</th>
@@ -314,7 +417,7 @@
       <!-- Sheet 4 Section -->
       <div id="sheet-4" class="border border-zinc-300 bg-white p-8">
         <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 4</div>
-        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 4: Annual Price Sheet Reconciliation</h3>
+        <h2 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 4: Annual Price Sheet Reconciliation</h2>
         <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
           Suppliers regularly issue annual price adjustments in dense, unformatted spreadsheets or multi-page PDFs. If your purchasing team does not update the ERP cost matrix before sales reps quote contracts, your distributor absorbs the price hike directly out of gross margin.
         </p>
@@ -326,7 +429,7 @@
       <!-- Sheet 5 Section -->
       <div id="sheet-5" class="border border-zinc-300 bg-white p-8">
         <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Detailed Specification &bull; Tab 5</div>
-        <h3 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 5: Faceted Search &amp; Attribute Taxonomies</h3>
+        <h2 class="text-2xl font-serif text-zinc-950 mb-4">Sheet 5: Faceted Search &amp; Attribute Taxonomies</h2>
         <p class="text-sm text-zinc-700 leading-relaxed mb-6 font-sans">
           On modern B2B e-commerce sites (BigCommerce, Magento, Adobe Commerce), customer search abandonment rates exceed 35% when attribute filters are fragmented. If one SKU is tagged "1/4 NPT", another "0.25 Inch NPT", and a third "1/4" Male NPT", your faceted search fails.
         </p>
@@ -357,7 +460,7 @@
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
           <div class="border border-zinc-300 bg-parchment p-6">
-            <h4 class="font-mono text-xs uppercase font-bold text-zinc-900 mb-2">PIM Software Only:</h4>
+            <h3 class="font-mono text-xs uppercase font-bold text-zinc-900 mb-2">PIM Software Only:</h3>
             <ul class="space-y-2 text-xs text-zinc-600">
               <li>&bull; Software license fee: $45,000 to $90,000/yr</li>
               <li>&bull; Requires full-time internal operator ($75k/yr)</li>
@@ -367,7 +470,7 @@
             </ul>
           </div>
           <div class="border-2 border-zinc-950 bg-white p-6 shadow-sm">
-            <h4 class="font-mono text-xs uppercase font-bold text-zinc-950 mb-2">Vellett Managed Catalog Engineering:</h4>
+            <h3 class="font-mono text-xs uppercase font-bold text-zinc-950 mb-2">Vellett Managed Catalog Engineering:</h3>
             <ul class="space-y-2 text-xs text-zinc-700">
               <li>&bull; Predictable monthly retainer ($1,500 - $4,500/mo)</li>
               <li>&bull; Turnkey execution: You send PDF, we deliver 5 sheets</li>
@@ -381,7 +484,7 @@
     </div>
   </section>
 
-  <!-- CTA Box -->
+  <!-- CTA Box with Direct Dialer -->
   <section class="py-20 px-4 sm:px-8 bg-zinc-950 text-white">
     <div class="max-w-4xl mx-auto text-center">
       <span class="text-xs font-mono uppercase tracking-widest text-zinc-400">Direct Engineering Evaluation</span>
@@ -395,8 +498,9 @@
         <a href="/contact/" class="bg-white text-zinc-950 hover:bg-zinc-200 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm">
           Request Free 10-SKU Pilot Audit
         </a>
-        <a href="tel:+19193391208" class="border border-zinc-700 text-zinc-200 hover:text-white px-6 py-3.5 text-xs font-mono transition-colors">
-          Call Direct: (919) 339-1208
+        <a href="tel:+19193391208" class="border border-zinc-700 text-zinc-200 hover:text-white px-6 py-3.5 text-xs font-mono transition-colors flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>Call Direct: (919) 339-1208</span>
         </a>
       </div>
     </div>
@@ -451,7 +555,7 @@
         <div>
           <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-white mb-4">Firm & Contact</h4>
           <ul class="space-y-2.5 text-xs text-zinc-400">
-            <li><a href="/pricing/" class="hover:text-white transition-colors">Pricing & Retainers</a></li>
+            <li><a href="/pricing/" class="hover:text-white transition-colors">Pricing</a></li>
             <li><a href="/pricing/#faq" class="hover:text-white transition-colors">Engagement Terms & FAQ</a></li>
             <li><a href="/resources/" class="hover:text-white transition-colors">Technical Guides Hub</a></li>
             <li><a href="/contact/" class="hover:text-white transition-colors">Request 10-SKU Sample</a></li>
@@ -468,10 +572,20 @@
         <div class="flex space-x-6">
           <span>Epicor Prophet 21&reg; and Infor&reg; are trademarks of their respective owners.</span>
           <a href="/sitemap.xml" class="hover:text-zinc-400 transition-colors">Sitemap</a>
+          <a href="/llms.txt" class="hover:text-zinc-400 transition-colors">llms.txt</a>
         </div>
       </div>
     </div>
   </footer>
+
+  <script>
+    function toggleMobileNav() {
+      var p = document.getElementById('mobile-nav-panel');
+      if (p) {
+        p.classList.toggle('hidden');
+      }
+    }
+  </script>
 
 </body>
 </html>
