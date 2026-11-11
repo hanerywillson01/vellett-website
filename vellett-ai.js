@@ -1,240 +1,360 @@
-// Vellett Industrial Catalog Engineering - AI Concierge & Lead Intake
-// High-performance client-side industrial Q&A engine and direct lead capture pipeline
+// Vellett Industrial Catalog Engineering - AI Helpdesk & Concierge
+// Multi-Tiered Interactive Decision Engine & 2-Field Direct Lead Intake
 
 (function () {
   'use strict';
 
-  // 1. Embedded Industrial Knowledge Base
-  const KNOWLEDGE = [
-    {
-      keywords: ['price', 'pricing', 'cost', 'fee', 'retainer', 'rate', 'quote', 'package', 'how much'],
-      answer: 'Our pricing is transparent and month-to-month:<br><br>&bull; <strong>Proof of Concept Pilot:</strong> $0 / 100% Free for 10-15 real SKUs from your PDF.<br>&bull; <strong>Starter Retainer:</strong> $1,500/month (1-2 lines, up to 750 SKUs, 5-day sprints).<br>&bull; <strong>Growth Retainer:</strong> $4,200/month (up to 4 complete manufacturer lines per month with price update reconciliations).<br>&bull; <strong>Enterprise Clearing:</strong> $12,000/month for high-volume legacy catalog backlogs with dedicated staging.'
+  // 1. Multi-Tiered Helpdesk Knowledge Tree
+  const HELPDESK = {
+    root: {
+      message: '<strong>Vellett Catalog Engineering Helpdesk</strong><br>We help industrial distributors unroll complex manufacturer PDFs into verified ERP item masters (P21, Infor, NetSuite).<br><br>What area can we assist you with today?',
+      chips: [
+        { label: '📦 Catalog PDF & Matrix Issues', next: 'catalog_issues' },
+        { label: '💻 ERP Integration (P21, Infor)', next: 'erp_integration' },
+        { label: '💰 Pricing & Free 10-SKU Pilot', next: 'pricing_pilot' },
+        { label: '📞 Speak with Engineering Desk', next: 'lead_capture' }
+      ]
     },
-    {
-      keywords: ['turnaround', 'time', 'how long', 'fast', 'sprint', 'schedule', 'days', 'sla'],
-      answer: 'We deliver complete catalog lines in <strong>5 business days</strong> per manufacturer sprint. Every deliverable includes 5 verified sheets: P21/CSD Import CSV, Full 20-Attribute Master, Discrepancy Log, Footnote De-Rating Matrix, and Cross-Reference Sheet.'
+    catalog_issues: {
+      message: '<strong>Manufacturer Catalog & Matrix Engineering:</strong><br>Distributors lose sales when supplier product lines sit trapped in 80-page engineering PDFs. Which specific challenge are you looking to resolve?',
+      chips: [
+        { label: 'Unrolling Dense Part Matrices', next: 'matrix_unrolling' },
+        { label: 'Footnote De-Rating Auditing', next: 'footnote_auditing' },
+        { label: '5-Day Turnaround SLA', next: 'sla_turnaround' },
+        { label: 'Request Free 10-SKU Sample', next: 'lead_capture' },
+        { label: '← Back to Main Menu', next: 'root' }
+      ]
     },
-    {
-      keywords: ['erp', 'prophet 21', 'p21', 'epicor', 'infor', 'csd', 'sx.e', 'netsuite', 'sap', 'bigcommerce'],
-      answer: 'We format verified item masters mapped directly to your specific ERP schema:<br><br>&bull; <strong>Epicor Prophet 21:</strong> Item Master, Extended Attributes, Item Price, Item UOM.<br>&bull; <strong>Infor CSD / SX.e:</strong> ICSP, ICSPU, and catalog tables.<br>&bull; <strong>Oracle NetSuite &amp; SAP Business One:</strong> Matrix items &amp; custom attributes.<br>&bull; <strong>BigCommerce B2B Edition:</strong> Faceted search attributes and product variants.'
+    matrix_unrolling: {
+      message: '<strong>Unrolling Part Number Matrices:</strong><br>Lines like <strong>Ashcroft 1009</strong> gauges or <strong>Swagelok 60 Series</strong> valves pack up to 40,000 permutations across dial sizes, wetted metallurgies, connection types, and pressure ranges. We programmatically unpack every valid combination into clean, individual ERP records with 20 normalized technical attributes.<br><br>Would you like to test our accuracy on 10 SKUs from your PDF at no cost?',
+      chips: [
+        { label: 'Yes, Request 10-SKU Pilot ($0)', next: 'lead_capture' },
+        { label: 'Footnote De-Rating Questions', next: 'footnote_auditing' },
+        { label: '← Back to Catalog Issues', next: 'catalog_issues' }
+      ]
     },
-    {
-      keywords: ['methodology', '5-sheet', 'sheets', 'deliverable', 'attributes', 'what do you deliver'],
-      answer: 'Our 5-Sheet Deliverable guarantees zero data errors:<br><br>1. <strong>ERP Ready Import CSV:</strong> Formatted for one-click upload.<br>2. <strong>Master Engineering Sheet:</strong> 20 normalized technical attributes.<br>3. <strong>Discrepancy &amp; Gap Audit:</strong> Identifies discontinued SKUs and missing supplier data.<br>4. <strong>Footnote De-Rating Matrix:</strong> Temperature and pressure de-ratings audited directly from footnotes.<br>5. <strong>Interchange / Cross-Reference:</strong> Competitive drop-in replacement mapping.'
+    footnote_auditing: {
+      message: '<strong>Footnote Exception & De-Rating Audits:</strong><br>A valve rated at 2,200 PSI at ambient temperature often de-rates to 100 PSI at 400&deg;F steam. If an ERP clerk only logs 2,200 PSI, the wrong valve gets installed in a refinery, causing catastrophic failure and returns. Our engineering team audits every footnote and creates dedicated temperature/pressure de-rating tables.<br><br>Ready to audit a complex supplier line?',
+      chips: [
+        { label: 'Request Free 10-SKU Pilot Audit', next: 'lead_capture' },
+        { label: 'How 5-Day Delivery Works', next: 'sla_turnaround' },
+        { label: '← Back to Catalog Issues', next: 'catalog_issues' }
+      ]
     },
-    {
-      keywords: ['manufacturer', 'brand', 'ashcroft', 'swagelok', 'dwyer', 'wika', 'parker', 'smc'],
-      answer: 'We specialize in mechanical, fluid power, and instrumentation catalogs including <strong>Ashcroft</strong> (1009/1279 gauges, transmitters), <strong>Swagelok</strong> (60 Series valves, fittings), <strong>Dwyer Instruments</strong> (Magnehelics), <strong>WIKA</strong> (pressure gauges), <strong>Parker Hannifin</strong>, and <strong>SMC Pneumatics</strong>.'
+    sla_turnaround: {
+      message: '<strong>Guaranteed 5-Day Sprint Delivery:</strong><br>We deliver complete manufacturer catalog series in <strong>5 business days</strong>. Your team receives 5 verified sheets ready for one-click upload into Prophet 21 or Infor CSD. No more 6-month internal data entry delays.',
+      chips: [
+        { label: 'Request 10-SKU Pilot Audit ($0)', next: 'lead_capture' },
+        { label: 'Explore Pricing Retainers', next: 'pricing_pilot' },
+        { label: '← Back to Main Menu', next: 'root' }
+      ]
     },
-    {
-      keywords: ['sample', 'pilot', 'free', 'test', 'audit', '10-sku'],
-      answer: 'We offer a <strong>Free 10-SKU Pilot Audit</strong>. Send us any manufacturer PDF catalog or part matrix, and our engineering desk will unroll 10 complex SKUs and deliver the complete 5-sheet deliverable free of charge so you can verify our precision before contracting.'
+    erp_integration: {
+      message: '<strong>ERP Item Master Integration:</strong><br>We build native import files specifically formatted for industrial ERP systems with zero manual re-typing. Which platform does your distribution business run?',
+      chips: [
+        { label: 'Epicor Prophet 21 (P21)', next: 'p21_details' },
+        { label: 'Infor CloudSuite Distribution (CSD)', next: 'infor_details' },
+        { label: 'Oracle NetSuite / SAP Business One', next: 'netsuite_details' },
+        { label: 'Item Master Deduplication', next: 'dedup_details' },
+        { label: '← Back to Main Menu', next: 'root' }
+      ]
     },
-    {
-      keywords: ['human', 'contact', 'call', 'speak', 'phone', 'talk', 'ayush', 'desk'],
-      answer: 'You can connect directly with our engineering desk right now:<br><br>&bull; <strong>Direct Line:</strong> <a href="tel:+19193391208" class="underline font-bold text-zinc-950">(919) 339-1208</a> (Mon&ndash;Fri 8am&ndash;6pm EST)<br>&bull; <strong>Email:</strong> <a href="mailto:inquiries@vellett.com" class="underline text-zinc-950">inquiries@vellett.com</a>'
+    p21_details: {
+      message: '<strong>Epicor Prophet 21 (P21) Formatting:</strong><br>We deliver validated import files mapped directly to P21 Item Master tables: Item ID, Extended Descriptions, 20 Technical Item Attributes, Item Pricing Multipliers, and UOM schedules. Ready for DynaChange or standard P21 import utility.',
+      chips: [
+        { label: 'Request 10-SKU P21 Sample File', next: 'lead_capture' },
+        { label: 'Item Master Deduplication', next: 'dedup_details' },
+        { label: '← Back to ERP Systems', next: 'erp_integration' }
+      ]
+    },
+    infor_details: {
+      message: '<strong>Infor CSD & SX.e Item Masters:</strong><br>Formatted directly for Infor CloudSuite Distribution (ICSP, ICSPU tables) with clean product hierarchies, search keywords, and supplier cross-references.',
+      chips: [
+        { label: 'Request 10-SKU Infor Sample File', next: 'lead_capture' },
+        { label: 'Pricing & Turnarounds', next: 'pricing_pilot' },
+        { label: '← Back to ERP Systems', next: 'erp_integration' }
+      ]
+    },
+    netsuite_details: {
+      message: '<strong>NetSuite & SAP Business One:</strong><br>We construct parent-child matrix items with normalized option drop-downs (materials, sizes, pressure ratings) tailored for industrial distribution.',
+      chips: [
+        { label: 'Request 10-SKU Sample File', next: 'lead_capture' },
+        { label: '← Back to ERP Systems', next: 'erp_integration' }
+      ]
+    },
+    dedup_details: {
+      message: '<strong>ERP Item Master Deduplication:</strong><br>Decades of manual entry create massive SKU duplication (e.g. "SS-62TS8" vs "SS62TS8" vs "SWG-SS-62TS8"). We audit and merge duplicate records, preserving historical order history and preventing redundant warehouse re-orders.',
+      chips: [
+        { label: 'Request Deduplication Assessment', next: 'lead_capture' },
+        { label: '← Back to ERP Systems', next: 'erp_integration' }
+      ]
+    },
+    pricing_pilot: {
+      message: '<strong>Transparent Capacity Retainers:</strong><br>&bull; <strong>Proof of Concept Pilot:</strong> $0 / 100% Free for 10-15 real SKUs from your PDF.<br>&bull; <strong>Starter Retainer:</strong> $1,500/mo (1-2 lines/mo, 750 SKUs, 5-day sprints).<br>&bull; <strong>Growth Retainer:</strong> $4,200/mo (up to 4 complete manufacturer lines/mo, price updates, priority desk).<br>&bull; <strong>Enterprise Clearing:</strong> $12,000/mo for massive legacy catalog backlogs.<br><br>All retainers are month-to-month with zero long-term lock-in.',
+      chips: [
+        { label: 'Request $0 Pilot Audit', next: 'lead_capture' },
+        { label: 'Speak with Engineering Desk', next: 'lead_capture' },
+        { label: '← Back to Main Menu', next: 'root' }
+      ]
     }
-  ];
+  };
 
-  // 2. Inject CSS if not already present
-  if (!document.getElementById('vellett-ai-styles')) {
-    const style = document.createElement('style');
-    style.id = 'vellett-ai-styles';
-    style.textContent = `
-      #vellett-ai-widget {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 99999;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      }
-      #vellett-ai-badge {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: #09090B;
-        color: #FFFFFF;
-        padding: 12px 18px;
-        border: 1px solid #27272A;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-size: 12px;
-        font-family: "JetBrains Mono", monospace;
-      }
-      #vellett-ai-badge:hover {
-        background: #18181B;
-        border-color: #52525B;
-        transform: translateY(-2px);
-      }
-      #vellett-ai-panel {
-        display: none;
-        width: 380px;
-        max-width: calc(100vw - 32px);
-        height: 540px;
-        max-height: calc(100vh - 100px);
-        background: #FBFBF9;
-        border: 1px solid #18181B;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        flex-direction: column;
-        overflow: hidden;
-        margin-bottom: 12px;
-      }
-      #vellett-ai-panel.open {
-        display: flex !important;
-      }
-      .vellett-ai-header {
-        background: #09090B;
-        color: #FFFFFF;
-        padding: 12px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #27272A;
-      }
-      .vellett-ai-messages {
-        flex: 1;
-        padding: 16px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        font-size: 13px;
-        line-height: 1.5;
-        background: #FBFBF9;
-      }
-      .vellett-msg {
-        max-width: 88%;
-        padding: 10px 14px;
-        word-wrap: break-word;
-      }
-      .vellett-msg.bot {
-        background: #FFFFFF;
-        color: #18181B;
-        border: 1px solid #E4E4E7;
-        align-self: flex-start;
-      }
-      .vellett-msg.user {
-        background: #09090B;
-        color: #FFFFFF;
-        align-self: flex-end;
-      }
-      .vellett-ai-chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 8px;
-      }
-      .vellett-chip {
-        background: #F4F4F0;
-        color: #18181B;
-        border: 1px solid #D4D4D8;
-        padding: 5px 10px;
-        font-size: 11px;
-        font-family: "JetBrains Mono", monospace;
-        cursor: pointer;
-        transition: all 0.15s;
-      }
-      .vellett-chip:hover {
-        background: #09090B;
-        color: #FFFFFF;
-        border-color: #09090B;
-      }
-      .vellett-ai-input-row {
-        display: flex;
-        border-top: 1px solid #E4E4E7;
-        background: #FFFFFF;
-        padding: 8px;
-        gap: 6px;
-      }
-      .vellett-ai-input-row input {
-        flex: 1;
-        border: 1px solid #D4D4D8;
-        padding: 8px 12px;
-        font-size: 13px;
-        outline: none;
-        background: #FBFBF9;
-        color: #09090B;
-      }
-      .vellett-ai-input-row input:focus {
-        border-color: #09090B;
-      }
-      .vellett-ai-input-row button {
-        background: #09090B;
-        color: #FFFFFF;
-        border: none;
-        padding: 8px 14px;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      .vellett-ai-input-row button:hover {
-        background: #27272A;
-      }
-      .vellett-lead-form {
-        margin-top: 10px;
-        padding: 10px;
-        border: 1px solid #18181B;
-        background: #FFFFFF;
-      }
-      .vellett-lead-form input {
-        width: 100%;
-        box-sizing: border-box;
-        margin-bottom: 8px;
-        padding: 7px 10px;
-        border: 1px solid #D4D4D8;
-        font-size: 12px;
-        outline: none;
-      }
-      .vellett-lead-form button {
-        width: 100%;
-        background: #09090B;
-        color: #FFFFFF;
-        border: none;
-        padding: 9px;
-        font-size: 12px;
-        font-weight: bold;
-        cursor: pointer;
-        text-transform: uppercase;
-      }
-    `;
-    document.head.appendChild(style);
+  // 2. High-Visibility Eye-Catching CSS Styles
+  const style = document.createElement('style');
+  style.id = 'vellett-ai-styles-v5';
+  style.textContent = `
+    @keyframes aiGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.4), 0 10px 25px rgba(0, 0, 0, 0.5); }
+      50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.8), 0 15px 35px rgba(0, 0, 0, 0.6); }
+    }
+    @keyframes badgeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    #vellett-ai-widget {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99999;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    #vellett-ai-bubble-callout {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      right: 0;
+      background: #09090B;
+      color: #FFFFFF;
+      border: 1px solid #10B981;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-family: "JetBrains Mono", monospace;
+      white-space: nowrap;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 2px;
+      cursor: pointer;
+      animation: badgeFloat 3s ease-in-out infinite;
+    }
+    #vellett-ai-bubble-callout::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 24px;
+      border-width: 6px;
+      border-style: solid;
+      border-color: #09090B transparent transparent transparent;
+    }
+    #vellett-ai-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #09090B;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border: 1.5px solid #10B981;
+      animation: aiGlow 3s infinite ease-in-out;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 12px;
+      font-family: "JetBrains Mono", monospace;
+      border-radius: 2px;
+    }
+    #vellett-ai-badge:hover {
+      background: #18181B;
+      transform: scale(1.03);
+    }
+    #vellett-ai-panel {
+      display: none;
+      width: 400px;
+      max-width: calc(100vw - 32px);
+      height: 560px;
+      max-height: calc(100vh - 100px);
+      background: #FBFBF9;
+      border: 1.5px solid #18181B;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+      flex-direction: column;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border-radius: 2px;
+    }
+    #vellett-ai-panel.open {
+      display: flex !important;
+    }
+    .vellett-ai-header {
+      background: #09090B;
+      color: #FFFFFF;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #27272A;
+    }
+    .vellett-ai-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      background: #FBFBF9;
+    }
+    .vellett-msg {
+      max-width: 90%;
+      padding: 12px 14px;
+      word-wrap: break-word;
+      font-size: 13px;
+      border-radius: 2px;
+    }
+    .vellett-msg.bot {
+      background: #FFFFFF;
+      color: #18181B;
+      border: 1px solid #E4E4E7;
+      align-self: flex-start;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .vellett-msg.user {
+      background: #09090B;
+      color: #FFFFFF;
+      align-self: flex-end;
+    }
+    .vellett-ai-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .vellett-chip {
+      background: #FFFFFF;
+      color: #18181B;
+      border: 1px solid #D4D4D8;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .vellett-chip:hover {
+      background: #09090B;
+      color: #FFFFFF;
+      border-color: #09090B;
+      padding-left: 15px;
+    }
+    .vellett-ai-input-row {
+      display: flex;
+      border-top: 1px solid #E4E4E7;
+      background: #FFFFFF;
+      padding: 10px;
+      gap: 8px;
+    }
+    .vellett-ai-input-row input {
+      flex: 1;
+      border: 1px solid #D4D4D8;
+      padding: 9px 12px;
+      font-size: 13px;
+      outline: none;
+      background: #FBFBF9;
+      color: #09090B;
+    }
+    .vellett-ai-input-row input:focus {
+      border-color: #09090B;
+    }
+    .vellett-ai-input-row button {
+      background: #09090B;
+      color: #FFFFFF;
+      border: none;
+      padding: 9px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .vellett-ai-input-row button:hover {
+      background: #27272A;
+    }
+    .vellett-fast-lead {
+      background: #F4F4F0;
+      border: 1.5px solid #18181B;
+      padding: 14px;
+      margin-top: 8px;
+    }
+    .vellett-fast-lead input {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 8px;
+      padding: 8px 12px;
+      border: 1px solid #D4D4D8;
+      font-size: 13px;
+      background: #FFFFFF;
+      outline: none;
+    }
+    .vellett-fast-lead button {
+      width: 100%;
+      background: #09090B;
+      color: #FFFFFF;
+      border: none;
+      padding: 11px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .vellett-fast-lead button:hover {
+      background: #27272A;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // 3. Inject Widget DOM
+  let existingWidget = document.getElementById('vellett-ai-widget');
+  if (existingWidget) {
+    existingWidget.remove();
   }
 
-  // 3. Inject DOM if not present
-  let widget = document.getElementById('vellett-ai-widget');
-  if (!widget) {
-    widget = document.createElement('div');
-    widget.id = 'vellett-ai-widget';
-    widget.innerHTML = `
-      <div id="vellett-ai-panel">
-        <div class="vellett-ai-header">
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:8px;height:8px;background:#34D399;border-radius:50%;display:inline-block;"></span>
-            <span style="font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:0.5px;">VELLETT CATALOG AI</span>
-          </div>
-          <button id="vellett-ai-close" style="background:none;border:none;color:#A1A1AA;cursor:pointer;font-size:20px;line-height:1;" title="Close">&times;</button>
+  const widget = document.createElement('div');
+  widget.id = 'vellett-ai-widget';
+  widget.innerHTML = `
+    <div id="vellett-ai-bubble-callout" title="Ask Vellett Catalog AI Helpdesk">
+      <span style="width:6px;height:6px;background:#10B981;border-radius:50%;display:inline-block;"></span>
+      <span>Have a messy catalog? Ask Vellett AI &rarr;</span>
+    </div>
+
+    <div id="vellett-ai-panel">
+      <div class="vellett-ai-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="width:8px;height:8px;background:#10B981;border-radius:50%;display:inline-block;"></span>
+          <span style="font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:0.5px;">VELLETT CATALOG AI HELPDESK</span>
         </div>
-        <div class="vellett-ai-messages" id="vellett-msg-list"></div>
-        <form class="vellett-ai-input-row" id="vellett-ai-form">
-          <input type="text" id="vellett-user-input" placeholder="Ask about catalogs, ERPs, turnaround..." autocomplete="off">
-          <button type="submit">Send</button>
-        </form>
+        <button id="vellett-ai-close" style="background:none;border:none;color:#A1A1AA;cursor:pointer;font-size:20px;line-height:1;" title="Close">&times;</button>
       </div>
+      <div class="vellett-ai-messages" id="vellett-msg-list"></div>
+      <form class="vellett-ai-input-row" id="vellett-ai-form">
+        <input type="text" id="vellett-user-input" placeholder="Type a question or select an option..." autocomplete="off">
+        <button type="submit">Ask</button>
+      </form>
+    </div>
 
-      <div id="vellett-ai-badge" title="Open Vellett Catalog AI Concierge">
-        <span style="width:8px;height:8px;background:#34D399;border-radius:50%;display:inline-block;"></span>
-        <span>Catalog AI Concierge</span>
-        <svg style="width:15px;height:15px;margin-left:4px;opacity:0.85;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      </div>
-    `;
-    document.body.appendChild(widget);
-  }
+    <div id="vellett-ai-badge" title="Open Vellett Catalog AI Helpdesk">
+      <span style="width:8px;height:8px;background:#10B981;border-radius:50%;display:inline-block;"></span>
+      <span style="font-weight:700;letter-spacing:0.5px;">Catalog AI Helpdesk</span>
+      <svg style="width:15px;height:15px;margin-left:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </div>
+  `;
+  document.body.appendChild(widget);
 
   const panel = document.getElementById('vellett-ai-panel');
   const badge = document.getElementById('vellett-ai-badge');
+  const callout = document.getElementById('vellett-ai-bubble-callout');
   const closeBtn = document.getElementById('vellett-ai-close');
   const msgList = document.getElementById('vellett-msg-list');
   const form = document.getElementById('vellett-ai-form');
@@ -251,35 +371,32 @@
       panel.classList.remove('open');
     }
 
-    if (panel.classList.contains('open') && !hasGreeted) {
-      sendGreeting();
-      hasGreeted = true;
+    if (panel.classList.contains('open')) {
+      if (callout) callout.style.display = 'none';
+      if (!hasGreeted) {
+        showHelpdeskNode('root');
+        hasGreeted = true;
+      }
     }
   }
 
   window.toggleAIPanel = togglePanel;
-
-  if (badge) {
-    badge.onclick = () => togglePanel();
-  }
-  if (closeBtn) {
-    closeBtn.onclick = () => togglePanel(false);
-  }
-
-  // Global trigger for Request Sample button
   window.openSampleIntake = function (e) {
     if (e && e.preventDefault) e.preventDefault();
     togglePanel(true);
     setTimeout(() => {
-      triggerSampleAuditFlow();
+      showHelpdeskNode('lead_capture');
     }, 200);
   };
 
-  function appendMessage(text, sender = 'bot', chips = null) {
-    if (!msgList) return;
+  badge.onclick = () => togglePanel();
+  if (callout) callout.onclick = () => togglePanel(true);
+  closeBtn.onclick = () => togglePanel(false);
+
+  function appendBotMessage(html, chips = null) {
     const div = document.createElement('div');
-    div.className = `vellett-msg ${sender}`;
-    div.innerHTML = text;
+    div.className = 'vellett-msg bot';
+    div.innerHTML = html;
 
     if (chips && chips.length > 0) {
       const chipContainer = document.createElement('div');
@@ -288,9 +405,12 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'vellett-chip';
-        btn.textContent = c.label;
+        btn.innerHTML = `<span>${c.label}</span><span style="opacity:0.5;font-size:10px;">&rarr;</span>`;
         btn.onclick = () => {
-          handleUserInput(c.query || c.label);
+          appendUserMessage(c.label);
+          setTimeout(() => {
+            showHelpdeskNode(c.next);
+          }, 250);
         };
         chipContainer.appendChild(btn);
       });
@@ -301,183 +421,149 @@
     msgList.scrollTop = msgList.scrollHeight;
   }
 
-  function sendGreeting() {
-    appendMessage(
-      '<strong>Welcome to Vellett Industrial Catalog Engineering.</strong><br>We unroll complex manufacturer PDF datasheets into audited 20-attribute item masters for industrial ERPs.<br><br>What catalog or ERP challenge is your team looking to solve?',
-      'bot',
-      [
-        { label: 'Request Free 10-SKU Sample', query: 'I want to request a free 10-SKU pilot audit' },
-        { label: 'Unroll Supplier PDF Matrix', query: 'How do you unroll complex manufacturer matrices?' },
-        { label: 'Epicor P21 / Infor CSD', query: 'What ERP systems do you format for?' },
-        { label: 'Pricing & 5-Day Delivery', query: 'What is your pricing and turnaround time?' },
-        { label: 'Call Engineering Desk', query: 'I want to call your engineering desk' }
-      ]
-    );
+  function appendUserMessage(text) {
+    const div = document.createElement('div');
+    div.className = 'vellett-msg user';
+    div.textContent = text;
+    msgList.appendChild(div);
+    msgList.scrollTop = msgList.scrollHeight;
   }
 
-  function triggerSampleAuditFlow() {
-    appendMessage('I would like to request a 10-SKU sample audit.', 'user');
-    setTimeout(() => {
-      renderLeadForm('10-SKU Pilot Audit Request');
-    }, 300);
+  function showHelpdeskNode(key) {
+    if (key === 'lead_capture') {
+      renderSimpleLeadCapture();
+      return;
+    }
+
+    const node = HELPDESK[key];
+    if (node) {
+      appendBotMessage(node.message, node.chips);
+    } else {
+      showHelpdeskNode('root');
+    }
   }
 
-  function renderLeadForm(topic = 'Inquiry') {
-    const formDiv = document.createElement('div');
-    formDiv.className = 'vellett-msg bot';
-    formDiv.style.width = '92%';
-    formDiv.innerHTML = `
-      <strong>Intake Routing to Engineering Desk</strong><br>
-      <span style="font-size:11px;color:#71717A;">Enter your details below. Our team will review your catalog requirements within 2 business hours.</span>
-      <form class="vellett-lead-form" id="ai-lead-capture">
-        <input type="text" id="ai-lead-name" placeholder="Full Name *" required>
-        <input type="tel" id="ai-lead-phone" placeholder="Direct Phone Number *" required>
-        <input type="email" id="ai-lead-email" placeholder="Work Email *" required>
-        <input type="text" id="ai-lead-company" placeholder="Company / Distributor Name *" required>
-        <input type="text" id="ai-lead-catalog" placeholder="Manufacturer PDF / Brand (e.g. Ashcroft, Swagelok)">
-        <button type="submit">Submit to Engineering Desk</button>
+  // ULTRA-SIMPLE 2-FIELD LEAD CAPTURE (NO MASSIVE FORM)
+  function renderSimpleLeadCapture() {
+    const div = document.createElement('div');
+    div.className = 'vellett-msg bot';
+    div.style.width = '94%';
+    div.innerHTML = `
+      <strong>Direct Intake: 10-SKU Pilot Audit</strong><br>
+      <span style="font-size:12px;color:#52525B;">Where should our catalog engineering desk send your 10-SKU audit deliverable? Enter your contact details below:</span>
+      <form class="vellett-fast-lead" id="fast-lead-form">
+        <input type="text" id="lead-name" placeholder="Your Name / Title *" required>
+        <input type="tel" id="lead-phone" placeholder="Direct Phone Number *" required>
+        <input type="text" id="lead-company" placeholder="Company Name &amp; Catalog Line (Optional)">
+        <button type="submit">Submit for 2-Hour Review</button>
       </form>
       <div style="margin-top:8px;font-size:11px;color:#71717A;text-align:center;">
-        Prefer calling now? <a href="tel:+19193391208" style="color:#09090B;font-weight:bold;text-decoration:underline;">(919) 339-1208</a>
+        Need to speak right now? Call: <a href="tel:+19193391208" style="color:#09090B;font-weight:bold;text-decoration:underline;">(919) 339-1208</a>
       </div>
     `;
-    msgList.appendChild(formDiv);
+    msgList.appendChild(div);
     msgList.scrollTop = msgList.scrollHeight;
 
-    const leadForm = formDiv.querySelector('#ai-lead-capture');
+    const leadForm = div.querySelector('#fast-lead-form');
     leadForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      const lead = {
-        name: leadForm.querySelector('#ai-lead-name').value.trim(),
-        phone: leadForm.querySelector('#ai-lead-phone').value.trim(),
-        email: leadForm.querySelector('#ai-lead-email').value.trim(),
-        company: leadForm.querySelector('#ai-lead-company').value.trim(),
-        catalog: leadForm.querySelector('#ai-lead-catalog').value.trim(),
-        topic: topic,
-        timestamp: new Date().toISOString()
+      const payload = {
+        name: div.querySelector('#lead-name').value.trim(),
+        phone: div.querySelector('#lead-phone').value.trim(),
+        company: div.querySelector('#lead-company').value.trim() || 'Industrial Distributor',
+        timestamp: new Date().toISOString(),
+        source: 'AI Helpdesk Chatbot'
       };
-      submitLead(lead, formDiv);
-    });
-  }
 
-  function submitLead(lead, container) {
-    container.innerHTML = `
-      <div style="padding:12px;background:#F4F4F0;border:1px solid #18181B;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:bold;color:#09090B;margin-bottom:4px;">
-          INQUIRY DISPATCHED TO ENGINEERING DESK
-        </div>
-        <p style="margin:0 0 8px 0;font-size:12px;color:#27272A;">
-          Thank you, <strong>${lead.name || 'Partner'}</strong>. Your request for <strong>${lead.company || 'your catalog line'}</strong> has been received by our catalog engineering desk.
-        </p>
-        <div style="padding:8px;background:#FFFFFF;border:1px solid #E4E4E7;margin-bottom:8px;font-size:11px;font-family:'JetBrains Mono',monospace;">
-          <div>Phone: ${lead.phone}</div>
-          <div>Email: ${lead.email}</div>
-          <div>Catalog: ${lead.catalog || 'To be provided'}</div>
-          <div style="color:#16A34A;font-weight:bold;margin-top:4px;">Status: Queued for 2-hour engineering review</div>
-        </div>
-        <div style="font-size:11px;color:#71717A;">
-          For immediate priority intake, call our direct line:
-          <a href="tel:+19193391208" style="display:block;margin-top:4px;padding:6px;background:#09090B;color:#FFFFFF;text-align:center;font-weight:bold;text-decoration:none;font-family:'JetBrains Mono',monospace;">
-            Call Direct: (919) 339-1208
+      div.innerHTML = `
+        <div style="padding:12px;background:#F4F4F0;border:1.5px solid #10B981;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:bold;color:#047857;margin-bottom:4px;">
+            ✓ INTAKE DISPATCHED TO ENGINEERING DESK
+          </div>
+          <p style="margin:0 0 8px 0;font-size:12px;color:#18181B;">
+            Thank you, <strong>${payload.name}</strong>. Your number (<strong>${payload.phone}</strong>) has been queued for review by our catalog engineering desk.
+          </p>
+          <div style="font-size:11px;color:#52525B;margin-bottom:8px;">
+            A catalog engineer will review your PDF specifications within 2 business hours.
+          </div>
+          <a href="tel:+19193391208" style="display:block;padding:8px;background:#09090B;color:#FFFFFF;text-align:center;font-weight:bold;text-decoration:none;font-size:11px;font-family:'JetBrains Mono',monospace;">
+            Call Direct Now: (919) 339-1208
           </a>
         </div>
-      </div>
-    `;
+      `;
 
-    // 1. Save to localStorage backup
-    try {
-      const existing = JSON.parse(localStorage.getItem('vellett_leads') || '[]');
-      existing.push(lead);
-      localStorage.setItem('vellett_leads', JSON.stringify(existing));
-    } catch (err) {}
+      // Save locally & dispatch to email
+      try {
+        const stored = JSON.parse(localStorage.getItem('vellett_leads') || '[]');
+        stored.push(payload);
+        localStorage.setItem('vellett_leads', JSON.stringify(stored));
+      } catch (err) {}
 
-    // 2. Post to Cloudflare Function / API
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(lead)
-    }).catch(() => {});
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
 
-    // 3. Post to Web3Forms for direct email delivery to inquiries@vellett.com
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: '64696b99-e6c1-4b10-8b1b-2ce8288544e3',
-        subject: `[VELLETT AI LEAD] ${lead.name} from ${lead.company} - (${lead.phone})`,
-        from_name: 'Vellett AI Concierge',
-        to: 'inquiries@vellett.com',
-        ...lead
-      })
-    }).catch(() => {});
-  }
-
-  function handleUserInput(query) {
-    if (!query || !query.trim()) return;
-    const cleanQuery = query.trim();
-    appendMessage(cleanQuery, 'user');
-    if (input) input.value = '';
-
-    const lower = cleanQuery.toLowerCase();
-
-    // Check if user is asking for sample / pilot
-    if (lower.includes('sample') || lower.includes('pilot') || lower.includes('10-sku') || lower.includes('quote')) {
-      setTimeout(() => {
-        appendMessage('We would be glad to unroll 10 SKUs from your manufacturer catalog free of charge.', 'bot');
-        renderLeadForm('10-SKU Pilot Audit');
-      }, 400);
-      return;
-    }
-
-    // Check if user is asking to speak / call
-    if (lower.includes('call') || lower.includes('speak') || lower.includes('contact') || lower.includes('phone') || lower.includes('human')) {
-      setTimeout(() => {
-        appendMessage(
-          'You can call our direct engineering intake line right now at <a href="tel:+19193391208" style="font-weight:bold;text-decoration:underline;">(919) 339-1208</a>.<br><br>Or leave your number below and our engineering team will contact you directly within 2 business hours:',
-          'bot'
-        );
-        renderLeadForm('Direct Callback Request');
-      }, 400);
-      return;
-    }
-
-    // Match with knowledge base
-    let matchedAnswer = null;
-    for (const item of KNOWLEDGE) {
-      if (item.keywords.some(kw => lower.includes(kw))) {
-        matchedAnswer = item.answer;
-        break;
-      }
-    }
-
-    setTimeout(() => {
-      if (matchedAnswer) {
-        appendMessage(
-          matchedAnswer,
-          'bot',
-          [
-            { label: 'Request Free 10-SKU Audit', query: 'I want to request a free 10-SKU pilot audit' },
-            { label: 'Call (919) 339-1208', query: 'I want to call your engineering desk' }
-          ]
-        );
-      } else {
-        appendMessage(
-          'Our catalog engineering desk handles custom manufacturer PDF unrolling, part matrix unrolling, and 20-attribute formatting for industrial ERPs.<br><br>Would you like to speak directly with an engineer or submit a 10-SKU sample to test our accuracy?',
-          'bot',
-          [
-            { label: 'Request 10-SKU Sample', query: 'I want to request a free 10-SKU pilot audit' },
-            { label: 'Call Direct: (919) 339-1208', query: 'I want to call your engineering desk' }
-          ]
-        );
-      }
-    }, 400);
-  }
-
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      handleUserInput(input.value);
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '64696b99-e6c1-4b10-8b1b-2ce8288544e3',
+          subject: `[VELLETT AI LEAD] ${payload.name} - ${payload.phone}`,
+          to: 'inquiries@vellett.com',
+          ...payload
+        })
+      }).catch(() => {});
     });
   }
+
+  // Free-text natural language parser
+  function handleFreeText(text) {
+    if (!text || !text.trim()) return;
+    const clean = text.trim();
+    appendUserMessage(clean);
+    input.value = '';
+
+    const lower = clean.toLowerCase();
+
+    if (lower.includes('price') || lower.includes('cost') || lower.includes('retainer') || lower.includes('rate')) {
+      setTimeout(() => showHelpdeskNode('pricing_pilot'), 300);
+    } else if (lower.includes('p21') || lower.includes('prophet') || lower.includes('epicor')) {
+      setTimeout(() => showHelpdeskNode('p21_details'), 300);
+    } else if (lower.includes('infor') || lower.includes('csd') || lower.includes('sx.e')) {
+      setTimeout(() => showHelpdeskNode('infor_details'), 300);
+    } else if (lower.includes('matrix') || lower.includes('ashcroft') || lower.includes('swagelok') || lower.includes('gauge') || lower.includes('valve')) {
+      setTimeout(() => showHelpdeskNode('matrix_unrolling'), 300);
+    } else if (lower.includes('footnote') || lower.includes('derating') || lower.includes('de-rating') || lower.includes('temperature')) {
+      setTimeout(() => showHelpdeskNode('footnote_auditing'), 300);
+    } else if (lower.includes('sample') || lower.includes('pilot') || lower.includes('free') || lower.includes('audit')) {
+      setTimeout(() => showHelpdeskNode('lead_capture'), 300);
+    } else if (lower.includes('call') || lower.includes('phone') || lower.includes('human') || lower.includes('speak') || lower.includes('talk')) {
+      setTimeout(() => {
+        appendBotMessage(
+          'You can call our direct catalog engineering desk right now at <a href="tel:+19193391208" style="font-weight:bold;text-decoration:underline;">(919) 339-1208</a>.<br><br>Or leave your name and phone number below for an immediate callback:',
+          [{ label: 'Request Immediate Callback', next: 'lead_capture' }]
+        );
+      }, 300);
+    } else {
+      setTimeout(() => {
+        appendBotMessage(
+          'Our catalog engineering desk handles complex manufacturer PDF unrolling, 20-attribute ERP formatting (Prophet 21, Infor CSD), and footnote de-rating audits.<br><br>Please choose an area to explore:',
+          [
+            { label: '📦 Catalog PDF & Matrix Issues', next: 'catalog_issues' },
+            { label: '💻 ERP Integration (P21, Infor)', next: 'erp_integration' },
+            { label: '💰 Pricing & Free 10-SKU Pilot', next: 'pricing_pilot' },
+            { label: '📞 Speak with Engineering Desk', next: 'lead_capture' }
+          ]
+        );
+      }, 300);
+    }
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    handleFreeText(input.value);
+  });
 
 })();
