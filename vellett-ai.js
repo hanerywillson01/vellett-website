@@ -9,10 +9,10 @@
     root: {
       message: '<strong>Vellett Catalog Engineering Helpdesk</strong><br>We help industrial distributors unroll complex manufacturer PDFs into verified ERP item masters (P21, Infor, NetSuite).<br><br>What area can we assist you with today?',
       chips: [
-        { label: '📦 Catalog PDF & Matrix Issues', next: 'catalog_issues' },
-        { label: '💻 ERP Integration (P21, Infor)', next: 'erp_integration' },
-        { label: '💰 Pricing & Free 10-SKU Pilot', next: 'pricing_pilot' },
-        { label: '📞 Speak with Engineering Desk', next: 'lead_capture' }
+        { label: 'Catalog PDF & Matrix Issues', next: 'catalog_issues' },
+        { label: 'ERP Integration (P21, Infor)', next: 'erp_integration' },
+        { label: 'Pricing & Free 10-SKU Pilot', next: 'pricing_pilot' },
+        { label: 'Speak with Engineering Desk', next: 'lead_capture' }
       ]
     },
     catalog_issues: {
@@ -22,7 +22,7 @@
         { label: 'Footnote De-Rating Auditing', next: 'footnote_auditing' },
         { label: '5-Day Turnaround SLA', next: 'sla_turnaround' },
         { label: 'Request Free 10-SKU Sample', next: 'lead_capture' },
-        { label: '← Back to Main Menu', next: 'root' }
+        { label: 'Back to Main Menu', next: 'root' }
       ]
     },
     matrix_unrolling: {
@@ -30,7 +30,7 @@
       chips: [
         { label: 'Yes, Request 10-SKU Pilot ($0)', next: 'lead_capture' },
         { label: 'Footnote De-Rating Questions', next: 'footnote_auditing' },
-        { label: '← Back to Catalog Issues', next: 'catalog_issues' }
+        { label: 'Back to Catalog Issues', next: 'catalog_issues' }
       ]
     },
     footnote_auditing: {
@@ -38,7 +38,7 @@
       chips: [
         { label: 'Request Free 10-SKU Pilot Audit', next: 'lead_capture' },
         { label: 'How 5-Day Delivery Works', next: 'sla_turnaround' },
-        { label: '← Back to Catalog Issues', next: 'catalog_issues' }
+        { label: 'Back to Catalog Issues', next: 'catalog_issues' }
       ]
     },
     sla_turnaround: {
@@ -46,7 +46,7 @@
       chips: [
         { label: 'Request 10-SKU Pilot Audit ($0)', next: 'lead_capture' },
         { label: 'Explore Pricing Retainers', next: 'pricing_pilot' },
-        { label: '← Back to Main Menu', next: 'root' }
+        { label: 'Back to Main Menu', next: 'root' }
       ]
     },
     erp_integration: {
@@ -56,7 +56,7 @@
         { label: 'Infor CloudSuite Distribution (CSD)', next: 'infor_details' },
         { label: 'Oracle NetSuite / SAP Business One', next: 'netsuite_details' },
         { label: 'Item Master Deduplication', next: 'dedup_details' },
-        { label: '← Back to Main Menu', next: 'root' }
+        { label: 'Back to Main Menu', next: 'root' }
       ]
     },
     p21_details: {
@@ -64,7 +64,7 @@
       chips: [
         { label: 'Request 10-SKU P21 Sample File', next: 'lead_capture' },
         { label: 'Item Master Deduplication', next: 'dedup_details' },
-        { label: '← Back to ERP Systems', next: 'erp_integration' }
+        { label: 'Back to ERP Systems', next: 'erp_integration' }
       ]
     },
     infor_details: {
@@ -72,21 +72,21 @@
       chips: [
         { label: 'Request 10-SKU Infor Sample File', next: 'lead_capture' },
         { label: 'Pricing & Turnarounds', next: 'pricing_pilot' },
-        { label: '← Back to ERP Systems', next: 'erp_integration' }
+        { label: 'Back to ERP Systems', next: 'erp_integration' }
       ]
     },
     netsuite_details: {
       message: '<strong>NetSuite & SAP Business One:</strong><br>We construct parent-child matrix items with normalized option drop-downs (materials, sizes, pressure ratings) tailored for industrial distribution.',
       chips: [
         { label: 'Request 10-SKU Sample File', next: 'lead_capture' },
-        { label: '← Back to ERP Systems', next: 'erp_integration' }
+        { label: 'Back to ERP Systems', next: 'erp_integration' }
       ]
     },
     dedup_details: {
       message: '<strong>ERP Item Master Deduplication:</strong><br>Decades of manual entry create massive SKU duplication (e.g. "SS-62TS8" vs "SS62TS8" vs "SWG-SS-62TS8"). We audit and merge duplicate records, preserving historical order history and preventing redundant warehouse re-orders.',
       chips: [
         { label: 'Request Deduplication Assessment', next: 'lead_capture' },
-        { label: '← Back to ERP Systems', next: 'erp_integration' }
+        { label: 'Back to ERP Systems', next: 'erp_integration' }
       ]
     },
     pricing_pilot: {
@@ -94,7 +94,7 @@
       chips: [
         { label: 'Request $0 Pilot Audit', next: 'lead_capture' },
         { label: 'Speak with Engineering Desk', next: 'lead_capture' },
-        { label: '← Back to Main Menu', next: 'root' }
+        { label: 'Back to Main Menu', next: 'root' }
       ]
     }
   };
@@ -478,7 +478,7 @@
       div.innerHTML = `
         <div style="padding:12px;background:#F4F4F0;border:1.5px solid #10B981;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:bold;color:#047857;margin-bottom:4px;">
-            ✓ INTAKE DISPATCHED TO ENGINEERING DESK
+            INTAKE DISPATCHED TO ENGINEERING DESK
           </div>
           <p style="margin:0 0 8px 0;font-size:12px;color:#18181B;">
             Thank you, <strong>${payload.name}</strong>. Your number (<strong>${payload.phone}</strong>) has been queued for review by our catalog engineering desk.
@@ -551,10 +551,10 @@
         appendBotMessage(
           'Our catalog engineering desk handles complex manufacturer PDF unrolling, 20-attribute ERP formatting (Prophet 21, Infor CSD), and footnote de-rating audits.<br><br>Please choose an area to explore:',
           [
-            { label: '📦 Catalog PDF & Matrix Issues', next: 'catalog_issues' },
-            { label: '💻 ERP Integration (P21, Infor)', next: 'erp_integration' },
-            { label: '💰 Pricing & Free 10-SKU Pilot', next: 'pricing_pilot' },
-            { label: '📞 Speak with Engineering Desk', next: 'lead_capture' }
+            { label: 'Catalog PDF & Matrix Issues', next: 'catalog_issues' },
+            { label: 'ERP Integration (P21, Infor)', next: 'erp_integration' },
+            { label: 'Pricing & Free 10-SKU Pilot', next: 'pricing_pilot' },
+            { label: 'Speak with Engineering Desk', next: 'lead_capture' }
           ]
         );
       }, 300);
