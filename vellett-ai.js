@@ -1,14 +1,14 @@
 // Vellett Industrial Catalog Engineering - AI Concierge & Lead Intake
-// Lightweight client-side industrial Q&A engine and direct lead capture pipeline
+// High-performance client-side industrial Q&A engine and direct lead capture pipeline
 
 (function () {
   'use strict';
 
-  // 1. Embedded Knowledge Base
+  // 1. Embedded Industrial Knowledge Base
   const KNOWLEDGE = [
     {
       keywords: ['price', 'pricing', 'cost', 'fee', 'retainer', 'rate', 'quote', 'package', 'how much'],
-      answer: 'Our pricing is transparent and project-based:<br><br>&bull; <strong>10-SKU Pilot Audit:</strong> 100% Free proof-of-concept.<br>&bull; <strong>Single Line Pilot:</strong> $1,500 flat fee for 1 full manufacturer series.<br>&bull; <strong>Active Distribution Sprint:</strong> $4,200/month (up to 4 complete manufacturer lines per month, 5-day sprints).<br>&bull; <strong>Enterprise Clearing:</strong> $12,000/month for high-volume legacy catalog backlogs with dedicated staging.'
+      answer: 'Our pricing is transparent and month-to-month:<br><br>&bull; <strong>Proof of Concept Pilot:</strong> $0 / 100% Free for 10-15 real SKUs from your PDF.<br>&bull; <strong>Starter Retainer:</strong> $1,500/month (1-2 lines, up to 750 SKUs, 5-day sprints).<br>&bull; <strong>Growth Retainer:</strong> $4,200/month (up to 4 complete manufacturer lines per month with price update reconciliations).<br>&bull; <strong>Enterprise Clearing:</strong> $12,000/month for high-volume legacy catalog backlogs with dedicated staging.'
     },
     {
       keywords: ['turnaround', 'time', 'how long', 'fast', 'sprint', 'schedule', 'days', 'sla'],
@@ -16,7 +16,7 @@
     },
     {
       keywords: ['erp', 'prophet 21', 'p21', 'epicor', 'infor', 'csd', 'sx.e', 'netsuite', 'sap', 'bigcommerce'],
-      answer: 'We build native import files mapped directly to your specific ERP schema:<br><br>&bull; <strong>Epicor Prophet 21:</strong> Item Master, Extended Attributes, Item Price, Item UOM.<br>&bull; <strong>Infor CSD / SX.e:</strong> ICSP, ICSPU, and catalog tables.<br>&bull; <strong>Oracle NetSuite &amp; SAP Business One:</strong> Matrix items &amp; custom attributes.<br>&bull; <strong>BigCommerce B2B Edition:</strong> Faceted search attributes and product variants.'
+      answer: 'We format verified item masters mapped directly to your specific ERP schema:<br><br>&bull; <strong>Epicor Prophet 21:</strong> Item Master, Extended Attributes, Item Price, Item UOM.<br>&bull; <strong>Infor CSD / SX.e:</strong> ICSP, ICSPU, and catalog tables.<br>&bull; <strong>Oracle NetSuite &amp; SAP Business One:</strong> Matrix items &amp; custom attributes.<br>&bull; <strong>BigCommerce B2B Edition:</strong> Faceted search attributes and product variants.'
     },
     {
       keywords: ['methodology', '5-sheet', 'sheets', 'deliverable', 'attributes', 'what do you deliver'],
@@ -24,7 +24,7 @@
     },
     {
       keywords: ['manufacturer', 'brand', 'ashcroft', 'swagelok', 'dwyer', 'wika', 'parker', 'smc'],
-      answer: 'We specialize in mechanical, fluid power, and instrumentation catalogs including <strong>Ashcroft</strong> (gauges/transmitters), <strong>Swagelok</strong> (60 Series valves, fittings), <strong>Dwyer Instruments</strong> (Magnehelics), <strong>WIKA</strong> (pressure gauges), <strong>Parker Hannifin</strong>, and <strong>SMC Pneumatics</strong>.'
+      answer: 'We specialize in mechanical, fluid power, and instrumentation catalogs including <strong>Ashcroft</strong> (1009/1279 gauges, transmitters), <strong>Swagelok</strong> (60 Series valves, fittings), <strong>Dwyer Instruments</strong> (Magnehelics), <strong>WIKA</strong> (pressure gauges), <strong>Parker Hannifin</strong>, and <strong>SMC Pneumatics</strong>.'
     },
     {
       keywords: ['sample', 'pilot', 'free', 'test', 'audit', '10-sku'],
@@ -36,197 +36,202 @@
     }
   ];
 
-  // 2. Build and Inject UI
-  const style = document.createElement('style');
-  style.textContent = `
-    #vellett-ai-widget {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 99999;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    #vellett-ai-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #09090B;
-      color: #FFFFFF;
-      padding: 10px 16px;
-      border: 1px solid #27272A;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 12px;
-      font-family: "JetBrains Mono", monospace;
-    }
-    #vellett-ai-badge:hover {
-      background: #18181B;
-      transform: translateY(-2px);
-    }
-    #vellett-ai-panel {
-      display: none;
-      width: 380px;
-      max-width: calc(100vw - 32px);
-      height: 540px;
-      max-height: calc(100vh - 100px);
-      background: #FBFBF9;
-      border: 1px solid #18181B;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-      flex-direction: column;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-    #vellett-ai-panel.open {
-      display: flex;
-    }
-    .vellett-ai-header {
-      background: #09090B;
-      color: #FFFFFF;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #27272A;
-    }
-    .vellett-ai-messages {
-      flex: 1;
-      padding: 16px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 13px;
-      line-height: 1.5;
-      background: #FBFBF9;
-    }
-    .vellett-msg {
-      max-width: 88%;
-      padding: 10px 14px;
-      word-wrap: break-word;
-    }
-    .vellett-msg.bot {
-      background: #FFFFFF;
-      color: #18181B;
-      border: 1px solid #E4E4E7;
-      align-self: flex-start;
-    }
-    .vellett-msg.user {
-      background: #09090B;
-      color: #FFFFFF;
-      align-self: flex-end;
-    }
-    .vellett-ai-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-    .vellett-chip {
-      background: #F4F4F0;
-      color: #18181B;
-      border: 1px solid #D4D4D8;
-      padding: 5px 10px;
-      font-size: 11px;
-      font-family: "JetBrains Mono", monospace;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .vellett-chip:hover {
-      background: #09090B;
-      color: #FFFFFF;
-      border-color: #09090B;
-    }
-    .vellett-ai-input-row {
-      display: flex;
-      border-top: 1px solid #E4E4E7;
-      background: #FFFFFF;
-      padding: 8px;
-      gap: 6px;
-    }
-    .vellett-ai-input-row input {
-      flex: 1;
-      border: 1px solid #D4D4D8;
-      padding: 8px 12px;
-      font-size: 13px;
-      outline: none;
-      background: #FBFBF9;
-      color: #09090B;
-    }
-    .vellett-ai-input-row input:focus {
-      border-color: #09090B;
-    }
-    .vellett-ai-input-row button {
-      background: #09090B;
-      color: #FFFFFF;
-      border: none;
-      padding: 8px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .vellett-ai-input-row button:hover {
-      background: #27272A;
-    }
-    .vellett-lead-form {
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px solid #18181B;
-      background: #FFFFFF;
-    }
-    .vellett-lead-form input {
-      width: 100%;
-      box-sizing: border-box;
-      margin-bottom: 8px;
-      padding: 7px 10px;
-      border: 1px solid #D4D4D8;
-      font-size: 12px;
-      outline: none;
-    }
-    .vellett-lead-form button {
-      width: 100%;
-      background: #09090B;
-      color: #FFFFFF;
-      border: none;
-      padding: 9px;
-      font-size: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      text-transform: uppercase;
-    }
-  `;
-  document.head.appendChild(style);
+  // 2. Inject CSS if not already present
+  if (!document.getElementById('vellett-ai-styles')) {
+    const style = document.createElement('style');
+    style.id = 'vellett-ai-styles';
+    style.textContent = `
+      #vellett-ai-widget {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 99999;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      #vellett-ai-badge {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #09090B;
+        color: #FFFFFF;
+        padding: 12px 18px;
+        border: 1px solid #27272A;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 12px;
+        font-family: "JetBrains Mono", monospace;
+      }
+      #vellett-ai-badge:hover {
+        background: #18181B;
+        border-color: #52525B;
+        transform: translateY(-2px);
+      }
+      #vellett-ai-panel {
+        display: none;
+        width: 380px;
+        max-width: calc(100vw - 32px);
+        height: 540px;
+        max-height: calc(100vh - 100px);
+        background: #FBFBF9;
+        border: 1px solid #18181B;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        flex-direction: column;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+      #vellett-ai-panel.open {
+        display: flex !important;
+      }
+      .vellett-ai-header {
+        background: #09090B;
+        color: #FFFFFF;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #27272A;
+      }
+      .vellett-ai-messages {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        font-size: 13px;
+        line-height: 1.5;
+        background: #FBFBF9;
+      }
+      .vellett-msg {
+        max-width: 88%;
+        padding: 10px 14px;
+        word-wrap: break-word;
+      }
+      .vellett-msg.bot {
+        background: #FFFFFF;
+        color: #18181B;
+        border: 1px solid #E4E4E7;
+        align-self: flex-start;
+      }
+      .vellett-msg.user {
+        background: #09090B;
+        color: #FFFFFF;
+        align-self: flex-end;
+      }
+      .vellett-ai-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .vellett-chip {
+        background: #F4F4F0;
+        color: #18181B;
+        border: 1px solid #D4D4D8;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .vellett-chip:hover {
+        background: #09090B;
+        color: #FFFFFF;
+        border-color: #09090B;
+      }
+      .vellett-ai-input-row {
+        display: flex;
+        border-top: 1px solid #E4E4E7;
+        background: #FFFFFF;
+        padding: 8px;
+        gap: 6px;
+      }
+      .vellett-ai-input-row input {
+        flex: 1;
+        border: 1px solid #D4D4D8;
+        padding: 8px 12px;
+        font-size: 13px;
+        outline: none;
+        background: #FBFBF9;
+        color: #09090B;
+      }
+      .vellett-ai-input-row input:focus {
+        border-color: #09090B;
+      }
+      .vellett-ai-input-row button {
+        background: #09090B;
+        color: #FFFFFF;
+        border: none;
+        padding: 8px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .vellett-ai-input-row button:hover {
+        background: #27272A;
+      }
+      .vellett-lead-form {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #18181B;
+        background: #FFFFFF;
+      }
+      .vellett-lead-form input {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 8px;
+        padding: 7px 10px;
+        border: 1px solid #D4D4D8;
+        font-size: 12px;
+        outline: none;
+      }
+      .vellett-lead-form button {
+        width: 100%;
+        background: #09090B;
+        color: #FFFFFF;
+        border: none;
+        padding: 9px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+    `;
+    document.head.appendChild(style);
+  }
 
-  // Widget HTML
-  const widget = document.createElement('div');
-  widget.id = 'vellett-ai-widget';
-  widget.innerHTML = `
-    <div id="vellett-ai-panel">
-      <div class="vellett-ai-header">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="width:8px;height:8px;background:#34D399;border-radius:50%;display:inline-block;"></span>
-          <span style="font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:0.5px;">VELLETT CATALOG AI</span>
+  // 3. Inject DOM if not present
+  let widget = document.getElementById('vellett-ai-widget');
+  if (!widget) {
+    widget = document.createElement('div');
+    widget.id = 'vellett-ai-widget';
+    widget.innerHTML = `
+      <div id="vellett-ai-panel">
+        <div class="vellett-ai-header">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="width:8px;height:8px;background:#34D399;border-radius:50%;display:inline-block;"></span>
+            <span style="font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:0.5px;">VELLETT CATALOG AI</span>
+          </div>
+          <button id="vellett-ai-close" style="background:none;border:none;color:#A1A1AA;cursor:pointer;font-size:20px;line-height:1;" title="Close">&times;</button>
         </div>
-        <button id="vellett-ai-close" style="background:none;border:none;color:#A1A1AA;cursor:pointer;font-size:18px;line-height:1;" title="Close">&times;</button>
+        <div class="vellett-ai-messages" id="vellett-msg-list"></div>
+        <form class="vellett-ai-input-row" id="vellett-ai-form">
+          <input type="text" id="vellett-user-input" placeholder="Ask about catalogs, ERPs, turnaround..." autocomplete="off">
+          <button type="submit">Send</button>
+        </form>
       </div>
-      <div class="vellett-ai-messages" id="vellett-msg-list">
-        <!-- Messages injected here -->
-      </div>
-      <form class="vellett-ai-input-row" id="vellett-ai-form">
-        <input type="text" id="vellett-user-input" placeholder="Ask about catalogs, ERPs, or turnaround..." autocomplete="off">
-        <button type="submit">Send</button>
-      </form>
-    </div>
 
-    <div id="vellett-ai-badge" title="Open Vellett Catalog AI Concierge">
-      <span style="width:8px;height:8px;background:#34D399;border-radius:50%;display:inline-block;"></span>
-      <span>Catalog AI Concierge</span>
-      <svg style="width:14px;height:14px;margin-left:4px;opacity:0.8;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-    </div>
-  `;
-  document.body.appendChild(widget);
+      <div id="vellett-ai-badge" title="Open Vellett Catalog AI Concierge">
+        <span style="width:8px;height:8px;background:#34D399;border-radius:50%;display:inline-block;"></span>
+        <span>Catalog AI Concierge</span>
+        <svg style="width:15px;height:15px;margin-left:4px;opacity:0.85;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      </div>
+    `;
+    document.body.appendChild(widget);
+  }
 
   const panel = document.getElementById('vellett-ai-panel');
   const badge = document.getElementById('vellett-ai-badge');
@@ -252,8 +257,14 @@
     }
   }
 
-  badge.addEventListener('click', () => togglePanel());
-  closeBtn.addEventListener('click', () => togglePanel(false));
+  window.toggleAIPanel = togglePanel;
+
+  if (badge) {
+    badge.onclick = () => togglePanel();
+  }
+  if (closeBtn) {
+    closeBtn.onclick = () => togglePanel(false);
+  }
 
   // Global trigger for Request Sample button
   window.openSampleIntake = function (e) {
@@ -265,6 +276,7 @@
   };
 
   function appendMessage(text, sender = 'bot', chips = null) {
+    if (!msgList) return;
     const div = document.createElement('div');
     div.className = `vellett-msg ${sender}`;
     div.innerHTML = text;
@@ -391,7 +403,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        access_key: '64696b99-e6c1-4b10-8b1b-2ce8288544e3', // Standard Web3Forms token or fallback
+        access_key: '64696b99-e6c1-4b10-8b1b-2ce8288544e3',
         subject: `[VELLETT AI LEAD] ${lead.name} from ${lead.company} - (${lead.phone})`,
         from_name: 'Vellett AI Concierge',
         to: 'inquiries@vellett.com',
@@ -404,7 +416,7 @@
     if (!query || !query.trim()) return;
     const cleanQuery = query.trim();
     appendMessage(cleanQuery, 'user');
-    input.value = '';
+    if (input) input.value = '';
 
     const lower = cleanQuery.toLowerCase();
 
@@ -461,9 +473,11 @@
     }, 400);
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    handleUserInput(input.value);
-  });
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleUserInput(input.value);
+    });
+  }
 
 })();
