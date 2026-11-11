@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Studio &amp; AI Graphic Generator | Vellett</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+  </style>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans pb-24">
+
+  <!-- Top Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-3 font-mono">
+        <span class="text-white font-semibold">VELLETT EDITORIAL STUDIO</span>
+        <span class="text-zinc-600">|</span>
+        <span class="text-zinc-400">Technical Post Publisher &amp; AI Graphic Suite</span>
+      </div>
+      <div>
+        <a href="index.html" class="text-zinc-400 hover:text-white transition-colors font-mono text-xs">&larr; Back to Guides Library</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-8">
+    
+    <div class="mb-8 pb-6 border-b border-zinc-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <h1 class="text-3xl font-serif font-bold text-zinc-950">Article Studio &amp; Media Engine</h1>
+        <p class="text-xs text-zinc-600 font-sans mt-1">Author new industrial guides, upload featured technical diagrams, or generate AI blueprint graphics with 1-click publishing.</p>
+      </div>
+      <div class="flex items-center space-x-3">
+        <button type="button" onclick="previewArticle()" class="px-4 py-2 border border-zinc-300 bg-white text-zinc-800 text-xs font-mono font-medium hover:bg-zinc-100 transition-colors cursor-pointer">
+          Preview Article
+        </button>
+        <button type="button" onclick="publishPost()" class="px-5 py-2 bg-zinc-950 text-white text-xs font-mono font-semibold uppercase tracking-wider hover:bg-zinc-800 transition-colors shadow-sm cursor-pointer">
+          Publish Post &rarr;
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Article Metadata & Photo Controls -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Metadata Box -->
+        <div class="border border-zinc-300 bg-white p-6 shadow-sm">
+          <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold mb-4">Post Metadata</h2>
+          
+          <div class="space-y-4 text-xs font-sans">
+            <div>
+              <label class="block font-mono uppercase text-[11px] text-zinc-700 mb-1.5 font-semibold">Article Title *</label>
+              <input type="text" id="post-title" oninput="updateSlug()" placeholder="e.g. Parker A-LOK vs. Swagelok Tube Fitting Interchange" class="w-full px-3 py-2 border border-zinc-300 font-sans text-xs focus:outline-none focus:border-zinc-950 bg-parchment" value="Parker A-LOK vs. Swagelok Double-Ferrule Tube Fittings: The Complete ERP Interchange Specification">
+            </div>
+
+            <div>
+              <label class="block font-mono uppercase text-[11px] text-zinc-700 mb-1.5 font-semibold">URL Slug *</label>
+              <input type="text" id="post-slug" placeholder="parker-a-lok-vs-swagelok-interchange-guide" class="w-full px-3 py-2 border border-zinc-300 font-mono text-xs focus:outline-none focus:border-zinc-950 bg-parchment" value="parker-a-lok-vs-swagelok-interchange-guide">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block font-mono uppercase text-[11px] text-zinc-700 mb-1.5 font-semibold">Category *</label>
+                <select id="post-category" class="w-full px-3 py-2 border border-zinc-300 font-sans text-xs focus:outline-none focus:border-zinc-950 bg-parchment">
+                  <option value="ERP Imports (P21/Infor)">ERP Imports (P21/Infor)</option>
+                  <option value="Brand Onboarding">Brand Onboarding</option>
+                  <option value="Data Quality & De-Rating">Data Quality &amp; De-Rating</option>
+                  <option value="Taxonomy & eCommerce">Taxonomy &amp; eCommerce</option>
+                  <option value="Price Reconciliation">Price Reconciliation</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-mono uppercase text-[11px] text-zinc-700 mb-1.5 font-semibold">Read Time *</label>
+                <input type="text" id="post-readtime" class="w-full px-3 py-2 border border-zinc-300 font-sans text-xs focus:outline-none focus:border-zinc-950 bg-parchment" value="8 min read">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-mono uppercase text-[11px] text-zinc-700 mb-1.5 font-semibold">Summary &amp; Meta Description *</label>
+              <textarea id="post-summary" rows="3" class="w-full px-3 py-2 border border-zinc-300 font-sans text-xs focus:outline-none focus:border-zinc-950 bg-parchment" placeholder="Executive summary for search engines and article cards...">A comprehensive engineering comparison of Parker A-LOK double-ferrule instrumentation fittings against Swagelok 60 Series components. How to map drop-in substitutes in Epicor Prophet 21 without voiding plant warranties.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHOTO & AI GRAPHIC GENERATOR SUITE -->
+        <div class="border border-zinc-300 bg-white p-6 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-zinc-200">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-950 font-bold">Featured Photo &amp; Diagram Suite</h2>
+            <span class="text-[10px] font-mono bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 font-semibold">Active Engine</span>
+          </div>
+
+          <div class="space-y-4">
+            
+            <!-- Tab Buttons: Upload vs AI Generate -->
+            <div class="flex border border-zinc-200 bg-parchment p-1 font-mono text-xs">
+              <button type="button" id="tab-upload" onclick="switchMediaTab('upload')" class="flex-1 py-1.5 font-semibold bg-zinc-950 text-white transition-colors cursor-pointer text-center">
+                Upload Photo / Diagram
+              </button>
+              <button type="button" id="tab-ai" onclick="switchMediaTab('ai')" class="flex-1 py-1.5 font-medium text-zinc-700 hover:text-zinc-950 transition-colors cursor-pointer text-center">
+                Generate AI Technical Graphic
+              </button>
+            </div>
+
+            <!-- Upload Option Panel -->
+            <div id="media-panel-upload" class="space-y-3">
+              <div class="border-2 border-dashed border-zinc-300 p-6 text-center bg-parchment hover:border-zinc-500 transition-colors cursor-pointer" onclick="document.getElementById('file-upload-input').click()">
+                <svg class="w-8 h-8 mx-auto text-zinc-400 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <div class="text-xs font-mono font-semibold text-zinc-900">Click to Upload Feature Image</div>
+                <div class="text-[11px] text-zinc-500 font-sans mt-0.5">Supports PNG, JPG, WebP, SVG (Recommended: 1200x630px)</div>
+                <input type="file" id="file-upload-input" accept="image/*" class="hidden" onchange="handleFileUpload(event)">
+              </div>
+            </div>
+
+            <!-- AI Generator Panel -->
+            <div id="media-panel-ai" class="space-y-3 hidden">
+              <div>
+                <label class="block font-mono uppercase text-[11px] text-zinc-700 mb-1.5 font-semibold">Select AI Blueprint Archetype</label>
+                <select id="ai-graphic-type" onchange="generateAIGraphic()" class="w-full px-3 py-2 border border-zinc-300 font-sans text-xs focus:outline-none focus:border-zinc-950 bg-parchment">
+                  <option value="flange_ratings">ASME Flange Pressure-Temperature De-Rating Curve</option>
+                  <option value="matrix_flow">Ashcroft / Swagelok Part Matrix Logic Diagram</option>
+                  <option value="p21_relational">Epicor Prophet 21 Relational Item Master Schema</option>
+                  <option value="crossref_matrix">Drop-In Interchange Matrix (Swagelok &harr; Parker)</option>
+                  <option value="taxonomy_tree">B2B E-Commerce Faceted Search Taxonomy Tree</option>
+                </select>
+              </div>
+
+              <button type="button" onclick="generateAIGraphic()" class="w-full py-2.5 bg-zinc-900 text-white font-mono text-xs font-semibold uppercase tracking-wider hover:bg-zinc-800 transition-colors cursor-pointer flex items-center justify-center gap-2">
+                <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span>Generate On-Brand Technical SVG</span>
+              </button>
+            </div>
+
+            <!-- Media Preview Container -->
+            <div class="pt-3 border-t border-zinc-200">
+              <div class="flex justify-between items-center mb-2 font-mono text-[11px] text-zinc-500">
+                <span>Active Image Preview:</span>
+                <button type="button" onclick="clearMedia()" class="text-red-700 hover:underline">Remove</button>
+              </div>
+              <div id="image-preview-container" class="border border-zinc-200 bg-parchment overflow-hidden flex items-center justify-center min-h-[160px] max-h-[240px]">
+                <!-- Default SVG Blueprint Preview -->
+                <svg id="active-svg-graphic" class="w-full h-auto max-h-[220px]" viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="800" height="420" fill="#09090B"/>
+                  <path d="M0 40H800M0 80H800M0 120H800M0 160H800M0 200H800M0 240H800M0 280H800M0 320H800M0 360H800M0 400H800" stroke="#27272A" stroke-width="1"/>
+                  <path d="M80 0V420M160 0V420M240 0V420M320 0V420M400 0V420M480 0V420M560 0V420M640 0V420M720 0V420" stroke="#27272A" stroke-width="1"/>
+                  <text x="40" y="70" fill="#10B981" font-family="JetBrains Mono" font-size="14" font-weight="bold">SPECIFICATION BLUEPRINT // VELLETT INDUSTRIAL CATALOG ENGINE</text>
+                  <text x="40" y="105" fill="#FAFAFA" font-family="Newsreader" font-size="24">ASME B16.5 Pressure-Temperature De-Rating Curve</text>
+                  <path d="M80 340 C 220 330, 400 240, 720 130" stroke="#10B981" stroke-width="3" fill="none"/>
+                  <circle cx="280" cy="300" r="5" fill="#FFFFFF"/>
+                  <text x="295" y="295" fill="#FAFAFA" font-family="JetBrains Mono" font-size="11">Class 150 (275 PSI @ 100°F)</text>
+                  <circle cx="580" cy="180" r="5" fill="#EF4444"/>
+                  <text x="595" y="175" fill="#EF4444" font-family="JetBrains Mono" font-size="11">De-rated to 20 PSI @ 1000°F [CRITICAL]</text>
+                  <rect x="40" y="370" width="300" height="24" fill="#18181B" stroke="#27272A"/>
+                  <text x="50" y="386" fill="#A1A1AA" font-family="JetBrains Mono" font-size="10">AUDITED FOOTNOTE EXCEPTION: TAB 2 READY</text>
+                </svg>
+                <img id="active-image-preview" src="" alt="Uploaded Feature" class="w-full h-auto max-h-[220px] object-cover hidden">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Content Editor & Live Preview -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <div class="border border-zinc-300 bg-white p-6 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-zinc-200">
+            <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-950 font-bold">Article Content Editor</h2>
+            <div class="flex items-center space-x-2 text-xs font-mono">
+              <button type="button" onclick="insertSnippet('heading')" class="px-2 py-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-300">+ Heading</button>
+              <button type="button" onclick="insertSnippet('table')" class="px-2 py-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-300">+ Spec Table</button>
+              <button type="button" onclick="insertSnippet('alert')" class="px-2 py-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-300">+ Alert Box</button>
+            </div>
+          </div>
+
+          <div>
+            <textarea id="post-body" rows="18" class="w-full p-4 border border-zinc-300 font-mono text-xs leading-relaxed focus:outline-none focus:border-zinc-950 bg-parchment" placeholder="Write or paste your article content here (supports HTML or Markdown)..."><h2>1. The High Cost of Tube Fitting Mismatches in Process Plants</h2>
+<p>Instrumentation tube fittings operate under extreme hydraulic and gas pressure (up to 15,000 PSIG). When an industrial distributor supplies replacement fittings to a chemical processing facility, counter personnel frequently field requests for <strong>Parker A-LOK</strong> double-ferrule components as direct replacements for factory-installed <strong>Swagelok</strong> tubing lines.</p>
+
+<div class="my-6 p-4 border border-amber-300 bg-amber-50/60 font-sans text-xs text-amber-950">
+  <strong>CRITICAL METALLURGICAL PROTOCOL:</strong> While Parker A-LOK (double-ferrule) components are mechanically and dimensionally interchangeable with Swagelok tube fittings, mixing single-ferrule CPI components with double-ferrule bodies voids manufacturer warranty and ASME B31.3 compliance.
+</div>
+
+<h2>2. Dimensional & Metallurgical Cross-Reference Matrix</h2>
+<p>To prevent inside sales reps from guessing part interchangeability, your ERP Item Master must cross-reference core body sizes against verified supplier part matrices:</p>
+
+<table class="w-full text-left text-xs font-mono border border-zinc-300 my-4">
+  <thead class="bg-zinc-950 text-white">
+    <tr>
+      <th class="p-2.5">Tube O.D.</th>
+      <th class="p-2.5">Swagelok Part #</th>
+      <th class="p-2.5">Parker A-LOK Equivalent</th>
+      <th class="p-2.5">Pressure Rating @ 100°F</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-zinc-200">
+    <tr class="bg-parchment"><td class="p-2.5">1/4 in.</td><td class="p-2.5">SS-400-6</td><td class="p-2.5">4-4 FBZ-SS</td><td class="p-2.5">10,200 PSIG</td></tr>
+    <tr class="bg-white"><td class="p-2.5">3/8 in.</td><td class="p-2.5">SS-600-6</td><td class="p-2.5">6-6 FBZ-SS</td><td class="p-2.5">6,500 PSIG</td></tr>
+    <tr class="bg-parchment"><td class="p-2.5">1/2 in.</td><td class="p-2.5">SS-810-6</td><td class="p-2.5">8-8 FBZ-SS</td><td class="p-2.5">6,700 PSIG</td></tr>
+  </tbody>
+</table>
+
+<h2>3. Configuring P21 Substitute Item Tables for Instant Quoting</h2>
+<p>Inside Epicor Prophet 21, assign Parker equivalents directly to the <code>item_substitute</code> table. When a counter rep enters the Swagelok SKU during a stockout, P21 immediately displays the verified Parker drop-in equivalent with stock availability.</p></textarea>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-zinc-200 flex justify-between items-center text-xs font-mono text-zinc-500">
+            <span>Author: Vellett Engineering Desk</span>
+            <span>Formatted for: Prophet 21 &bull; Infor CSD &bull; Web</span>
+          </div>
+        </div>
+
+        <!-- Publishing Status Box -->
+        <div id="publish-status-box" class="hidden p-4 border text-xs font-mono"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Studio JavaScript Engine -->
+  <script>
+    let activeMediaMode = 'ai'; // 'ai' or 'upload'
+    let currentUploadedDataUrl = '';
+
+    function switchMediaTab(tab) {
+      activeMediaMode = tab;
+      const isUpload = (tab === 'upload');
+      document.getElementById('media-panel-upload').classList.toggle('hidden', !isUpload);
+      document.getElementById('media-panel-ai').classList.toggle('hidden', isUpload);
+
+      const btnUp = document.getElementById('tab-upload');
+      const btnAi = document.getElementById('tab-ai');
+      if (isUpload) {
+        btnUp.className = 'flex-1 py-1.5 font-semibold bg-zinc-950 text-white transition-colors cursor-pointer text-center';
+        btnAi.className = 'flex-1 py-1.5 font-medium text-zinc-700 hover:text-zinc-950 transition-colors cursor-pointer text-center';
+        if (currentUploadedDataUrl) {
+          document.getElementById('active-image-preview').classList.remove('hidden');
+          document.getElementById('active-svg-graphic').classList.add('hidden');
+        }
+      } else {
+        btnAi.className = 'flex-1 py-1.5 font-semibold bg-zinc-950 text-white transition-colors cursor-pointer text-center';
+        btnUp.className = 'flex-1 py-1.5 font-medium text-zinc-700 hover:text-zinc-950 transition-colors cursor-pointer text-center';
+        document.getElementById('active-image-preview').classList.add('hidden');
+        document.getElementById('active-svg-graphic').classList.remove('hidden');
+      }
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        currentUploadedDataUrl = e.target.result;
+        const img = document.getElementById('active-image-preview');
+        img.src = currentUploadedDataUrl;
+        img.classList.remove('hidden');
+        document.getElementById('active-svg-graphic').classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function generateAIGraphic() {
+      const type = document.getElementById('ai-graphic-type').value;
+      const svg = document.getElementById('active-svg-graphic');
+      const img = document.getElementById('active-image-preview');
+      img.classList.add('hidden');
+      svg.classList.remove('hidden');
+
+      if (type === 'matrix_flow') {
+        svg.innerHTML = `
+          <rect width="800" height="420" fill="#09090B"/>
+          <path d="M0 40H800M0 80H800M0 120H800M0 160H800M0 200H800M0 240H800M0 280H800M0 320H800M0 360H800M0 400H800" stroke="#27272A" stroke-width="1"/>
+          <path d="M80 0V420M160 0V420M240 0V420M320 0V420M400 0V420M480 0V420M560 0V420M640 0V420M720 0V420" stroke="#27272A" stroke-width="1"/>
+          <text x="40" y="60" fill="#10B981" font-family="JetBrains Mono" font-size="13" font-weight="bold">VELLETT PART MATRIX LOGIC UNROLLING // ARCHITECTURE</text>
+          <rect x="40" y="100" width="180" height="70" fill="#18181B" stroke="#52525B"/>
+          <text x="55" y="130" fill="#FAFAFA" font-family="JetBrains Mono" font-size="12" font-weight="bold">PDF Ordering Table</text>
+          <text x="55" y="150" fill="#A1A1AA" font-family="JetBrains Mono" font-size="10">Dense Matrix Code</text>
+          <path d="M220 135 H 300" stroke="#10B981" stroke-width="2"/>
+          <polygon points="300,135 292,130 292,140" fill="#10B981"/>
+          <rect x="300" y="100" width="200" height="70" fill="#18181B" stroke="#10B981"/>
+          <text x="315" y="130" fill="#FAFAFA" font-family="JetBrains Mono" font-size="12" font-weight="bold">Permutation Engine</text>
+          <text x="315" y="150" fill="#A1A1AA" font-family="JetBrains Mono" font-size="10">20-Attribute Extractor</text>
+          <path d="M500 135 H 580" stroke="#10B981" stroke-width="2"/>
+          <polygon points="580,135 572,130 572,140" fill="#10B981"/>
+          <rect x="580" y="100" width="180" height="70" fill="#18181B" stroke="#52525B"/>
+          <text x="595" y="130" fill="#10B981" font-family="JetBrains Mono" font-size="12" font-weight="bold">Prophet 21 Ready</text>
+          <text x="595" y="150" fill="#A1A1AA" font-family="JetBrains Mono" font-size="10">Zero Missing Attributes</text>
+          <rect x="40" y="220" width="720" height="150" fill="#18181B" stroke="#27272A"/>
+          <text x="60" y="250" fill="#FAFAFA" font-family="JetBrains Mono" font-size="12">Matrix Output: 1,420 Verified SKUs unrolled with exact pressure & metallurgy specs</text>
+          <text x="60" y="280" fill="#A1A1AA" font-family="JetBrains Mono" font-size="11">&bull; Dial Sizes: 2.5 in, 4.0 in, 4.5 in &bull; Pressure: 0-15 PSI up to 15,000 PSI</text>
+          <text x="60" y="310" fill="#A1A1AA" font-family="JetBrains Mono" font-size="11">&bull; Wetted Parts: 316SS, Monel, Brass &bull; Connections: 1/4 NPT, 1/2 NPT Lower/Back</text>
+        `;
+      } else if (type === 'crossref_matrix') {
+        svg.innerHTML = `
+          <rect width="800" height="420" fill="#09090B"/>
+          <path d="M0 40H800M0 80H800M0 120H800M0 160H800M0 200H800M0 240H800M0 280H800M0 320H800M0 360H800M0 400H800" stroke="#27272A" stroke-width="1"/>
+          <text x="40" y="70" fill="#10B981" font-family="JetBrains Mono" font-size="14" font-weight="bold">DROP-IN REPLACEMENT CROSS-REFERENCE INTERCHANGE MATRIX</text>
+          <rect x="40" y="110" width="340" height="180" fill="#18181B" stroke="#52525B"/>
+          <text x="60" y="145" fill="#EF4444" font-family="JetBrains Mono" font-size="13" font-weight="bold">Primary Supplier (Out of Stock)</text>
+          <text x="60" y="180" fill="#FAFAFA" font-family="JetBrains Mono" font-size="14">Swagelok SS-62TS8</text>
+          <text x="60" y="210" fill="#A1A1AA" font-family="JetBrains Mono" font-size="11">Lead Time: 22 Weeks (Backordered)</text>
+          <text x="60" y="240" fill="#A1A1AA" font-family="JetBrains Mono" font-size="11">Specs: 1/2 in. Tube, 316SS, 2200 PSI</text>
+          <rect x="420" y="110" width="340" height="180" fill="#18181B" stroke="#10B981"/>
+          <text x="440" y="145" fill="#10B981" font-family="JetBrains Mono" font-size="13" font-weight="bold">Verified Drop-In Substitute</text>
+          <text x="440" y="180" fill="#FAFAFA" font-family="JetBrains Mono" font-size="14">Parker 8Z-B6LJ2-SSP</text>
+          <text x="440" y="210" fill="#FAFAFA" font-family="JetBrains Mono" font-size="11">Stock Status: In Distributor Warehouse</text>
+          <text x="440" y="240" fill="#10B981" font-family="JetBrains Mono" font-size="11">Form-Fit-Function: 100% Verified Match</text>
+          <rect x="40" y="320" width="720" height="60" fill="#18181B" stroke="#27272A"/>
+          <text x="60" y="355" fill="#FAFAFA" font-family="JetBrains Mono" font-size="12">P21 Integration: Automated item_substitute pop-up enables instant counter quoting</text>
+        `;
+      } else {
+        // Default flange rating curve
+        svg.innerHTML = `
+          <rect width="800" height="420" fill="#09090B"/>
+          <path d="M0 40H800M0 80H800M0 120H800M0 160H800M0 200H800M0 240H800M0 280H800M0 320H800M0 360H800M0 400H800" stroke="#27272A" stroke-width="1"/>
+          <path d="M80 0V420M160 0V420M240 0V420M320 0V420M400 0V420M480 0V420M560 0V420M640 0V420M720 0V420" stroke="#27272A" stroke-width="1"/>
+          <text x="40" y="70" fill="#10B981" font-family="JetBrains Mono" font-size="14" font-weight="bold">SPECIFICATION BLUEPRINT // VELLETT INDUSTRIAL CATALOG ENGINE</text>
+          <text x="40" y="105" fill="#FAFAFA" font-family="Newsreader" font-size="24">ASME B16.5 Pressure-Temperature De-Rating Curve</text>
+          <path d="M80 340 C 220 330, 400 240, 720 130" stroke="#10B981" stroke-width="3" fill="none"/>
+          <circle cx="280" cy="300" r="5" fill="#FFFFFF"/>
+          <text x="295" y="295" fill="#FAFAFA" font-family="JetBrains Mono" font-size="11">Class 150 (275 PSI @ 100°F)</text>
+          <circle cx="580" cy="180" r="5" fill="#EF4444"/>
+          <text x="595" y="175" fill="#EF4444" font-family="JetBrains Mono" font-size="11">De-rated to 20 PSI @ 1000°F [CRITICAL]</text>
+          <rect x="40" y="370" width="300" height="24" fill="#18181B" stroke="#27272A"/>
+          <text x="50" y="386" fill="#A1A1AA" font-family="JetBrains Mono" font-size="10">AUDITED FOOTNOTE EXCEPTION: TAB 2 READY</text>
+        `;
+      }
+    }
+
+    function clearMedia() {
+      currentUploadedDataUrl = '';
+      document.getElementById('file-upload-input').value = '';
+      document.getElementById('active-image-preview').classList.add('hidden');
+      document.getElementById('active-image-preview').src = '';
+      document.getElementById('active-svg-graphic').classList.remove('hidden');
+      generateAIGraphic();
+    }
+
+    function updateSlug() {
+      const title = document.getElementById('post-title').value;
+      const slug = title.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)+/g, '');
+      document.getElementById('post-slug').value = slug;
+    }
+
+    function insertSnippet(type) {
+      const textarea = document.getElementById('post-body');
+      let snippet = '';
+      if (type === 'heading') {
+        snippet = '\n<h2>New Technical Section Heading</h2>\n<p>Explain the engineering implications for ERP item master tables here...</p>\n';
+      } else if (type === 'table') {
+        snippet = `\n<table class="w-full text-left text-xs font-mono border border-zinc-300 my-4">
+  <thead class="bg-zinc-950 text-white">
+    <tr><th class="p-2">Attribute</th><th class="p-2">Engineering Value</th><th class="p-2">P21 Field</th></tr>
+  </thead>
+  <tbody class="divide-y divide-zinc-200">
+    <tr class="bg-parchment"><td class="p-2">Body Metallurgy</td><td class="p-2">316 Stainless Steel</td><td class="p-2">inv_mast.class_id1</td></tr>
+    <tr class="bg-white"><td class="p-2">Pressure Rating</td><td class="p-2">6,000 PSIG @ 100°F</td><td class="p-2">item_attr.pressure_psi</td></tr>
+  </tbody>
+</table>\n`;
+      } else if (type === 'alert') {
+        snippet = '\n<div class="my-6 p-4 border border-red-300 bg-red-50 text-xs font-sans text-red-950 font-semibold">\n  CRITICAL NOTICE: Always verify footnote temperature de-ratings prior to loading supplier part numbers into active production ERP environments.\n</div>\n';
+      }
+      textarea.value += snippet;
+    }
+
+    async function publishPost() {
+      const title = document.getElementById('post-title').value.trim();
+      const slug = document.getElementById('post-slug').value.trim();
+      const category = document.getElementById('post-category').value;
+      const readTime = document.getElementById('post-readtime').value.trim();
+      const summary = document.getElementById('post-summary').value.trim();
+      const body = document.getElementById('post-body').value.trim();
+
+      const statusBox = document.getElementById('publish-status-box');
+      statusBox.classList.remove('hidden');
+      statusBox.className = 'p-4 border border-zinc-400 bg-zinc-50 text-zinc-900 font-mono text-xs';
+      statusBox.innerHTML = 'Compiling production article and packaging image asset...';
+
+      const payload = {
+        title,
+        slug,
+        category,
+        readTime,
+        summary,
+        body,
+        mediaMode: activeMediaMode,
+        uploadedImage: currentUploadedDataUrl,
+        svgContent: document.getElementById('active-svg-graphic').outerHTML
+      };
+
+      try {
+        const response = await fetch('/api/publish', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          const res = await response.json();
+          statusBox.className = 'p-4 border border-emerald-600 bg-emerald-50 text-emerald-950 font-mono text-xs';
+          statusBox.innerHTML = `<strong>SUCCESS: ARTICLE PUBLISHED TO REPOSITORY</strong><br>Created: /resources/${slug}/index.html<br>Image Asset Saved.<br>Resources index and sitemap updated.<br><a href="${slug}/index.html" class="underline font-bold mt-2 inline-block">View Published Post &rarr;</a>`;
+        } else {
+          throw new Error('Local server not running');
+        }
+      } catch (err) {
+        // Fallback: Generate full standalone HTML for download or direct save
+        statusBox.className = 'p-4 border border-zinc-900 bg-zinc-950 text-white font-mono text-xs';
+        statusBox.innerHTML = `
+          <strong>ARTICLE COMPILED LOCALLY</strong><br>
+          Your article and featured graphic are ready. Directory: <code>resources/${slug}/</code><br><br>
+          <button type="button" onclick="downloadArticleBundle()" class="bg-white text-zinc-950 px-3 py-1 font-bold mr-2 cursor-pointer">Download Article HTML</button>
+          <button type="button" onclick="downloadGraphicAsset()" class="border border-white text-white px-3 py-1 font-bold cursor-pointer">Download Graphic Asset</button>
+        `;
+      }
+    }
+
+    function downloadArticleBundle() {
+      const slug = document.getElementById('post-slug').value.trim();
+      const title = document.getElementById('post-title').value.trim();
+      const summary = document.getElementById('post-summary').value.trim();
+      const body = document.getElementById('post-body').value.trim();
+
+      const fullHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>${title} | Vellett</title>
+  <meta name="description" content="${summary}">
+  <link rel="canonical" href="https://vellett.com/resources/${slug}/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Newsreader:ital,wght@0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#FBFBF9] text-[#09090B] font-sans antialiased">
+  <header class="border-b border-zinc-200 bg-white/95 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
+    <a href="../../index.html" class="text-xl font-bold font-sans">VELLETT</a>
+    <nav class="flex gap-6 text-sm font-medium text-zinc-600">
+      <a href="../../methodology/index.html">Methodology</a>
+      <a href="../../services/index.html">Services</a>
+      <a href="../../pricing/index.html">Pricing</a>
+      <a href="../index.html" class="text-zinc-950 font-semibold">Guides</a>
+    </nav>
+  </header>
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-serif font-bold text-zinc-950 mb-4">${title}</h1>
+    <p class="text-base text-zinc-600 mb-8">${summary}</p>
+    <div class="my-8 border border-zinc-200 overflow-hidden bg-zinc-950">
+      <img src="featured.svg" alt="${title}" class="w-full h-auto">
+    </div>
+    <div class="prose max-w-none text-zinc-800 leading-relaxed">${body}</div>
+  </main>
+  <script src="../../vellett-ai.js" defer></script>
+</body>
+</html>`;
+
+      const blob = new Blob([fullHtml], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      a.click();
+    }
+
+    function downloadGraphicAsset() {
+      const svg = document.getElementById('active-svg-graphic').outerHTML;
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'featured.svg';
+      a.click();
+    }
+
+    function previewArticle() {
+      const body = document.getElementById('post-body').value;
+      const win = window.open('', '_blank');
+      win.document.write('<html><head><title>Preview</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-[#FBFBF9] p-8 max-w-4xl mx-auto">' + body + '</body></html>');
+    }
+  </script>
+</body>
+</html>

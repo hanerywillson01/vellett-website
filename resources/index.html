@@ -222,10 +222,17 @@
       </div>
     </nav>
 
-        <div class="inline-flex items-center space-x-2 border border-zinc-300 bg-white px-3 py-1 text-xs font-mono uppercase tracking-wider text-zinc-700 mb-6">
-          <span>Catalog Engineering Knowledge Base</span>
-          <span class="text-zinc-400">|</span>
-          <span class="text-zinc-950 font-semibold">11 In-Depth Guides</span>
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div class="inline-flex items-center space-x-2 border border-zinc-300 bg-white px-3 py-1 text-xs font-mono uppercase tracking-wider text-zinc-700">
+            <span>Catalog Engineering Knowledge Base</span>
+            <span class="text-zinc-400">|</span>
+            <span class="text-zinc-950 font-semibold">11 In-Depth Guides</span>
+          </div>
+
+          <a href="studio.html" class="inline-flex items-center gap-1.5 border border-zinc-950 bg-zinc-950 text-white px-3.5 py-1.5 text-xs font-mono font-medium hover:bg-zinc-800 transition-colors shadow-sm">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+            <span>+ Open Article Studio / Write Post</span>
+          </a>
         </div>
         
         <h1 class="text-4xl sm:text-5xl font-serif tracking-tight text-zinc-950 leading-[1.15] mb-6">
@@ -245,16 +252,39 @@
     </div>
   </section>
 
-  <!-- Guides Grid -->
-  <section class="py-20 px-4 sm:px-8 border-b border-zinc-200 bg-parchment">
+  <!-- Guides Grid & Editorial Hub -->
+  <section class="py-16 px-4 sm:px-8 border-b border-zinc-200 bg-parchment">
     <div class="max-w-7xl mx-auto">
+
+      <!-- Publishing Studio Quick Banner -->
+      <div class="mb-12 border border-zinc-300 bg-white p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+        <div class="max-w-2xl">
+          <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 mb-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="text-zinc-950 font-semibold uppercase tracking-wider">Authoring &amp; Media Studio</span>
+            <span>&bull;</span>
+            <span>Direct Publisher</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-serif font-bold text-zinc-950 mb-2">Publish New Technical Guides &amp; Schematics</h2>
+          <p class="text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed">
+            Write and publish technical reference articles on demand. Upload custom engineering photos, wiring schematics, and flange diagrams, or generate on-brand SVG architectural blueprints with live previews.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+          <a href="studio.html" class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-zinc-950 text-white font-mono text-xs font-semibold uppercase tracking-wider hover:bg-zinc-800 transition-colors text-center">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            <span>Write New Post &rarr;</span>
+          </a>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
         <article class="p-8 border border-zinc-200 bg-white hover:border-zinc-400 transition-colors flex flex-col justify-between shadow-sm">
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">ERP Integration &bull; 12 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="hover:underline">Epicor Prophet 21: How to Import Supplier PDF Catalogs Without Breaking Item Masters</a>
+              <a href="epicor-prophet-21-pdf-catalog-import-guide/index.html" class="hover:underline">Epicor Prophet 21: How to Import Supplier PDF Catalogs Without Breaking Item Masters</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               Step-by-step protocol for extracting unformatted manufacturer tables, unrolling ordering matrices, and mapping to P21 DynaChange and Item Master fields.
@@ -262,7 +292,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="epicor-prophet-21-pdf-catalog-import-guide/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -270,7 +300,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Engineering Audit &bull; 10 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/" class="hover:underline">The Hidden Danger of Manufacturer PDF Footnotes: Why Pressure De-Ratings Cause Returns</a>
+              <a href="hidden-danger-manufacturer-pdf-footnotes-returns/index.html" class="hover:underline">The Hidden Danger of Manufacturer PDF Footnotes: Why Pressure De-Ratings Cause Returns</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               Real case studies of industrial product returns caused by missing fine-print temperature de-ratings, steam siphoning mandates, and seal chemical alerts.
@@ -278,7 +308,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="hidden-danger-manufacturer-pdf-footnotes-returns/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -286,7 +316,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Software TCO &bull; 14 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/pim-software-vs-managed-catalog-preparation-cost/" class="hover:underline">PIM Software vs Managed Catalog Preparation: The True TCO for Industrial Distributors</a>
+              <a href="pim-software-vs-managed-catalog-preparation-cost/index.html" class="hover:underline">PIM Software vs Managed Catalog Preparation: The True TCO for Industrial Distributors</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               Why purchasing a $50k/year PIM software license still leaves distributors with empty tables unless they hire engineering specialists to unroll supplier PDFs.
@@ -294,7 +324,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/pim-software-vs-managed-catalog-preparation-cost/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="pim-software-vs-managed-catalog-preparation-cost/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -302,7 +332,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Infor CSD &bull; 11 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/item-master-duplicate-cleansing-infor-csd/" class="hover:underline">Item Master Duplicate Cleansing in Infor CSD: Merging Multi-Branch Records</a>
+              <a href="item-master-duplicate-cleansing-infor-csd/index.html" class="hover:underline">Item Master Duplicate Cleansing in Infor CSD: Merging Multi-Branch Records</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               How multi-branch acquisitions create item master fragmentation, and the step-by-step methodology to consolidate SKUs without breaking historical sales orders.
@@ -310,7 +340,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/item-master-duplicate-cleansing-infor-csd/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="item-master-duplicate-cleansing-infor-csd/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -318,7 +348,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Inside Sales &bull; 9 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/stock-out-drop-in-replacement-cross-referencing/" class="hover:underline">Stock-Out Drop-In Replacement Cross-Referencing: Protecting Counter Sales</a>
+              <a href="stock-out-drop-in-replacement-cross-referencing/index.html" class="hover:underline">Stock-Out Drop-In Replacement Cross-Referencing: Protecting Counter Sales</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               How to map interchangeable valve, gauge, and fitting product lines so inside sales reps can instantly quote in-stock alternatives during 16-week factory delays.
@@ -326,7 +356,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/stock-out-drop-in-replacement-cross-referencing/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="stock-out-drop-in-replacement-cross-referencing/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -334,7 +364,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Matrix Engineering &bull; 13 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="hover:underline">Unrolling Valve and Gauge Part Number Matrices: From PDF Code Matrix to Discreet SKUs</a>
+              <a href="unrolling-valve-gauge-part-number-matrices/index.html" class="hover:underline">Unrolling Valve and Gauge Part Number Matrices: From PDF Code Matrix to Discreet SKUs</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               A deep dive into combinatoric part number matrix unrolling for Ashcroft, Swagelok, Parker, and Dwyer catalogs to generate explicit discreet SKUs.
@@ -342,7 +372,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="unrolling-valve-gauge-part-number-matrices/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -350,7 +380,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Margin Defense &bull; 10 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="hover:underline">Reconciling Annual Supplier Price Sheet Hikes: Halting Gross Margin Bleed</a>
+              <a href="reconciling-annual-supplier-price-sheet-hikes/index.html" class="hover:underline">Reconciling Annual Supplier Price Sheet Hikes: Halting Gross Margin Bleed</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               Automated side-by-side reconciliation protocols for vendor price sheets to prevent quoting customers at outdated cost levels when suppliers increase prices.
@@ -358,7 +388,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="reconciling-annual-supplier-price-sheet-hikes/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -366,7 +396,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Taxonomy & Units &bull; 8 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/standardizing-npt-bsp-psi-bar-industrial-ecommerce/" class="hover:underline">Standardizing NPT vs BSP and PSI vs Bar: Fixing Industrial E-Commerce Search Filters</a>
+              <a href="standardizing-npt-bsp-psi-bar-industrial-ecommerce/index.html" class="hover:underline">Standardizing NPT vs BSP and PSI vs Bar: Fixing Industrial E-Commerce Search Filters</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               Why unit variations destroy faceted search usability on B2B distributor storefronts, and the exact normalization rules for thread types and pressure scales.
@@ -374,7 +404,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/standardizing-npt-bsp-psi-bar-industrial-ecommerce/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="standardizing-npt-bsp-psi-bar-industrial-ecommerce/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -382,7 +412,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">E-Commerce &bull; 11 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/bigcommerce-b2b-faceted-search-attribute-guide/" class="hover:underline">BigCommerce B2B Edition: Setting Up Faceted Search for Industrial Distributors</a>
+              <a href="bigcommerce-b2b-faceted-search-attribute-guide/index.html" class="hover:underline">BigCommerce B2B Edition: Setting Up Faceted Search for Industrial Distributors</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               Architecting custom fields, product filtering, and variant matrices in BigCommerce B2B Edition to help engineers find specific valves in 2 clicks.
@@ -390,7 +420,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/bigcommerce-b2b-faceted-search-attribute-guide/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="bigcommerce-b2b-faceted-search-attribute-guide/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -398,7 +428,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">PVF Standards &bull; 12 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/ansi-flange-pressure-temperature-ratings-guide/" class="hover:underline">ANSI Flange Pressure-Temperature Ratings: Class 150 to Class 2500 Normalization</a>
+              <a href="ansi-flange-pressure-temperature-ratings-guide/index.html" class="hover:underline">ANSI Flange Pressure-Temperature Ratings: Class 150 to Class 2500 Normalization</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               Technical reference for normalizing ASME B16.5 flange pressure-temperature ratings across carbon steel (A105) and 316 stainless steel for ERP item masters.
@@ -406,7 +436,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/ansi-flange-pressure-temperature-ratings-guide/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="ansi-flange-pressure-temperature-ratings-guide/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -414,7 +444,7 @@
           <div>
             <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Process Framework &bull; 10 min read</div>
             <h2 class="text-xl font-serif font-bold text-zinc-950 mb-3 leading-snug">
-              <a href="/resources/5-day-supplier-onboarding-framework-pdf-to-erp/" class="hover:underline">The 5-Day Supplier Onboarding Framework: Moving From PDF to ERP Ready</a>
+              <a href="5-day-supplier-onboarding-framework-pdf-to-erp/index.html" class="hover:underline">The 5-Day Supplier Onboarding Framework: Moving From PDF to ERP Ready</a>
             </h2>
             <p class="text-xs text-zinc-600 leading-relaxed mb-6 font-sans">
               The exact day-by-day operational playbook Vellett executes to take a new manufacturer catalog from raw PDF to verified ERP import file in 5 business days.
@@ -422,7 +452,7 @@
           </div>
           <div class="pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono">
             <span class="text-zinc-500">By Vellett Engineering</span>
-            <a href="/resources/5-day-supplier-onboarding-framework-pdf-to-erp/" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
+            <a href="5-day-supplier-onboarding-framework-pdf-to-erp/index.html" class="text-zinc-950 font-semibold hover:underline">Read Guide &rarr;</a>
           </div>
         </article>
 
@@ -469,7 +499,7 @@
           <div class="space-y-2 text-xs font-mono text-zinc-400">
             <div><span class="text-zinc-500">Corporate HQ:</span> 1201 N Orange St, Suite 700, Wilmington, DE 19801</div>
             <div><span class="text-zinc-500">Direct Desk:</span> <a href="tel:+19193391208" class="text-zinc-200 hover:text-white underline">(919) 339-1208</a></div>
-            <div><span class="text-zinc-500">Principal Desk:</span> <a href="mailto:ayush@vellett.com" class="text-zinc-200 hover:text-white underline">ayush@vellett.com</a></div>
+            <div><span class="text-zinc-500">Principal Desk:</span> <a href="mailto:inquiries@vellett.com" class="text-zinc-200 hover:text-white underline">inquiries@vellett.com</a></div>
             <div><span class="text-zinc-500">Inquiry Desk:</span> <a href="mailto:inquiries@vellett.com" class="text-zinc-200 hover:text-white underline">inquiries@vellett.com</a></div>
           </div>
         </div>
