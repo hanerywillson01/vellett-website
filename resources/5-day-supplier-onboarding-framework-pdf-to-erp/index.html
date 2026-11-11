@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: {
+              850: '#18181B',
+              900: '#09090B',
+              950: '#040405',
+            },
+            industrial: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1E3A8A',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+    ::selection { background-color: #1E3A8A; color: #FFFFFF; }
+    .border-subtle { border-color: #E4E4E7; }
+    .bg-parchment { background-color: #FBFBF9; }
+    .bg-parchment-subtle { background-color: #F4F4F0; }
+    pre { background-color: #18181B; color: #F4F4F5; padding: 1.25rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.6; }
+    code { font-family: 'JetBrains Mono', monospace; }
+  </style>
+
+  <title>The 5-Day Supplier Onboarding Framework: From Messy PDF to Live ERP & E-Commerce | Vellett</title>
+  <meta name="description" content="Vellett's battle-tested 5-day protocol for taking a new 500-SKU manufacturer catalog from a dense engineering PDF to a 100% verified production import file inside Prophet 21 and BigCommerce. Includes executive checklists for each day.">
+  <link rel="canonical" href="https://vellett.com/resources/5-day-supplier-onboarding-framework-pdf-to-erp/">
+  <meta property="og:title" content="The 5-Day Supplier Onboarding Framework: From Messy PDF to Live ERP & E-Commerce">
+  <meta property="og:description" content="Vellett's battle-tested 5-day protocol for taking a new 500-SKU manufacturer catalog from a dense engineering PDF to a 100% verified production import file inside Prophet 21 and BigCommerce. Includes executive checklists for each day.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://vellett.com/resources/5-day-supplier-onboarding-framework-pdf-to-erp/">
+</head>
+<body class="bg-parchment text-zinc-900 antialiased">
+  
+  <!-- TOP ENTERPRISE ANNOUNCEMENT BAR -->
+  <div class="border-b border-subtle bg-parchment-subtle px-4 py-2 text-center text-xs tracking-wide text-zinc-600">
+    <span class="inline-flex items-center gap-2">
+      <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+      <strong>Enterprise Catalog Engineering</strong> for Industrial Distributors & Fluid Power Suppliers • Prophet 21, Infor CSD, BigCommerce
+    </span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 border-b border-subtle bg-parchment/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <div class="flex items-center gap-10">
+        <a href="/" class="flex items-center gap-2 group">
+          <span class="text-xl font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <span class="text-[10px] uppercase tracking-widest font-mono text-zinc-400 border border-zinc-200 px-1.5 py-0.5 rounded">Data Lab</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+          <a href="/#methodology" class="transition-colors hover:text-zinc-950">The 5-Sheet Methodology</a>
+          <a href="/#services" class="transition-colors hover:text-zinc-950">Services</a>
+          <a href="/resources/" class="text-zinc-950 font-semibold transition-colors flex items-center gap-1">
+            <span>Technical Guides</span>
+            <span class="rounded bg-zinc-100 px-1.5 py-0.2 text-[10px] font-mono text-zinc-600">10 Guides</span>
+          </a>
+          <a href="/#pricing" class="transition-colors hover:text-zinc-950">Pricing</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/#sample-request" class="rounded-md bg-zinc-950 px-4 py-2 text-xs font-semibold tracking-wide text-white transition-all hover:bg-industrial-900">
+          Request a 10-SKU Sample ($0)
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="py-12 sm:py-16">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-6">
+        <a href="/" class="hover:text-zinc-950">Home</a>
+        <span>/</span>
+        <a href="/resources/" class="hover:text-zinc-950">Resources</a>
+        <span>/</span>
+        <span class="text-zinc-900 font-semibold">Brand Onboarding</span>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="border-b border-subtle pb-8 mb-10">
+        <div class="flex items-center gap-3 text-xs font-mono text-zinc-500 mb-3">
+          <span class="rounded bg-industrial-100 text-industrial-900 font-bold px-2.5 py-0.5">Brand Onboarding</span>
+          <span>•</span>
+          <span>9 min read</span>
+          <span>•</span>
+          <span>Updated November 2026</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold text-zinc-950 leading-[1.15] tracking-tight">
+          The 5-Day Supplier Onboarding Framework: From Messy PDF to Live ERP & E-Commerce
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-zinc-600 font-sans leading-relaxed">
+          Vellett's battle-tested 5-day protocol for taking a new 500-SKU manufacturer catalog from a dense engineering PDF to a 100% verified production import file inside Prophet 21 and BigCommerce. Includes executive checklists for each day.
+        </p>
+
+        <!-- Author Byline -->
+        <div class="mt-6 flex items-center gap-3 pt-6 border-t border-zinc-100">
+          <div class="h-10 w-10 rounded-full bg-industrial-900 text-white flex items-center justify-center font-bold text-xs font-mono">
+            AS
+          </div>
+          <div>
+            <div class="text-xs font-bold text-zinc-900">Ayush Sharma</div>
+            <div class="text-[11px] text-zinc-500 font-sans">Catalog Engineering Director, Vellett</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Body -->
+      <article class="prose prose-zinc max-w-none text-zinc-800">
+        
+          <p class="text-lg leading-relaxed text-zinc-700 font-sans">
+            When an industrial distributor secures a new manufacturer line, the clock starts ticking immediately. Every day those products are not loaded into Prophet 21 and published to your e-commerce storefront is a day your competitors capture sales.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-zinc-700 font-sans">
+            Yet traditional onboarding takes 3 to 6 months. In this guide, we pull back the curtain on Vellett's proprietary <strong>5-Day Supplier Onboarding Framework</strong>—the protocol we use to convert 500 to 2,000 SKUs from a messy manufacturer PDF into live, transacting ERP items in one business week.
+          </p>
+
+          <h2 id="day-by-day" class="font-serif text-2xl font-bold text-zinc-950 mt-10 mb-4">The 5-Day Execution Blueprint</h2>
+          <div class="my-6 space-y-4 font-sans text-sm">
+            <div class="p-5 rounded-xl border border-subtle bg-white">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-xs font-bold text-industrial-900 bg-industrial-50 px-2 py-0.5 rounded">DAY 01</span>
+                <span class="text-xs text-zinc-400 font-mono">PDF Extraction & OCR Audit</span>
+              </div>
+              <h3 class="font-bold text-zinc-950 text-base">Deconstruction & Boundary Mapping</h3>
+              <p class="mt-1 text-xs text-zinc-600 leading-relaxed">
+                Extract high-resolution vector tables, cross-check page counts against the latest manufacturer bulletin revision, and harvest raw product photographs into 1500x1500px square assets.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl border border-subtle bg-white">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-xs font-bold text-industrial-900 bg-industrial-50 px-2 py-0.5 rounded">DAY 02</span>
+                <span class="text-xs text-zinc-400 font-mono">Permutation Unrolling</span>
+              </div>
+              <h3 class="font-bold text-zinc-950 text-base">Combinatorial Matrix Expansion</h3>
+              <p class="mt-1 text-xs text-zinc-600 leading-relaxed">
+                Run ordering formulas through Vellett's Python expansion engine. Enforce metallurgical and pressure dependencies to prune phantom combinations.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl border border-subtle bg-white">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-xs font-bold text-industrial-900 bg-industrial-50 px-2 py-0.5 rounded">DAY 03</span>
+                <span class="text-xs text-zinc-400 font-mono">Footnote Engineering Audit</span>
+              </div>
+              <h3 class="font-bold text-zinc-950 text-base">Application Limitations & Safety Catches</h3>
+              <p class="mt-1 text-xs text-zinc-600 leading-relaxed">
+                Extract all fine-print footnotes verbatim. Build Tab 2 Exception Log, mapping liquid-fill thresholds, steam ratings, and maximum static pressure caveats to ERP notes.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl border border-subtle bg-white">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-xs font-bold text-industrial-900 bg-industrial-50 px-2 py-0.5 rounded">DAY 04</span>
+                <span class="text-xs text-zinc-400 font-mono">Pricing & Equivalents</span>
+              </div>
+              <h3 class="font-bold text-zinc-950 text-base">Cross-Referencing & Margin Recalculation</h3>
+              <p class="mt-1 text-xs text-zinc-600 leading-relaxed">
+                Map drop-in equivalents from two competing brands (Tab 3). Reconcile supplier list prices against distributor purchase multipliers (Tab 4) to ensure 35%+ margins.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl border border-subtle bg-white">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-xs font-bold text-industrial-900 bg-industrial-50 px-2 py-0.5 rounded">DAY 05</span>
+                <span class="text-xs text-zinc-400 font-mono">Production Go-Live</span>
+              </div>
+              <h3 class="font-bold text-zinc-950 text-base">ERP Ingestion & Executive Sign-Off</h3>
+              <p class="mt-1 text-xs text-zinc-600 leading-relaxed">
+                Generate native Prophet 21 (DynaChange) and Infor CSD import files. Deliver the finalized 5-sheet master Excel deliverable with executive contrast verification (Tab 5).
+              </p>
+            </div>
+          </div>
+        
+      </article>
+
+      <!-- CTA Box -->
+      
+  <!-- ARTICLE BOTTOM CTA BOX -->
+  <div class="my-16 rounded-2xl border-2 border-zinc-950 bg-white p-8 sm:p-10 shadow-xl">
+    <div class="flex flex-wrap items-center justify-between gap-6">
+      <div class="max-w-xl">
+        <span class="rounded bg-industrial-100 px-2.5 py-0.5 text-xs font-mono font-bold text-industrial-900 uppercase tracking-wide">48-Hour Engineering Turnaround</span>
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-zinc-950 mt-2">Have a messy manufacturer catalog in PDF?</h3>
+        <p class="text-xs sm:text-sm text-zinc-600 mt-2 leading-relaxed font-sans">
+          Send us your toughest supplier PDF (Ashcroft, Swagelok, Parker, Dwyer, SMC). We will return an audited, 10-SKU 5-sheet master workbook formatted for your ERP—100% free with zero obligation.
+        </p>
+      </div>
+      <div>
+        <a href="/#sample-request" class="inline-block rounded-md bg-zinc-950 px-6 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-industrial-900 transition-all text-center">
+          Request a 10-SKU Sample ($0)
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+    </div>
+  </main>
+
+  
+  <!-- ENTERPRISE FOOTER -->
+  <footer class="border-t border-subtle bg-parchment-subtle py-16 text-xs text-zinc-500 mt-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <span class="text-lg font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <p class="mt-2 text-zinc-600 leading-relaxed font-sans">
+            Specialized item-master and e-commerce catalog engineering for North American industrial distributors, valve suppliers, and instrumentation firms.
+          </p>
+          <div class="mt-4 font-mono text-[11px] text-zinc-400">
+            Vellett Data Engineering LLC<br>Wilmington, DE • Operating Globally
+          </div>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Methodology & Workbooks</h4>
+          <ul class="space-y-2">
+            <li><a href="/#methodology" class="hover:text-zinc-900">1_ERP_And_Web_Import_Ready</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">2_Footnote_Exception_Audit</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">3_StockOut_DropIn_Equivalents</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">4_Price_And_Obsolete_Sync</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">5_Before_Vs_After_Visual</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Technical Guides</h4>
+          <ul class="space-y-2">
+            <li><a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="hover:text-zinc-900">Prophet 21 PDF Import Guide</a></li>
+            <li><a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="hover:text-zinc-900">Unrolling Part Number Matrices</a></li>
+            <li><a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="hover:text-zinc-900">Price Increase Reconciliation</a></li>
+            <li><a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/" class="hover:text-zinc-900">Footnote Exception Hazards</a></li>
+            <li><a href="/resources/" class="hover:text-zinc-900 font-semibold">View All 10 Guides →</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Enterprise Desk</h4>
+          <ul class="space-y-2">
+            <li>Inquiries: <a href="mailto:inquiries@vellett.com" class="font-mono text-zinc-900 hover:underline">inquiries@vellett.com</a></li>
+            <li>Turnaround: 48 Hours for 10-SKU Proof of Concept</li>
+            <li>Format: Prophet 21, Infor CSD, BigCommerce CSV</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-subtle pt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] text-zinc-400">
+        <div>© 2026 Vellett Data Engineering LLC. All rights reserved.</div>
+        <div class="flex gap-4">
+          <a href="/" class="hover:text-zinc-900">Home</a>
+          <a href="/resources/" class="hover:text-zinc-900">Resources</a>
+          <a href="/sitemap.xml" class="hover:text-zinc-900">XML Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

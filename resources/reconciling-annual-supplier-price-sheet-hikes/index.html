@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: {
+              850: '#18181B',
+              900: '#09090B',
+              950: '#040405',
+            },
+            industrial: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1E3A8A',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+    ::selection { background-color: #1E3A8A; color: #FFFFFF; }
+    .border-subtle { border-color: #E4E4E7; }
+    .bg-parchment { background-color: #FBFBF9; }
+    .bg-parchment-subtle { background-color: #F4F4F0; }
+    pre { background-color: #18181B; color: #F4F4F5; padding: 1.25rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.6; }
+    code { font-family: 'JetBrains Mono', monospace; }
+  </style>
+
+  <title>How to Reconcile Annual Supplier Price Increases Without Losing Margin in Prophet 21 | Vellett</title>
+  <meta name="description" content="The $140,000 hidden distributor margin leak: selling items at 2022 list while absorbing 2024 manufacturer hikes. A proven audit protocol for recalculating net multipliers (0.55x), mapping discontinued models, and syncing P21 pricing tables safely.">
+  <link rel="canonical" href="https://vellett.com/resources/reconciling-annual-supplier-price-sheet-hikes/">
+  <meta property="og:title" content="How to Reconcile Annual Supplier Price Increases Without Losing Margin in Prophet 21">
+  <meta property="og:description" content="The $140,000 hidden distributor margin leak: selling items at 2022 list while absorbing 2024 manufacturer hikes. A proven audit protocol for recalculating net multipliers (0.55x), mapping discontinued models, and syncing P21 pricing tables safely.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://vellett.com/resources/reconciling-annual-supplier-price-sheet-hikes/">
+</head>
+<body class="bg-parchment text-zinc-900 antialiased">
+  
+  <!-- TOP ENTERPRISE ANNOUNCEMENT BAR -->
+  <div class="border-b border-subtle bg-parchment-subtle px-4 py-2 text-center text-xs tracking-wide text-zinc-600">
+    <span class="inline-flex items-center gap-2">
+      <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+      <strong>Enterprise Catalog Engineering</strong> for Industrial Distributors & Fluid Power Suppliers • Prophet 21, Infor CSD, BigCommerce
+    </span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 border-b border-subtle bg-parchment/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <div class="flex items-center gap-10">
+        <a href="/" class="flex items-center gap-2 group">
+          <span class="text-xl font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <span class="text-[10px] uppercase tracking-widest font-mono text-zinc-400 border border-zinc-200 px-1.5 py-0.5 rounded">Data Lab</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+          <a href="/#methodology" class="transition-colors hover:text-zinc-950">The 5-Sheet Methodology</a>
+          <a href="/#services" class="transition-colors hover:text-zinc-950">Services</a>
+          <a href="/resources/" class="text-zinc-950 font-semibold transition-colors flex items-center gap-1">
+            <span>Technical Guides</span>
+            <span class="rounded bg-zinc-100 px-1.5 py-0.2 text-[10px] font-mono text-zinc-600">10 Guides</span>
+          </a>
+          <a href="/#pricing" class="transition-colors hover:text-zinc-950">Pricing</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/#sample-request" class="rounded-md bg-zinc-950 px-4 py-2 text-xs font-semibold tracking-wide text-white transition-all hover:bg-industrial-900">
+          Request a 10-SKU Sample ($0)
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="py-12 sm:py-16">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-6">
+        <a href="/" class="hover:text-zinc-950">Home</a>
+        <span>/</span>
+        <a href="/resources/" class="hover:text-zinc-950">Resources</a>
+        <span>/</span>
+        <span class="text-zinc-900 font-semibold">ERP Imports (P21/Infor)</span>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="border-b border-subtle pb-8 mb-10">
+        <div class="flex items-center gap-3 text-xs font-mono text-zinc-500 mb-3">
+          <span class="rounded bg-industrial-100 text-industrial-900 font-bold px-2.5 py-0.5">ERP Imports (P21/Infor)</span>
+          <span>•</span>
+          <span>9 min read</span>
+          <span>•</span>
+          <span>Updated November 2026</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold text-zinc-950 leading-[1.15] tracking-tight">
+          How to Reconcile Annual Supplier Price Increases Without Losing Margin in Prophet 21
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-zinc-600 font-sans leading-relaxed">
+          The $140,000 hidden distributor margin leak: selling items at 2022 list while absorbing 2024 manufacturer hikes. A proven audit protocol for recalculating net multipliers (0.55x), mapping discontinued models, and syncing P21 pricing tables safely.
+        </p>
+
+        <!-- Author Byline -->
+        <div class="mt-6 flex items-center gap-3 pt-6 border-t border-zinc-100">
+          <div class="h-10 w-10 rounded-full bg-industrial-900 text-white flex items-center justify-center font-bold text-xs font-mono">
+            AS
+          </div>
+          <div>
+            <div class="text-xs font-bold text-zinc-900">Ayush Sharma</div>
+            <div class="text-[11px] text-zinc-500 font-sans">Catalog Engineering Director, Vellett</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Body -->
+      <article class="prose prose-zinc max-w-none text-zinc-800">
+        
+          <p class="text-lg leading-relaxed text-zinc-700 font-sans">
+            Every January and July, major industrial manufacturers issue their revised price books. Over the past three years, cumulative price increases across valves, fittings, pressure instrumentation, and pneumatics have ranged from <strong>+14% to +26%</strong>. 
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-zinc-700 font-sans">
+            Yet inside the average mid-sized industrial distributor ($20M to $80M in annual revenue), price reconciliation is an administrative nightmare. Supplier price sheets arrive as messy 15,000-row Excel files with unformatted part numbers, missing discount multiplier columns, and unannounced product discontinuations. If your pricing desk takes 4 months to update Epicor Prophet 21, your business silently absorbs thousands of dollars in negative-margin sales every week.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-zinc-700 font-sans">
+            In this guide, we outline the exact reconciliation framework used by Vellett to audit, recalculate, and synchronize annual supplier price updates inside Prophet 21 with zero margin leakage.
+          </p>
+
+          <h2 id="margin-leak-mechanics" class="font-serif text-2xl font-bold text-zinc-950 mt-10 mb-4">1. The Mechanics of the $140,000 Margin Leak</h2>
+          <p class="text-base leading-relaxed text-zinc-700 font-sans">
+            Consider a typical regional instrumentation distributor processing $35 million in gross sales across 40 manufacturer lines. On January 1st, a tier-1 supplier increases their list prices by <strong>8.5%</strong>.
+          </p>
+          <div class="my-6 p-5 rounded-xl border border-subtle bg-white font-sans text-xs space-y-3">
+            <div class="flex justify-between items-center pb-2 border-b border-zinc-100 font-semibold text-zinc-900">
+              <span>Scenario: 1,500 Active Gauges & Valves Quoted Monthly</span>
+              <span>Impact Analysis</span>
+            </div>
+            <div class="flex justify-between text-zinc-700">
+              <span>Old Supplier List Price (Stored in P21):</span>
+              <span class="font-mono font-bold">$100.00</span>
+            </div>
+            <div class="flex justify-between text-zinc-700">
+              <span>Distributor Purchase Multiplier (0.52x Net):</span>
+              <span class="font-mono">$52.00 Old Net Cost</span>
+            </div>
+            <div class="flex justify-between text-zinc-700">
+              <span>Customer Contract Selling Price (List - 20%):</span>
+              <span class="font-mono font-bold text-emerald-800">$80.00 (35.0% Margin)</span>
+            </div>
+            <div class="border-t border-rose-200 pt-2 flex justify-between text-rose-900 bg-rose-50 p-2 rounded">
+              <span>New Supplier Invoice (Un-updated in P21):</span>
+              <span class="font-mono font-bold">$108.50 List → $56.42 Real Net Cost</span>
+            </div>
+            <div class="flex justify-between text-rose-900 font-semibold px-2">
+              <span>Real Margin Earned on Un-Updated Quotes:</span>
+              <span class="font-mono">29.4% (5.6% Margin Lost Per Sale)</span>
+            </div>
+          </div>
+          <p class="text-base leading-relaxed text-zinc-700 font-sans">
+            Across 90 days of lagging price updates, that single 5.6% margin leak on high-volume product lines drains over <strong>$45,000 in pure net profit</strong> directly out of the distributorship.
+          </p>
+
+          <h2 id="audit-framework" class="font-serif text-2xl font-bold text-zinc-950 mt-10 mb-4">2. The 4-Step Price Reconciliation Architecture</h2>
+          <p class="text-base leading-relaxed text-zinc-700 font-sans">
+            Vellett's Tab 4 Price Reconciliation Engine automates this process through four mathematical checks:
+          </p>
+          <div class="mt-4 space-y-4 font-sans text-sm">
+            <div class="p-4 rounded-lg bg-white border border-subtle">
+              <strong class="text-zinc-900 block font-semibold">Step 1: Part Number Key Alignment</strong>
+              <span class="text-zinc-600 text-xs mt-1 block">
+                Strip external formatting (dashes, slashes, trailing spaces) to match supplier part numbers directly against existing P21 <code>item_id</code> and <code>manufacturer_part_number</code> records.
+              </span>
+            </div>
+            <div class="p-4 rounded-lg bg-white border border-subtle">
+              <strong class="text-zinc-900 block font-semibold">Step 2: Delta Calculation & Outlier Detection</strong>
+              <span class="text-zinc-600 text-xs mt-1 block">
+                Compute percentage change: <code>((New_List - Old_List) / Old_List) * 100</code>. Any SKU showing >30% increase or a price decrease is quarantined for engineering review to catch typographical errors in supplier sheets.
+              </span>
+            </div>
+            <div class="p-4 rounded-lg bg-white border border-subtle">
+              <strong class="text-zinc-900 block font-semibold">Step 3: Multiplier Harmonization</strong>
+              <span class="text-zinc-600 text-xs mt-1 block">
+                Apply distributor-specific contract multipliers (e.g. 0.55x standard, 0.48x OEM tier) to establish exact updated net purchase costs for inventory revaluation.
+              </span>
+            </div>
+            <div class="p-4 rounded-lg bg-white border border-subtle">
+              <strong class="text-zinc-900 block font-semibold">Step 4: Discontinued Model Supersession</strong>
+              <span class="text-zinc-600 text-xs mt-1 block">
+                Flag SKUs present in P21 but absent from the new price book. Map them to active replacement part numbers so inside sales does not quote obsolete equipment.
+              </span>
+            </div>
+          </div>
+
+          <h2 id="sql-audit" class="font-serif text-2xl font-bold text-zinc-950 mt-10 mb-4">3. SQL Script for Identifying P21 Margin Variance</h2>
+          <p class="text-base leading-relaxed text-zinc-700 font-sans">
+            Distributors running P21 can run this SQL query to detect items where selling prices are lagging supplier standard costs:
+          </p>
+
+          <div class="my-6 rounded-lg border border-subtle bg-white p-5 font-mono text-xs">
+            <span class="text-zinc-400 block mb-2">// SQL Query: Detect P21 Margin Squeeze</span>
+            <pre><code>SELECT 
+    m.item_id,
+    m.item_desc,
+    p.supplier_cost,
+    p.price1 AS customer_list_price,
+    ROUND(((p.price1 - p.supplier_cost) / NULLIF(p.price1, 0)) * 100, 2) AS current_gross_margin_pct
+FROM inv_mast m
+JOIN item_price p ON m.inv_mast_uid = p.inv_mast_uid
+WHERE m.primary_supplier_id = 10442 -- Target Manufacturer Supplier ID
+  AND ((p.price1 - p.supplier_cost) / NULLIF(p.price1, 0)) < 0.25 -- Flag margins under 25%
+ORDER BY current_gross_margin_pct ASC;</code></pre>
+          </div>
+        
+      </article>
+
+      <!-- CTA Box -->
+      
+  <!-- ARTICLE BOTTOM CTA BOX -->
+  <div class="my-16 rounded-2xl border-2 border-zinc-950 bg-white p-8 sm:p-10 shadow-xl">
+    <div class="flex flex-wrap items-center justify-between gap-6">
+      <div class="max-w-xl">
+        <span class="rounded bg-industrial-100 px-2.5 py-0.5 text-xs font-mono font-bold text-industrial-900 uppercase tracking-wide">48-Hour Engineering Turnaround</span>
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-zinc-950 mt-2">Have a messy manufacturer catalog in PDF?</h3>
+        <p class="text-xs sm:text-sm text-zinc-600 mt-2 leading-relaxed font-sans">
+          Send us your toughest supplier PDF (Ashcroft, Swagelok, Parker, Dwyer, SMC). We will return an audited, 10-SKU 5-sheet master workbook formatted for your ERP—100% free with zero obligation.
+        </p>
+      </div>
+      <div>
+        <a href="/#sample-request" class="inline-block rounded-md bg-zinc-950 px-6 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-industrial-900 transition-all text-center">
+          Request a 10-SKU Sample ($0)
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+    </div>
+  </main>
+
+  
+  <!-- ENTERPRISE FOOTER -->
+  <footer class="border-t border-subtle bg-parchment-subtle py-16 text-xs text-zinc-500 mt-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <span class="text-lg font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <p class="mt-2 text-zinc-600 leading-relaxed font-sans">
+            Specialized item-master and e-commerce catalog engineering for North American industrial distributors, valve suppliers, and instrumentation firms.
+          </p>
+          <div class="mt-4 font-mono text-[11px] text-zinc-400">
+            Vellett Data Engineering LLC<br>Wilmington, DE • Operating Globally
+          </div>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Methodology & Workbooks</h4>
+          <ul class="space-y-2">
+            <li><a href="/#methodology" class="hover:text-zinc-900">1_ERP_And_Web_Import_Ready</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">2_Footnote_Exception_Audit</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">3_StockOut_DropIn_Equivalents</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">4_Price_And_Obsolete_Sync</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">5_Before_Vs_After_Visual</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Technical Guides</h4>
+          <ul class="space-y-2">
+            <li><a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="hover:text-zinc-900">Prophet 21 PDF Import Guide</a></li>
+            <li><a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="hover:text-zinc-900">Unrolling Part Number Matrices</a></li>
+            <li><a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="hover:text-zinc-900">Price Increase Reconciliation</a></li>
+            <li><a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/" class="hover:text-zinc-900">Footnote Exception Hazards</a></li>
+            <li><a href="/resources/" class="hover:text-zinc-900 font-semibold">View All 10 Guides →</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Enterprise Desk</h4>
+          <ul class="space-y-2">
+            <li>Inquiries: <a href="mailto:inquiries@vellett.com" class="font-mono text-zinc-900 hover:underline">inquiries@vellett.com</a></li>
+            <li>Turnaround: 48 Hours for 10-SKU Proof of Concept</li>
+            <li>Format: Prophet 21, Infor CSD, BigCommerce CSV</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-subtle pt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] text-zinc-400">
+        <div>© 2026 Vellett Data Engineering LLC. All rights reserved.</div>
+        <div class="flex gap-4">
+          <a href="/" class="hover:text-zinc-900">Home</a>
+          <a href="/resources/" class="hover:text-zinc-900">Resources</a>
+          <a href="/sitemap.xml" class="hover:text-zinc-900">XML Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

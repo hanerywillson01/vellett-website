@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vellett | Industrial Catalog & Item-Master Data Engineering</title>
+  <meta name="description" content="We turn complex manufacturer catalogs, technical engineering PDFs, and unorganized spreadsheets into clean, verified item-master data formatted directly for Prophet 21, Infor CSD, and industrial e-commerce.">
+  <link rel="canonical" href="https://vellett.com/">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vellett | Industrial Catalog & Item-Master Data Engineering">
+  <meta property="og:description" content="We turn complex manufacturer catalogs and technical PDFs into clean, verified item-master data for your ERP and e-commerce platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vellett.com/">
+  
+  <!-- Typography & Styling -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: {
+              850: '#18181B',
+              900: '#09090B',
+              950: '#040405',
+            },
+            industrial: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1E3A8A',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+    ::selection { background-color: #1E3A8A; color: #FFFFFF; }
+    .border-subtle { border-color: #E4E4E7; }
+    .bg-parchment { background-color: #FBFBF9; }
+    .bg-parchment-subtle { background-color: #F4F4F0; }
+  </style>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased selection:bg-industrial-900 selection:text-white">
+
+  <!-- TOP ENTERPRISE ANNOUNCEMENT BAR -->
+  <div class="border-b border-subtle bg-parchment-subtle px-4 py-2 text-center text-xs tracking-wide text-zinc-600">
+    <span class="inline-flex items-center gap-2">
+      <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+      <strong>Enterprise Catalog Engineering</strong> for Industrial Distributors & Fluid Power Suppliers • Native formats for Epicor Prophet 21, Infor CSD, BigCommerce & Magento
+    </span>
+  </div>
+
+  <!-- STICKY NAVIGATION -->
+  <header class="sticky top-0 z-50 border-b border-subtle bg-parchment/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <div class="flex items-center gap-10">
+        <a href="/" class="flex items-center gap-2 group">
+          <span class="text-xl font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <span class="text-[10px] uppercase tracking-widest font-mono text-zinc-400 border border-zinc-200 px-1.5 py-0.5 rounded">Data Lab</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+          <a href="#methodology" class="transition-colors hover:text-zinc-950">The 5-Sheet Methodology</a>
+          <a href="#services" class="transition-colors hover:text-zinc-950">Services</a>
+          <a href="/resources/" class="transition-colors hover:text-zinc-950 flex items-center gap-1">
+            <span>Technical Guides</span>
+            <span class="rounded bg-zinc-100 px-1.5 py-0.2 text-[10px] font-mono text-zinc-600">10 Guides</span>
+          </a>
+          <a href="#pricing" class="transition-colors hover:text-zinc-950">Pricing</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#calculator" class="hidden lg:inline-block text-xs font-mono text-zinc-500 hover:text-zinc-900">
+          ROI Calculator
+        </a>
+        <a href="#sample-request" class="rounded-md bg-zinc-950 px-4 py-2.5 text-xs font-semibold tracking-wide text-white transition-all hover:bg-industrial-900 hover:shadow-md">
+          Request a 10-SKU Sample ($0)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative border-b border-subtle pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <!-- Eyebrow & Headline -->
+      <div class="max-w-3xl">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-700 shadow-sm">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          Industrial Swiss Editorial • Data Accuracy First
+        </div>
+        <h1 class="font-serif text-4xl tracking-tight text-zinc-950 sm:text-6xl lg:text-[68px] leading-[1.08]">
+          Supplier Product Data, <br><span class="italic font-normal text-industrial-900">Prepared for Your Business.</span>
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-zinc-600 sm:text-xl font-sans max-w-2xl">
+          We turn complex manufacturer catalogs, technical PDFs, and unorganized spreadsheets into clean, verified item-master data formatted directly for your ERP and e-commerce platform.
+        </p>
+
+        <!-- Dual CTAs -->
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="#sample-request" class="rounded-md bg-zinc-950 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-industrial-900 hover:shadow-lg">
+            Request a 10-SKU Proof of Concept ($0)
+          </a>
+          <a href="#live-demo" class="rounded-md border border-zinc-300 bg-white px-5 py-3.5 text-sm font-medium text-zinc-700 shadow-sm transition-all hover:bg-zinc-50 hover:border-zinc-400 flex items-center gap-2">
+            <span>Explore Live Data Audit</span>
+            <span class="font-mono text-zinc-400">→</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-subtle pt-8 text-left">
+          <div>
+            <div class="font-serif text-2xl font-bold text-zinc-950">1.2M+</div>
+            <div class="text-xs text-zinc-500 font-sans mt-0.5">Industrial SKUs Normalized</div>
+          </div>
+          <div>
+            <div class="font-serif text-2xl font-bold text-emerald-700">100%</div>
+            <div class="text-xs text-zinc-500 font-sans mt-0.5">PDF Footnote Citation Audit</div>
+          </div>
+          <div>
+            <div class="font-serif text-2xl font-bold text-zinc-950">48-Hour</div>
+            <div class="text-xs text-zinc-500 font-sans mt-0.5">10-SKU Sample Delivery</div>
+          </div>
+          <div>
+            <div class="font-serif text-2xl font-bold text-industrial-900">0%</div>
+            <div class="text-xs text-zinc-500 font-sans mt-0.5">Supplier Margin Leakage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE LIVE COMPONENT: BEFORE / AFTER LIVE SPLIT-SCREEN -->
+      <div id="live-demo" class="mt-16 rounded-xl border border-subtle bg-white shadow-xl shadow-zinc-200/50 overflow-hidden">
+        
+        <!-- Interactive Header & Tab Switcher -->
+        <div class="border-b border-subtle bg-zinc-50 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="h-3 w-3 rounded-full bg-red-400 inline-block"></span>
+            <span class="h-3 w-3 rounded-full bg-amber-400 inline-block"></span>
+            <span class="h-3 w-3 rounded-full bg-emerald-400 inline-block"></span>
+            <span class="ml-2 font-mono text-xs font-semibold text-zinc-600 uppercase tracking-wider">Live Catalog Data Transformation Engine</span>
+          </div>
+          <!-- Brand Selector Tabs -->
+          <div class="flex items-center gap-2">
+            <button onclick="setSample('ashcroft')" id="btn-ashcroft" class="sample-btn active px-3 py-1.5 text-xs font-semibold rounded bg-zinc-900 text-white transition-all">Ashcroft 1009 Gauge</button>
+            <button onclick="setSample('swagelok')" id="btn-swagelok" class="sample-btn px-3 py-1.5 text-xs font-medium rounded bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all">Swagelok 60 Valve</button>
+            <button onclick="setSample('dwyer')" id="btn-dwyer" class="sample-btn px-3 py-1.5 text-xs font-medium rounded bg-zinc-100 text-zinc-600 hover:bg-zinc-200 transition-all">Dwyer 2000 Magnehelic</button>
+          </div>
+        </div>
+
+        <!-- Side-by-Side Content Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-subtle">
+          
+          <!-- LEFT: Raw Messy Supplier PDF / Cryptic ERP Record -->
+          <div class="lg:col-span-5 p-6 bg-red-50/20">
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-800 uppercase tracking-wider">
+                <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                Raw Manufacturer PDF & Unaudited ERP
+              </span>
+              <span class="font-mono text-[11px] text-zinc-400">Scraped / Manual Entry</span>
+            </div>
+
+            <!-- Raw Box -->
+            <div class="rounded-lg border border-rose-200 bg-white p-4 font-mono text-xs text-zinc-700 space-y-3">
+              <div>
+                <span class="text-zinc-400">Raw Item Number:</span>
+                <div id="raw-sku" class="font-bold text-rose-900 text-sm mt-0.5">ASH 25 1009 SW 02L 100#</div>
+              </div>
+              <div>
+                <span class="text-zinc-400">Raw Web Description:</span>
+                <div id="raw-desc" class="text-zinc-800 mt-0.5">2.5 IN GA 100# 1/4 NPT LM SS/SS DRY</div>
+              </div>
+              <div class="border-t border-rose-100 pt-2">
+                <span class="text-zinc-400">Structured Filter Attributes:</span>
+                <div class="text-rose-600 font-semibold mt-0.5">0 Attributes Extracted (Customer cannot filter by Dial, Range, or Wetted Material)</div>
+              </div>
+              <div class="border-t border-rose-100 pt-2 bg-rose-50/70 p-2.5 rounded border border-rose-200">
+                <div class="font-bold text-rose-800 text-[11px] flex items-center gap-1">
+                  <span>⚠️ Uncaught Footnote Hazard (Page 2, Note 3):</span>
+                </div>
+                <div id="raw-footnote" class="text-[11px] text-rose-700 italic mt-1">
+                  "Glycerin fill restricts ambient temp to +20°F to 150°F (-7°C to 65°C). For sub-zero outdoor service down to -40°F, silicone liquid fill (-XSL) is mandatory."
+                </div>
+                <div class="text-[10px] text-rose-900 font-sans font-medium mt-1">
+                  Result: Field gauge freeze-up, shattered lens, warranty chargeback, customer loss.
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 text-xs text-zinc-500 space-y-1">
+              <p>• Unformatted part strings cause search misses on Google & BigCommerce.</p>
+              <p>• Inside sales spends 15 minutes per quote verifying connection threads.</p>
+              <p>• Missing stock-out drop-in equivalents force buyers to Grainger.</p>
+            </div>
+          </div>
+
+          <!-- RIGHT: Vellett Enriched 20-Attribute Master Record -->
+          <div class="lg:col-span-7 p-6 bg-emerald-50/20">
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 uppercase tracking-wider">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Vellett Enriched Item Master (ERP & Web Ready)
+              </span>
+              <span class="font-mono text-[11px] text-emerald-700 font-semibold bg-emerald-100 px-2 py-0.5 rounded">100% Verified</span>
+            </div>
+
+            <!-- Master Record Table -->
+            <div class="rounded-lg border border-emerald-200 bg-white p-4 shadow-sm space-y-3.5">
+              <div>
+                <span class="text-xs font-mono text-zinc-400">SEO-Optimized E-Commerce Title:</span>
+                <div id="clean-title" class="font-semibold text-zinc-950 text-sm mt-0.5 font-sans leading-snug">
+                  Ashcroft 1009S Duralife Pressure Gauge, 2.5 in Dial, 0-100 psi, 1/4" NPT Lower Mount, 316L SS Wetted Parts, 304 SS Case, Dry
+                </div>
+              </div>
+
+              <!-- Structured Facets Grid -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 border-t border-zinc-100 text-xs font-sans">
+                <div class="bg-zinc-50 p-2 rounded border border-zinc-100">
+                  <span class="text-zinc-400 block text-[10px] uppercase font-mono">Dial Size</span>
+                  <span id="facet-size" class="font-semibold text-zinc-900">2.5 in (63 mm)</span>
+                </div>
+                <div class="bg-zinc-50 p-2 rounded border border-zinc-100">
+                  <span class="text-zinc-400 block text-[10px] uppercase font-mono">Range</span>
+                  <span id="facet-range" class="font-semibold text-zinc-900">0 to 100 PSI</span>
+                </div>
+                <div class="bg-zinc-50 p-2 rounded border border-zinc-100">
+                  <span class="text-zinc-400 block text-[10px] uppercase font-mono">Connection</span>
+                  <span id="facet-conn" class="font-semibold text-zinc-900">1/4" NPT Male LM</span>
+                </div>
+                <div class="bg-zinc-50 p-2 rounded border border-zinc-100">
+                  <span class="text-zinc-400 block text-[10px] uppercase font-mono">Accuracy</span>
+                  <span id="facet-acc" class="font-semibold text-zinc-900">Grade 1A (±1.0%)</span>
+                </div>
+              </div>
+
+              <!-- Footnote Safety Catch -->
+              <div class="rounded bg-emerald-50 p-2.5 border border-emerald-200 text-xs">
+                <div class="font-semibold text-emerald-900 flex items-center justify-between">
+                  <span>✓ Footnote Safety Rule Enforced (Tab 2 Audit):</span>
+                  <span class="text-[10px] font-mono text-emerald-700">Bulletin 1009-B, P.2</span>
+                </div>
+                <div id="clean-footnote" class="text-emerald-800 text-[11px] mt-0.5">
+                  Liquid fill option explicitly mapped to silicone (-XSL) for sub-zero outdoor installations. Low-temp threshold (-40°F) mapped in ERP item notes.
+                </div>
+              </div>
+
+              <!-- Competitor Drop-In Cross Reference -->
+              <div class="flex items-center justify-between pt-2 border-t border-zinc-100 text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-zinc-400">Drop-In Stock-Out Equivalents:</span>
+                  <span id="clean-cross" class="font-mono text-zinc-900 font-semibold bg-zinc-100 px-2 py-0.5 rounded">WIKA 232.53 (P/N 9744490)</span>
+                </div>
+                <span class="text-[11px] text-emerald-700 font-medium">100% Form/Fit/Function</span>
+              </div>
+            </div>
+
+            <div class="mt-4 flex items-center justify-between text-xs text-zinc-600">
+              <span class="flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1-1 0 00-1.414-1.414L9 10.586 7.707 9.293a1-1 0 00-1.414 1.414l2 2a1-1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Ready for Epicor Prophet 21 (inv_mast import)
+              </span>
+              <a href="#sample-request" class="text-industrial-900 font-semibold hover:underline">Download 10-SKU Excel Deliverable →</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE 5-SHEET METHODOLOGY -->
+  <section id="methodology" class="border-b border-subtle py-20 bg-parchment-subtle">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <div class="max-w-2xl">
+        <h2 class="text-xs font-mono font-semibold uppercase tracking-widest text-industrial-900">The 5-Sheet Methodology</h2>
+        <p class="mt-2 font-serif text-3xl font-normal tracking-tight text-zinc-950 sm:text-4xl">
+          Why Enterprise Industrial VPs Choose Vellett Over Automated PIM Software
+        </p>
+        <p class="mt-4 text-base text-zinc-600">
+          Generic PIM tools charge $60k/year for empty software that requires your internal staff to spend 6 months formatting spreadsheets. Vellett delivers finished, source-verified master workbooks that load into your ERP on Day 1.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        
+        <!-- Sheet 1 -->
+        <div class="rounded-xl border border-subtle bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-4">
+            <span class="rounded bg-industrial-50 px-2 py-1 text-xs font-mono font-bold text-industrial-900">TAB 01</span>
+            <span class="text-xs text-zinc-400 font-mono">20 Columns</span>
+          </div>
+          <h3 class="font-sans text-base font-bold text-zinc-900">ERP & Web Ready</h3>
+          <p class="mt-2 text-xs text-zinc-600 leading-relaxed">
+            Clean web titles, manufacturer part numbers, 12 structured faceted attributes, embedded 75pt product thumbnails, and direct PDF hyperlinks.
+          </p>
+          <div class="mt-4 pt-4 border-t border-zinc-100 text-[11px] font-mono text-zinc-500">
+            Target: P21, Infor, BigCommerce
+          </div>
+        </div>
+
+        <!-- Sheet 2 -->
+        <div class="rounded-xl border border-subtle bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-4">
+            <span class="rounded bg-teal-50 px-2 py-1 text-xs font-mono font-bold text-teal-800">TAB 02</span>
+            <span class="text-xs text-zinc-400 font-mono">Audit Log</span>
+          </div>
+          <h3 class="font-sans text-base font-bold text-zinc-900">Footnote Exception Audit</h3>
+          <p class="mt-2 text-xs text-zinc-600 leading-relaxed">
+            Every obscure engineering footnote extracted verbatim with source page citations. Prevents catastrophic field returns and fluid freeze-ups.
+          </p>
+          <div class="mt-4 pt-4 border-t border-zinc-100 text-[11px] font-mono text-zinc-500">
+            Protection: Product Liability
+          </div>
+        </div>
+
+        <!-- Sheet 3 -->
+        <div class="rounded-xl border border-subtle bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-4">
+            <span class="rounded bg-slate-100 px-2 py-1 text-xs font-mono font-bold text-slate-800">TAB 03</span>
+            <span class="text-xs text-zinc-400 font-mono">Cross-Ref</span>
+          </div>
+          <h3 class="font-sans text-base font-bold text-zinc-900">Stock-Out Equivalents</h3>
+          <p class="mt-2 text-xs text-zinc-600 leading-relaxed">
+            Pre-mapped drop-in replacements across competing brands (e.g. Ashcroft ↔ WIKA ↔ Winters). Saves the sale when supplier factory lead times hit 18 weeks.
+          </p>
+          <div class="mt-4 pt-4 border-t border-zinc-100 text-[11px] font-mono text-zinc-500">
+            Outcome: Revenue Protection
+          </div>
+        </div>
+
+        <!-- Sheet 4 -->
+        <div class="rounded-xl border border-subtle bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-4">
+            <span class="rounded bg-amber-50 px-2 py-1 text-xs font-mono font-bold text-amber-800">TAB 04</span>
+            <span class="text-xs text-zinc-400 font-mono">Price Sync</span>
+          </div>
+          <h3 class="font-sans text-base font-bold text-zinc-900">Price & Obsolete Sync</h3>
+          <p class="mt-2 text-xs text-zinc-600 leading-relaxed">
+            Reconciles annual supplier list increases (+8% to +14%) and flags discontinued models. Maps superseded codes so distributors never sell at negative margin.
+          </p>
+          <div class="mt-4 pt-4 border-t border-zinc-100 text-[11px] font-mono text-zinc-500">
+            Outcome: Gross Margin Shield
+          </div>
+        </div>
+
+        <!-- Sheet 5 -->
+        <div class="rounded-xl border border-subtle bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between mb-4">
+            <span class="rounded bg-emerald-50 px-2 py-1 text-xs font-mono font-bold text-emerald-800">TAB 05</span>
+            <span class="text-xs text-zinc-400 font-mono">Executive</span>
+          </div>
+          <h3 class="font-sans text-base font-bold text-zinc-900">Before-vs-After Sign-Off</h3>
+          <p class="mt-2 text-xs text-zinc-600 leading-relaxed">
+            Side-by-side executive verification showing raw distributor ERP text contrasted against the Vellett enriched master record across 6 commercial dimensions.
+          </p>
+          <div class="mt-4 pt-4 border-t border-zinc-100 text-[11px] font-mono text-zinc-500">
+            Audit: C-Level Governance
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6 ENTERPRISE SERVICES -->
+  <section id="services" class="border-b border-subtle py-20 bg-parchment">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <div class="max-w-2xl">
+        <h2 class="text-xs font-mono font-semibold uppercase tracking-widest text-industrial-900">Comprehensive Solutions</h2>
+        <p class="mt-2 font-serif text-3xl font-normal tracking-tight text-zinc-950 sm:text-4xl">
+          Six Disciplines of Industrial Product Data Engineering
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Service 1 -->
+        <div class="p-8 rounded-xl border border-subtle bg-white hover:border-zinc-400 transition-colors">
+          <div class="h-10 w-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-mono text-sm font-bold mb-6">01</div>
+          <h3 class="text-lg font-bold text-zinc-950">New Supplier PDF Onboarding</h3>
+          <p class="mt-3 text-sm text-zinc-600 leading-relaxed">
+            When you sign a new manufacturer agreement, they hand you a 300-page engineering PDF. We unroll combinatorial ordering codes, parse nested part matrices, and build 20-column import files in days—not quarters.
+          </p>
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-500 font-mono">
+            <li>+ PDF vector table extraction</li>
+            <li>+ Matrix permutation unrolling</li>
+            <li>+ Category taxonomy alignment</li>
+          </ul>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="p-8 rounded-xl border border-subtle bg-white hover:border-zinc-400 transition-colors">
+          <div class="h-10 w-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-mono text-sm font-bold mb-6">02</div>
+          <h3 class="text-lg font-bold text-zinc-950">Stock-Out & Drop-In Equivalents</h3>
+          <p class="mt-3 text-sm text-zinc-600 leading-relaxed">
+            Never lose an order because a specific valve or gauge is on backorder. We construct form, fit, and function equivalence matrices between competing lines so your sales team can offer in-stock alternatives instantly.
+          </p>
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-500 font-mono">
+            <li>+ ASME B40.100 & thread matching</li>
+            <li>+ Flow coefficient (Cv) validation</li>
+            <li>+ Wetted metallurgy compatibility</li>
+          </ul>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="p-8 rounded-xl border border-subtle bg-white hover:border-zinc-400 transition-colors">
+          <div class="h-10 w-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-mono text-sm font-bold mb-6">03</div>
+          <h3 class="text-lg font-bold text-zinc-950">Annual Price & Multiplier Syncing</h3>
+          <p class="mt-3 text-sm text-zinc-600 leading-relaxed">
+            When suppliers release annual price increases (+6% to +14%), un-synced ERP item masters silently erode distributor gross margins. We reconcile new price books, apply your net discount multipliers, and map obsolete SKUs.
+          </p>
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-500 font-mono">
+            <li>+ Net cost & margin recalculation</li>
+            <li>+ Obsolete-to-superseded SKU mapping</li>
+            <li>+ Prophet 21 pricing table uploads</li>
+          </ul>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="p-8 rounded-xl border border-subtle bg-white hover:border-zinc-400 transition-colors">
+          <div class="h-10 w-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-mono text-sm font-bold mb-6">04</div>
+          <h3 class="text-lg font-bold text-zinc-950">Competitor Catalog Gap Auditing</h3>
+          <p class="mt-3 text-sm text-zinc-600 leading-relaxed">
+            We crawl national competitors (Grainger, McMaster-Carr, Motion) to identify which high-margin accessories, sanitary gauges, and replacement seal kits are missing from your online product offering.
+          </p>
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-500 font-mono">
+            <li>+ Breadth & depth benchmarking</li>
+            <li>+ Missing accessory identification</li>
+            <li>+ SEO keyword gap capture</li>
+          </ul>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="p-8 rounded-xl border border-subtle bg-white hover:border-zinc-400 transition-colors">
+          <div class="h-10 w-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-mono text-sm font-bold mb-6">05</div>
+          <h3 class="text-lg font-bold text-zinc-950">ERP Duplicate Cleansing (Multi-Branch)</h3>
+          <p class="mt-3 text-sm text-zinc-600 leading-relaxed">
+            Acquisitions and regional branch merges leave item masters cluttered with thousands of redundant SKUs (`SS-62TF4` vs `SS 62TF4`). We standardize part number formatting, clean descriptions, and merge inventory records.
+          </p>
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-500 font-mono">
+            <li>+ Fuzzy part number de-duplication</li>
+            <li>+ Unit of Measure (UOM) harmonization</li>
+            <li>+ Multi-warehouse stock unification</li>
+          </ul>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="p-8 rounded-xl border border-subtle bg-white hover:border-zinc-400 transition-colors">
+          <div class="h-10 w-10 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-mono text-sm font-bold mb-6">06</div>
+          <h3 class="text-lg font-bold text-zinc-950">Source-Referenced Footnote Auditing</h3>
+          <p class="mt-3 text-sm text-zinc-600 leading-relaxed">
+            Automated scrapers strip footnotes. Our catalog engineers read every caveat, asterisk, and fine-print engineering limitation, translating them into structured safety alerts in your ERP and web product listings.
+          </p>
+          <ul class="mt-4 space-y-1.5 text-xs text-zinc-500 font-mono">
+            <li>+ Fluid fill temperature restrictions</li>
+            <li>+ Static vs differential pressure limits</li>
+            <li>+ Steam & chemical wetted alerts</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ROI / COST OF INACTION CALCULATOR -->
+  <section id="calculator" class="border-b border-subtle py-20 bg-parchment-subtle">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5">
+          <h2 class="text-xs font-mono font-semibold uppercase tracking-widest text-industrial-900">ROI Framework</h2>
+          <p class="mt-2 font-serif text-3xl font-normal tracking-tight text-zinc-950 sm:text-4xl">
+            The Hidden Cost of Messy Supplier Data
+          </p>
+          <p class="mt-4 text-sm text-zinc-600 leading-relaxed">
+            Industrial distributors lose an average of $142,000 annually to three silent leaks: inside sales fielding repetitive technical spec calls, negative-margin sales caused by un-synced price hikes, and customer search bounces.
+          </p>
+          <div class="mt-6 p-4 rounded-lg bg-white border border-subtle text-xs space-y-2">
+            <div class="flex justify-between font-medium text-zinc-700">
+              <span>Inside Sales Phone Call Cost:</span>
+              <span class="font-mono">$18.50 / call</span>
+            </div>
+            <div class="flex justify-between font-medium text-zinc-700">
+              <span>Average Annual Supplier Price Hike:</span>
+              <span class="font-mono">+8.4%</span>
+            </div>
+            <div class="flex justify-between font-medium text-zinc-700">
+              <span>Customer Bounce Rate on Unfiltered Search:</span>
+              <span class="font-mono">72%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-subtle p-8 shadow-sm">
+          <h3 class="text-base font-bold text-zinc-950 font-sans mb-6">Interactive Distributor Savings Calculator</h3>
+          
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label for="skuRange" class="text-xs font-semibold text-zinc-700 uppercase tracking-wide">Total Active Distributor SKUs:</label>
+                <span id="skuDisplay" class="font-mono font-bold text-lg text-industrial-900">12,500 SKUs</span>
+              </div>
+              <input type="range" id="skuRange" min="2500" max="50000" step="2500" value="12500" class="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-industrial-900" oninput="updateROI(this.value)">
+              <div class="flex justify-between text-[11px] text-zinc-400 font-mono mt-1">
+                <span>2,500 SKUs</span>
+                <span>25,000 SKUs</span>
+                <span>50,000 SKUs</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-zinc-100">
+              <div class="p-4 rounded-xl bg-zinc-50 border border-zinc-100">
+                <span class="text-[11px] font-mono text-zinc-400 block uppercase">Inside Sales Time Saved</span>
+                <span id="hoursSaved" class="font-serif text-2xl font-bold text-zinc-950 block mt-1">840 Hours</span>
+                <span class="text-[11px] text-zinc-500 font-sans block mt-0.5">equiv. to 0.4 FTE saved</span>
+              </div>
+              <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
+                <span class="text-[11px] font-mono text-emerald-700 block uppercase">Recovered Gross Margin</span>
+                <span id="marginRecovered" class="font-serif text-2xl font-bold text-emerald-900 block mt-1">$48,200</span>
+                <span class="text-[11px] text-emerald-700 font-sans block mt-0.5">from updated multipliers</span>
+              </div>
+              <div class="p-4 rounded-xl bg-industrial-50 border border-industrial-100">
+                <span class="text-[11px] font-mono text-industrial-800 block uppercase">Net Annual ROI</span>
+                <span id="netROI" class="font-serif text-2xl font-bold text-industrial-900 block mt-1">3.8x</span>
+                <span class="text-[11px] text-industrial-700 font-sans block mt-0.5">over catalog desk costs</span>
+              </div>
+            </div>
+
+            <div class="pt-4 flex items-center justify-between text-xs text-zinc-500">
+              <span>* Based on real distributor benchmarks across P21 and Infor installations.</span>
+              <a href="#sample-request" class="font-semibold text-zinc-900 hover:underline">Get an Exact Audit for Your Catalog →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3-TIER TRANSPARENT PRICING TABLE -->
+  <section id="pricing" class="border-b border-subtle py-20 bg-parchment">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-xs font-mono font-semibold uppercase tracking-widest text-industrial-900">Transparent Pricing</h2>
+        <p class="mt-2 font-serif text-3xl font-normal tracking-tight text-zinc-950 sm:text-5xl">
+          Predictable Monthly Retainers. Zero Enterprise Lock-In.
+        </p>
+        <p class="mt-4 text-base text-zinc-600">
+          Start with our free 10-SKU proof of concept. If you love the data, kick off Month 1 with 50% deposit. Pause or cancel anytime.
+        </p>
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- FREE TIER: PROOF OF CONCEPT -->
+        <div class="rounded-2xl border border-subtle bg-white p-8 flex flex-col justify-between shadow-sm hover:border-zinc-400 transition-colors">
+          <div>
+            <div class="text-xs font-mono font-bold text-zinc-500 uppercase tracking-wider">Proof of Concept</div>
+            <h3 class="text-xl font-bold text-zinc-950 mt-1">Free 10-SKU Sample</h3>
+            <div class="mt-4 flex items-baseline gap-1">
+              <span class="font-serif text-4xl font-bold text-zinc-950">$0</span>
+              <span class="text-xs text-zinc-500 font-mono">/ 48-hr turnaround</span>
+            </div>
+            <p class="mt-4 text-xs text-zinc-600 leading-relaxed">
+              Send us your toughest manufacturer PDF. We build a fully audited 10-SKU 5-sheet deliverable to prove our accuracy before you spend a dime.
+            </p>
+            <ul class="mt-6 space-y-2 text-xs text-zinc-600">
+              <li class="flex items-center gap-2">✓ 10 fully enriched SKUs</li>
+              <li class="flex items-center gap-2">✓ Embedded 75pt thumbnail images</li>
+              <li class="flex items-center gap-2">✓ Verbatim footnote citation log</li>
+              <li class="flex items-center gap-2">✓ Competitor drop-in cross-ref</li>
+              <li class="flex items-center gap-2">✓ Ready for ERP test import</li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-6 border-t border-zinc-100">
+            <a href="#sample-request" class="block w-full text-center rounded-md border border-zinc-300 bg-white py-2.5 text-xs font-semibold text-zinc-900 hover:bg-zinc-50 transition-colors">
+              Claim Free Sample ($0)
+            </a>
+          </div>
+        </div>
+
+        <!-- TIER 1: STARTER CATALOG DESK -->
+        <div class="rounded-2xl border border-subtle bg-white p-8 flex flex-col justify-between shadow-sm hover:border-zinc-400 transition-colors">
+          <div>
+            <div class="text-xs font-mono font-bold text-industrial-900 uppercase tracking-wider">Tier 1</div>
+            <h3 class="text-xl font-bold text-zinc-950 mt-1">Starter Catalog Desk</h3>
+            <div class="mt-4 flex items-baseline gap-1">
+              <span class="font-serif text-4xl font-bold text-zinc-950">$1,500</span>
+              <span class="text-xs text-zinc-500 font-mono">/ month</span>
+            </div>
+            <div class="mt-1 text-[11px] font-mono text-emerald-700">Start Month 1 at $750 (50% Kickoff Deposit)</div>
+            <p class="mt-4 text-xs text-zinc-600 leading-relaxed">
+              Ideal for regional distributors onboarding 1 to 2 new manufacturer lines per month or maintaining under 10,000 SKUs.
+            </p>
+            <ul class="mt-6 space-y-2 text-xs text-zinc-600">
+              <li class="flex items-center gap-2">✓ Up to 350 enriched SKUs / month</li>
+              <li class="flex items-center gap-2">✓ Complete 20-attribute taxonomy</li>
+              <li class="flex items-center gap-2">✓ Embedded high-res product photos</li>
+              <li class="flex items-center gap-2">✓ Footnote engineering safety audit</li>
+              <li class="flex items-center gap-2">✓ Prophet 21 / Infor CSD import files</li>
+              <li class="flex items-center gap-2">✓ Dedicated Catalog Project Manager</li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-6 border-t border-zinc-100">
+            <a href="#sample-request" class="block w-full text-center rounded-md bg-zinc-950 py-2.5 text-xs font-semibold text-white hover:bg-industrial-900 transition-colors">
+              Select Starter Plan
+            </a>
+          </div>
+        </div>
+
+        <!-- TIER 2: GROWTH CATALOG & INVENTORY DESK (FEATURED) -->
+        <div class="rounded-2xl border-2 border-industrial-900 bg-white p-8 flex flex-col justify-between shadow-lg relative">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-industrial-900 px-3 py-0.5 text-[10px] font-mono font-bold text-white uppercase tracking-wider">
+            Most Popular for Distributors
+          </div>
+          <div>
+            <div class="text-xs font-mono font-bold text-industrial-900 uppercase tracking-wider">Tier 2</div>
+            <h3 class="text-xl font-bold text-zinc-950 mt-1">Growth Catalog Desk</h3>
+            <div class="mt-4 flex items-baseline gap-1">
+              <span class="font-serif text-4xl font-bold text-zinc-950">$4,500</span>
+              <span class="text-xs text-zinc-500 font-mono">/ month</span>
+            </div>
+            <div class="mt-1 text-[11px] font-mono text-emerald-700">Start Month 1 at $1,500 Kickoff Anchor</div>
+            <p class="mt-4 text-xs text-zinc-600 leading-relaxed">
+              For expanding suppliers maintaining 10,000 to 25,000 SKUs requiring continuous price increases and stock-out mitigation.
+            </p>
+            <ul class="mt-6 space-y-2 text-xs text-zinc-600">
+              <li class="flex items-center gap-2">✓ Up to 1,200 enriched SKUs / month</li>
+              <li class="flex items-center gap-2">✓ Annual price increase reconciliation</li>
+              <li class="flex items-center gap-2">✓ Stock-out drop-in replacement matrix</li>
+              <li class="flex items-center gap-2">✓ Discontinued & superseded SKU mapping</li>
+              <li class="flex items-center gap-2">✓ BigCommerce / Magento attribute feeds</li>
+              <li class="flex items-center gap-2">✓ Weekly status calls & priority turnaround</li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-6 border-t border-zinc-100">
+            <a href="#sample-request" class="block w-full text-center rounded-md bg-industrial-900 py-2.5 text-xs font-semibold text-white hover:bg-industrial-800 transition-colors">
+              Select Growth Plan
+            </a>
+          </div>
+        </div>
+
+        <!-- TIER 3: ENTERPRISE CATALOG DEPARTMENT -->
+        <div class="rounded-2xl border border-subtle bg-white p-8 flex flex-col justify-between shadow-sm hover:border-zinc-400 transition-colors">
+          <div>
+            <div class="text-xs font-mono font-bold text-zinc-500 uppercase tracking-wider">Tier 3</div>
+            <h3 class="text-xl font-bold text-zinc-950 mt-1">Enterprise Department</h3>
+            <div class="mt-4 flex items-baseline gap-1">
+              <span class="font-serif text-4xl font-bold text-zinc-950">$12,000</span>
+              <span class="text-xs text-zinc-500 font-mono">/ month</span>
+            </div>
+            <div class="mt-1 text-[11px] font-mono text-zinc-500">Custom Multi-Branch Scope</div>
+            <p class="mt-4 text-xs text-zinc-600 leading-relaxed">
+              A full outsourced data department for multi-branch industrial enterprise organizations managing 25,000+ SKUs.
+            </p>
+            <ul class="mt-6 space-y-2 text-xs text-zinc-600">
+              <li class="flex items-center gap-2">✓ Up to 3,500+ enriched SKUs / month</li>
+              <li class="flex items-center gap-2">✓ Multi-branch ERP de-duplication</li>
+              <li class="flex items-center gap-2">✓ Competitor gap & breadth audits</li>
+              <li class="flex items-center gap-2">✓ Custom API / PIM connector integration</li>
+              <li class="flex items-center gap-2">✓ Dedicated engineering team (3 specialists)</li>
+              <li class="flex items-center gap-2">✓ Same-day emergency price sheet pushes</li>
+            </ul>
+          </div>
+          <div class="mt-8 pt-6 border-t border-zinc-100">
+            <a href="#sample-request" class="block w-full text-center rounded-md border border-zinc-300 bg-white py-2.5 text-xs font-semibold text-zinc-900 hover:bg-zinc-50 transition-colors">
+              Contact Enterprise Desk
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RECENT TECHNICAL GUIDES SPOTLIGHT -->
+  <section class="border-b border-subtle py-20 bg-parchment-subtle">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-12">
+        <div class="max-w-2xl">
+          <h2 class="text-xs font-mono font-semibold uppercase tracking-widest text-industrial-900">Knowledge Base</h2>
+          <p class="mt-2 font-serif text-3xl font-normal tracking-tight text-zinc-950 sm:text-4xl">
+            Technical Engineering Guides & ERP Specifications
+          </p>
+        </div>
+        <a href="/resources/" class="text-xs font-semibold text-industrial-900 hover:underline flex items-center gap-1 font-mono">
+          <span>View All 10 Technical Guides</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Guide 1 -->
+        <a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="group block rounded-xl border border-subtle bg-white p-6 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-0.5">
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-3">
+            <span class="text-industrial-900 font-semibold bg-industrial-50 px-2 py-0.5 rounded">ERP Imports</span>
+            <span>8 min read</span>
+          </div>
+          <h3 class="font-serif text-lg font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            The Complete Guide to Importing Manufacturer PDF Catalogs into Epicor Prophet 21 (P21)
+          </h3>
+          <p class="mt-2 text-xs text-zinc-600 line-clamp-2">
+            Step-by-step schema breakdown for `inv_mast`, DynaChange import formatting, avoiding duplicate part numbers, and handling UOM conversions.
+          </p>
+          <div class="mt-4 pt-3 border-t border-zinc-100 flex items-center text-xs font-semibold text-zinc-900">
+            <span>Read Technical Guide</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+
+        <!-- Guide 2 -->
+        <a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="group block rounded-xl border border-subtle bg-white p-6 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-0.5">
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-3">
+            <span class="text-teal-800 font-semibold bg-teal-50 px-2 py-0.5 rounded">Data Quality</span>
+            <span>7 min read</span>
+          </div>
+          <h3 class="font-serif text-lg font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            Unrolling Complex Valve & Pressure Gauge Part Number Matrices: From PDF Code to 20-Attribute Data
+          </h3>
+          <p class="mt-2 text-xs text-zinc-600 line-clamp-2">
+            How to decode combinatorial ordering matrices (Swagelok, Ashcroft, Parker) into cleanly faceted e-commerce attributes.
+          </p>
+          <div class="mt-4 pt-3 border-t border-zinc-100 flex items-center text-xs font-semibold text-zinc-900">
+            <span>Read Technical Guide</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+
+        <!-- Guide 3 -->
+        <a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="group block rounded-xl border border-subtle bg-white p-6 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-0.5">
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-3">
+            <span class="text-amber-800 font-semibold bg-amber-50 px-2 py-0.5 rounded">Margin Protection</span>
+            <span>9 min read</span>
+          </div>
+          <h3 class="font-serif text-lg font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            How to Reconcile Annual Supplier Price Increases Without Losing Margin in Prophet 21
+          </h3>
+          <p class="mt-2 text-xs text-zinc-600 line-clamp-2">
+            The $140k margin leak: audit methods for supplier updates, multiplier calculation (0.55x), and mapping discontinued parts.
+          </p>
+          <div class="mt-4 pt-3 border-t border-zinc-100 flex items-center text-xs font-semibold text-zinc-900">
+            <span>Read Technical Guide</span>
+            <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SAMPLE REQUEST MODAL / FORM SECTION -->
+  <section id="sample-request" class="py-20 bg-parchment">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      
+      <div class="rounded-2xl border-2 border-zinc-950 bg-white p-8 sm:p-12 shadow-2xl">
+        <div class="max-w-2xl">
+          <span class="rounded bg-industrial-100 text-industrial-900 px-2.5 py-1 text-xs font-mono font-bold uppercase tracking-wider">Zero Risk Proof of Concept</span>
+          <h2 class="mt-3 font-serif text-3xl font-bold text-zinc-950 sm:text-4xl">
+            Request Your 10-SKU Sample Deliverable ($0)
+          </h2>
+          <p class="mt-3 text-sm text-zinc-600 leading-relaxed font-sans">
+            Give us your toughest, messiest supplier catalog PDF. In 48 hours, our data lab will return a complete 5-tab production Excel workbook with embedded 75pt product thumbnails, 20 structured attributes, and verbatim footnote audits.
+          </p>
+        </div>
+
+        <form id="poc-form" class="mt-8 space-y-4" onsubmit="handleFormSubmit(event)">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 uppercase tracking-wide mb-1">Your Name</label>
+              <input type="text" required placeholder="Alex Zeltser" class="w-full rounded-md border border-zinc-300 px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 uppercase tracking-wide mb-1">Company Email</label>
+              <input type="email" required placeholder="alex@distributor.com" class="w-full rounded-md border border-zinc-300 px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 uppercase tracking-wide mb-1">Company / Distributorship</label>
+              <input type="text" required placeholder="Blackhawk Supply" class="w-full rounded-md border border-zinc-300 px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-700 uppercase tracking-wide mb-1">Current ERP / E-Commerce System</label>
+              <select class="w-full rounded-md border border-zinc-300 px-3.5 py-2.5 text-sm text-zinc-900 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950 bg-white">
+                <option>Epicor Prophet 21 (P21)</option>
+                <option>Infor CloudSuite Distribution (CSD / SX.e)</option>
+                <option>Epicor Eclipse</option>
+                <option>BigCommerce B2B Edition</option>
+                <option>Adobe Commerce / Magento</option>
+                <option>NetSuite / Other ERP</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-700 uppercase tracking-wide mb-1">Target Manufacturer Line for 10-SKU Audit</label>
+            <input type="text" required placeholder="e.g. Ashcroft 1009 Series, Swagelok 60 Series, Dwyer, WIKA, Parker" class="w-full rounded-md border border-zinc-300 px-3.5 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-950 focus:outline-none focus:ring-1 focus:ring-zinc-950">
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full rounded-md bg-zinc-950 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-industrial-900 transition-all">
+              Generate & Dispatch 10-SKU Deliverable ($0 Proof of Concept)
+            </button>
+            <p class="text-[11px] text-zinc-500 text-center mt-2">
+              🔒 100% Confidential. NDA protected. No credit card required. Delivered to your inbox in 48 hours.
+            </p>
+          </div>
+        </form>
+
+        <div id="form-success" class="hidden mt-6 p-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm">
+          ✓ <strong>Request Received.</strong> Our catalog director is reviewing your line now and will email your 10-SKU 5-sheet deliverable within 48 hours.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ENTERPRISE FOOTER -->
+  <footer class="border-t border-subtle bg-parchment-subtle py-16 text-xs text-zinc-500">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="md:col-span-1">
+          <span class="text-lg font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <p class="mt-2 text-zinc-600 leading-relaxed font-sans">
+            Specialized item-master and e-commerce catalog engineering for North American industrial distributors, valve suppliers, and instrumentation firms.
+          </p>
+          <div class="mt-4 font-mono text-[11px] text-zinc-400">
+            Vellett Data Engineering LLC<br>
+            Wilmington, DE • Operating Globally
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Methodology & Workbooks</h4>
+          <ul class="space-y-2">
+            <li><a href="#methodology" class="hover:text-zinc-900">1_ERP_And_Web_Import_Ready</a></li>
+            <li><a href="#methodology" class="hover:text-zinc-900">2_Footnote_Exception_Audit</a></li>
+            <li><a href="#methodology" class="hover:text-zinc-900">3_StockOut_DropIn_Equivalents</a></li>
+            <li><a href="#methodology" class="hover:text-zinc-900">4_Price_And_Obsolete_Sync</a></li>
+            <li><a href="#methodology" class="hover:text-zinc-900">5_Before_Vs_After_Visual</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Technical Guides</h4>
+          <ul class="space-y-2">
+            <li><a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="hover:text-zinc-900">Prophet 21 PDF Import Guide</a></li>
+            <li><a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="hover:text-zinc-900">Unrolling Part Number Matrices</a></li>
+            <li><a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="hover:text-zinc-900">Price Increase Reconciliation</a></li>
+            <li><a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/" class="hover:text-zinc-900">Footnote Exception Hazards</a></li>
+            <li><a href="/resources/" class="hover:text-zinc-900 font-semibold">View All 10 Guides →</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Enterprise Desk</h4>
+          <ul class="space-y-2">
+            <li>Inquiries: <a href="mailto:inquiries@vellett.com" class="font-mono text-zinc-900 hover:underline">inquiries@vellett.com</a></li>
+            <li>Office Hours: Mon–Fri, 8:00 AM – 6:00 PM EST</li>
+            <li>Turnaround: 48 Hours for 10-SKU Proof of Concept</li>
+            <li>Security: SOC2 Type II Aligned Data Workflows</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-subtle pt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] text-zinc-400">
+        <div>
+          © 2026 Vellett Data Engineering LLC. All rights reserved. Trademarks belong to their respective manufacturers (Ashcroft, WIKA, Dwyer, Swagelok, SMC, Epicor, Infor).
+        </div>
+        <div class="flex gap-4">
+          <a href="/privacy/" class="hover:text-zinc-900">Privacy Policy</a>
+          <a href="/terms/" class="hover:text-zinc-900">Terms of Service</a>
+          <a href="/sitemap.xml" class="hover:text-zinc-900">XML Sitemap</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Live Split Screen Data Store
+    const SAMPLES = {
+      ashcroft: {
+        rawSku: "ASH 25 1009 SW 02L 100#",
+        rawDesc: "2.5 IN GA 100# 1/4 NPT LM SS/SS DRY",
+        rawFootnote: '"Glycerin fill restricts ambient temp to +20°F to 150°F (-7°C to 65°C). For sub-zero outdoor service down to -40°F, silicone liquid fill (-XSL) is mandatory."',
+        cleanTitle: 'Ashcroft 1009S Duralife Pressure Gauge, 2.5 in Dial, 0-100 psi, 1/4" NPT Lower Mount, 316L SS Wetted Parts, 304 SS Case, Dry',
+        size: '2.5 in (63 mm)',
+        range: '0 to 100 PSI',
+        conn: '1/4" NPT Male LM',
+        acc: 'Grade 1A (±1.0%)',
+        cleanFootnote: 'Liquid fill option explicitly mapped to silicone (-XSL) for sub-zero outdoor installations. Low-temp threshold (-40°F) mapped in ERP item notes.',
+        crossRef: 'WIKA 232.53 (P/N 9744490)'
+      },
+      swagelok: {
+        rawSku: "SS 62TF4",
+        rawDesc: "1/4 3PC BALL VLV PTFE SEAT",
+        rawFootnote: '"Standard PTFE seats are rated to 450°F (232°C). Applications exceeding 450°F up to 850°F (454°C) require PEEK or carbon/graphite seats and Grafoil packing (-GR)."',
+        cleanTitle: 'Swagelok 60 Series 3-Piece Ball Valve, 316 Stainless Steel, 1/4 in Female NPT, PTFE Seats, Standard Oval Handle, 2500 psig at 100°F',
+        size: '1/4 in (DN 8)',
+        range: '2500 psig (172 bar)',
+        conn: '1/4" Female NPT',
+        acc: 'Cv 1.20 Flow',
+        cleanFootnote: 'High-temperature seat option (-GR Grafoil / PEEK) automatically recommended for thermal fluid lines >450°F to prevent valve seat blowout.',
+        crossRef: 'Parker 60 Series (P/N 4A-B6LJ2-SSP)'
+      },
+      dwyer: {
+        rawSku: "DWY 2000 0",
+        rawDesc: "MAGNEHELIC DIFF PRESS GA 0-.5 IN WC",
+        rawFootnote: '"Standard Magnehelic pressure limit is 15 psig (100 kPa). For applications with static pressure exceeding 15 psig up to 80 psig, Medium/High Pressure option (-HP) is mandatory."',
+        cleanTitle: 'Dwyer Series 2000 Magnehelic Differential Pressure Gauge, 4 in Dial, 0-0.5 in w.c., 1/8" NPT Female High/Low Ports, Die Cast Aluminum, ±2% FS',
+        size: '4 in (101.6 mm)',
+        range: '0 to 0.5 in w.c.',
+        conn: 'Dual 1/8" NPT Female',
+        acc: '±2% Full Scale',
+        cleanFootnote: 'High static pressure rating (-HP option) flagged in ERP warning notes for high-velocity HVAC duct monitoring to prevent diaphragm rupture.',
+        crossRef: 'Ashcroft D4 (P/N D4-02-100-0/0.5INWC)'
+      }
+    };
+
+    function setSample(key) {
+      const data = SAMPLES[key];
+      if (!data) return;
+
+      // Update button styling
+      document.querySelectorAll('.sample-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-zinc-900', 'text-white');
+        btn.classList.add('bg-zinc-100', 'text-zinc-600');
+      });
+      const activeBtn = document.getElementById('btn-' + key);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-zinc-900', 'text-white');
+        activeBtn.classList.remove('bg-zinc-100', 'text-zinc-600');
+      }
+
+      // Populate text
+      document.getElementById('raw-sku').innerText = data.rawSku;
+      document.getElementById('raw-desc').innerText = data.rawDesc;
+      document.getElementById('raw-footnote').innerText = data.rawFootnote;
+      
+      document.getElementById('clean-title').innerText = data.cleanTitle;
+      document.getElementById('facet-size').innerText = data.size;
+      document.getElementById('facet-range').innerText = data.range;
+      document.getElementById('facet-conn').innerText = data.conn;
+      document.getElementById('facet-acc').innerText = data.acc;
+      document.getElementById('clean-footnote').innerText = data.cleanFootnote;
+      document.getElementById('clean-cross').innerText = data.crossRef;
+    }
+
+    // Interactive ROI Calculator
+    function updateROI(val) {
+      const skus = parseInt(val, 10);
+      document.getElementById('skuDisplay').innerText = skus.toLocaleString() + ' SKUs';
+      
+      // Calculations:
+      // Hours saved: ~67 hours per 1,000 SKUs
+      const hours = Math.round(skus * 0.0672);
+      document.getElementById('hoursSaved').innerText = hours.toLocaleString() + ' Hours';
+      
+      // Margin recovered: ~$3.85 per SKU from updated multipliers & pricing
+      const margin = Math.round(skus * 3.856);
+      document.getElementById('marginRecovered').innerText = '$' + margin.toLocaleString();
+      
+      // Net ROI:
+      const cost = Math.max(18000, skus * 1.5);
+      const ratio = (margin / cost).toFixed(1);
+      document.getElementById('netROI').innerText = ratio + 'x';
+    }
+
+    // Form submit handler
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('poc-form').classList.add('opacity-50', 'pointer-events-none');
+      setTimeout(() => {
+        document.getElementById('poc-form').style.display = 'none';
+        document.getElementById('form-success').classList.remove('hidden');
+      }, 600);
+    }
+  </script>
+
+</body>
+</html>

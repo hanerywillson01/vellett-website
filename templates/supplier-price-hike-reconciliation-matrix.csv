@@ -1,0 +1,5 @@
+Mfr_Part_Number,Current_ERP_List_Price,New_Supplier_List_Price,Distributor_Multiplier,Updated_Net_Cost,Price_Change_Pct,Catalog_Status,Direct_Replacement_SKU,ERP_Action_Required
+25-1009-SW-02L-30#,78.00,86.00,0.55,47.30,10.25%,Active,None,Update ERP Net Cost from $42.90 to $47.30
+25-1009-SW-02L-100#,84.00,92.50,0.55,50.88,10.12%,Active,None,Update ERP Net Cost from $46.20 to $50.88
+SS-62TF4,168.00,184.50,0.55,101.48,9.82%,Active,None,Recalculate contract discount tiers
+25-1009-SW-02L-15#-OBS,76.00,0.00,0.55,0.00,0.00%,Discontinued,25-1009-SW-02L-30#,Flag obsolete in P21. Map to 30 psi active variant

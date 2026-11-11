@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: {
+              850: '#18181B',
+              900: '#09090B',
+              950: '#040405',
+            },
+            industrial: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1E3A8A',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+    ::selection { background-color: #1E3A8A; color: #FFFFFF; }
+    .border-subtle { border-color: #E4E4E7; }
+    .bg-parchment { background-color: #FBFBF9; }
+    .bg-parchment-subtle { background-color: #F4F4F0; }
+    pre { background-color: #18181B; color: #F4F4F5; padding: 1.25rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.6; }
+    code { font-family: 'JetBrains Mono', monospace; }
+  </style>
+
+  <title>Technical Guides & Engineering Resources | Vellett</title>
+  <meta name="description" content="In-depth technical guides for industrial distributors and fluid power suppliers on Epicor Prophet 21 imports, BigCommerce B2B taxonomy, part matrix expansion, and price syncing.">
+  <link rel="canonical" href="https://vellett.com/resources/">
+</head>
+<body class="bg-parchment text-zinc-900 antialiased">
+  
+  <!-- TOP ENTERPRISE ANNOUNCEMENT BAR -->
+  <div class="border-b border-subtle bg-parchment-subtle px-4 py-2 text-center text-xs tracking-wide text-zinc-600">
+    <span class="inline-flex items-center gap-2">
+      <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+      <strong>Enterprise Catalog Engineering</strong> for Industrial Distributors & Fluid Power Suppliers • Prophet 21, Infor CSD, BigCommerce
+    </span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 border-b border-subtle bg-parchment/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <div class="flex items-center gap-10">
+        <a href="/" class="flex items-center gap-2 group">
+          <span class="text-xl font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <span class="text-[10px] uppercase tracking-widest font-mono text-zinc-400 border border-zinc-200 px-1.5 py-0.5 rounded">Data Lab</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+          <a href="/#methodology" class="transition-colors hover:text-zinc-950">The 5-Sheet Methodology</a>
+          <a href="/#services" class="transition-colors hover:text-zinc-950">Services</a>
+          <a href="/resources/" class="text-zinc-950 font-semibold transition-colors flex items-center gap-1">
+            <span>Technical Guides</span>
+            <span class="rounded bg-zinc-100 px-1.5 py-0.2 text-[10px] font-mono text-zinc-600">10 Guides</span>
+          </a>
+          <a href="/#pricing" class="transition-colors hover:text-zinc-950">Pricing</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/#sample-request" class="rounded-md bg-zinc-950 px-4 py-2 text-xs font-semibold tracking-wide text-white transition-all hover:bg-industrial-900">
+          Request a 10-SKU Sample ($0)
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      
+      <!-- Hub Header -->
+      <div class="max-w-3xl mb-12">
+        <div class="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-700 shadow-sm mb-4">
+          <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+          Vellett Catalog Data Lab • Engineering Publications
+        </div>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-950 tracking-tight leading-[1.1]">
+          Industrial Catalog Engineering <br><span class="italic text-industrial-900">Technical Guides & Reference Specs</span>
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-zinc-600 font-sans leading-relaxed">
+          Peer-reviewed technical blueprints for VPs of Operations, ERP Administrators, and E-Commerce Directors across North American industrial distributors.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills & Search -->
+      <div class="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-subtle pb-6">
+        <div class="flex flex-wrap items-center gap-2" id="filter-pills">
+          <button onclick="filterCategory('All')" class="filter-pill active rounded-full bg-zinc-950 px-4 py-1.5 text-xs font-semibold text-white transition-all">All Guides (10)</button>
+          <button onclick="filterCategory('ERP Imports (P21/Infor)')" class="filter-pill rounded-full bg-white border border-zinc-300 px-4 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-50 transition-all">ERP Imports (P21/Infor)</button>
+          <button onclick="filterCategory('Brand Onboarding')" class="filter-pill rounded-full bg-white border border-zinc-300 px-4 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-50 transition-all">Brand Onboarding</button>
+          <button onclick="filterCategory('Data Quality')" class="filter-pill rounded-full bg-white border border-zinc-300 px-4 py-1.5 text-xs font-medium text-zinc-700 hover:bg-zinc-50 transition-all">Data Quality</button>
+        </div>
+        <div class="w-full sm:w-auto">
+          <input type="text" id="guideSearch" placeholder="Filter by keyword (e.g. Prophet 21, Swagelok)..." onkeyup="searchGuides(this.value)" class="w-full sm:w-72 rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xs font-sans placeholder:text-zinc-400 focus:border-zinc-950 focus:outline-none">
+        </div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-container">
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="ERP Imports (P21/Infor)">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-industrial-50 text-industrial-900">ERP Imports (P21/Infor)</span>
+            <span>9 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/">The Complete Guide to Importing Manufacturer PDF Catalogs into Epicor Prophet 21 (P21)</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            A deep architectural breakdown of Epicor Prophet 21 item master ingestion (`inv_mast`). Learn how to convert 300-page manufacturer engineering PDFs into DynaChange-compliant import files without duplicate key errors, unit-of-measure mismatches, or missing attribute fields.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="Data Quality">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-teal-50 text-teal-800">Data Quality</span>
+            <span>8 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/unrolling-valve-gauge-part-number-matrices/">Unrolling Complex Valve & Pressure Gauge Part Number Matrices: From PDF Code to 20-Attribute Data</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            How industrial manufacturers (Swagelok, Ashcroft, Parker) condense 50,000 SKUs into a single 1-page ordering grid. Learn the combinatorial expansion algorithm that extracts every valid permutation while enforcing strict metallurgical and pressure dependencies.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="Brand Onboarding">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-amber-50 text-amber-800">Brand Onboarding</span>
+            <span>7 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/bigcommerce-b2b-faceted-search-attribute-guide/">Building Faceted Search Attributes for Industrial B2B E-Commerce (BigCommerce & Magento)</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            Why 72% of industrial buyers abandon distributor websites: the lack of parametric faceted filters. Learn how to design a standardized attribute schema (Port Size, Thread Standard, Body Material, Pressure Range, Accuracy Grade) for BigCommerce B2B Edition.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/bigcommerce-b2b-faceted-search-attribute-guide/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="ERP Imports (P21/Infor)">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-industrial-50 text-industrial-900">ERP Imports (P21/Infor)</span>
+            <span>9 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/reconciling-annual-supplier-price-sheet-hikes/">How to Reconcile Annual Supplier Price Increases Without Losing Margin in Prophet 21</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            The $140,000 hidden distributor margin leak: selling items at 2022 list while absorbing 2024 manufacturer hikes. A proven audit protocol for recalculating net multipliers (0.55x), mapping discontinued models, and syncing P21 pricing tables safely.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="Brand Onboarding">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-amber-50 text-amber-800">Brand Onboarding</span>
+            <span>8 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/stock-out-drop-in-replacement-cross-referencing/">Engineering Drop-In Equivalents: How to Cross-Reference Industrial Competitor Brands During Stock-Outs</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            When primary lines hit 18-week factory lead times, distributor sales stall. How to build verified cross-reference matrices across competing brands (Ashcroft ↔ WIKA ↔ Winters; Swagelok ↔ Parker ↔ Apollo) based on ASME B40.100 tolerances and wetted metallurgy.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/stock-out-drop-in-replacement-cross-referencing/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="Data Quality">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-teal-50 text-teal-800">Data Quality</span>
+            <span>8 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/">The Hidden Danger in Manufacturer PDF Footnotes: Why Naive Scrapers Cause Expensive Product Returns</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            Case studies of field equipment failures caused by automated scraping stripping critical fine-print footnotes. From glycerin fill freeze-ups at +20°F to PTFE valve seat blowouts above 450°F, learn how source-cited footnote auditing protects distributor liability.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="ERP Imports (P21/Infor)">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-industrial-50 text-industrial-900">ERP Imports (P21/Infor)</span>
+            <span>9 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/item-master-duplicate-cleansing-infor-csd/">Item Master Cleansing for Multi-Branch Distributors: De-duplicating Infor CloudSuite Distribution (CSD)</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            How branch acquisitions and decentralized purchasing create massive catalog bloat in Infor CSD / SX.e. A step-by-step framework for fuzzy part number normalization (`SS-62TF4` vs `SS 62TF4`), UOM unification, and single-source-of-truth item master creation.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/item-master-duplicate-cleansing-infor-csd/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="Data Quality">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-teal-50 text-teal-800">Data Quality</span>
+            <span>7 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/pim-software-vs-managed-catalog-preparation-cost/">In-House PIM Software vs. Managed Catalog Preparation: Total Cost of Ownership Comparison</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            An executive cost-benefit analysis comparing $60,000/year enterprise PIM licenses (Akeneo, Inriver, Salsify) that require dedicated in-house data teams against Vellett's managed turnkey catalog engineering service.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/pim-software-vs-managed-catalog-preparation-cost/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="Data Quality">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-teal-50 text-teal-800">Data Quality</span>
+            <span>7 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/standardizing-npt-bsp-psi-bar-industrial-ecommerce/">Standardizing Industrial Technical Units: NPT vs. BSPP, PSI vs. Bar, and Decimal Fractions for Web Search</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            Why industrial procurement officers fail to find items on distributor websites: unit syntax mismatch. Learn how to construct bidirectional synonym dictionaries and numeric normalization rules for thread types, pressure scales, and fractions (1/4" vs 0.25 in).
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/standardizing-npt-bsp-psi-bar-industrial-ecommerce/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+        <article class="resource-card group rounded-2xl border border-subtle bg-white p-7 shadow-sm hover:border-zinc-400 transition-all hover:-translate-y-1" data-category="Brand Onboarding">
+          <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3">
+            <span class="rounded px-2.5 py-0.5 font-bold bg-amber-50 text-amber-800">Brand Onboarding</span>
+            <span>9 min read</span>
+          </div>
+          <h2 class="font-serif text-xl font-bold text-zinc-950 group-hover:text-industrial-900 transition-colors leading-snug">
+            <a href="/resources/5-day-supplier-onboarding-framework-pdf-to-erp/">The 5-Day Supplier Onboarding Framework: From Messy PDF to Live ERP & E-Commerce</a>
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed line-clamp-3">
+            Vellett's battle-tested 5-day protocol for taking a new 500-SKU manufacturer catalog from a dense engineering PDF to a 100% verified production import file inside Prophet 21 and BigCommerce. Includes executive checklists for each day.
+          </p>
+          <div class="mt-6 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-sans">
+            <span class="text-zinc-500 font-medium">By Ayush Sharma</span>
+            <a href="/resources/5-day-supplier-onboarding-framework-pdf-to-erp/" class="font-semibold text-zinc-950 group-hover:text-industrial-900 flex items-center gap-1">
+              <span>Read Technical Guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        </article>
+        
+      </div>
+
+    </div>
+  </main>
+
+  
+  <!-- ENTERPRISE FOOTER -->
+  <footer class="border-t border-subtle bg-parchment-subtle py-16 text-xs text-zinc-500 mt-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <span class="text-lg font-bold tracking-widest text-zinc-950 font-sans">VELLETT</span>
+          <p class="mt-2 text-zinc-600 leading-relaxed font-sans">
+            Specialized item-master and e-commerce catalog engineering for North American industrial distributors, valve suppliers, and instrumentation firms.
+          </p>
+          <div class="mt-4 font-mono text-[11px] text-zinc-400">
+            Vellett Data Engineering LLC<br>Wilmington, DE • Operating Globally
+          </div>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Methodology & Workbooks</h4>
+          <ul class="space-y-2">
+            <li><a href="/#methodology" class="hover:text-zinc-900">1_ERP_And_Web_Import_Ready</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">2_Footnote_Exception_Audit</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">3_StockOut_DropIn_Equivalents</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">4_Price_And_Obsolete_Sync</a></li>
+            <li><a href="/#methodology" class="hover:text-zinc-900">5_Before_Vs_After_Visual</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Technical Guides</h4>
+          <ul class="space-y-2">
+            <li><a href="/resources/epicor-prophet-21-pdf-catalog-import-guide/" class="hover:text-zinc-900">Prophet 21 PDF Import Guide</a></li>
+            <li><a href="/resources/unrolling-valve-gauge-part-number-matrices/" class="hover:text-zinc-900">Unrolling Part Number Matrices</a></li>
+            <li><a href="/resources/reconciling-annual-supplier-price-sheet-hikes/" class="hover:text-zinc-900">Price Increase Reconciliation</a></li>
+            <li><a href="/resources/hidden-danger-manufacturer-pdf-footnotes-returns/" class="hover:text-zinc-900">Footnote Exception Hazards</a></li>
+            <li><a href="/resources/" class="hover:text-zinc-900 font-semibold">View All 10 Guides →</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-900 font-semibold mb-3">Enterprise Desk</h4>
+          <ul class="space-y-2">
+            <li>Inquiries: <a href="mailto:inquiries@vellett.com" class="font-mono text-zinc-900 hover:underline">inquiries@vellett.com</a></li>
+            <li>Turnaround: 48 Hours for 10-SKU Proof of Concept</li>
+            <li>Format: Prophet 21, Infor CSD, BigCommerce CSV</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-subtle pt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] text-zinc-400">
+        <div>© 2026 Vellett Data Engineering LLC. All rights reserved.</div>
+        <div class="flex gap-4">
+          <a href="/" class="hover:text-zinc-900">Home</a>
+          <a href="/resources/" class="hover:text-zinc-900">Resources</a>
+          <a href="/sitemap.xml" class="hover:text-zinc-900">XML Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    function filterCategory(cat) {
+      document.querySelectorAll('.filter-pill').forEach(btn => {
+        if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText.includes('All'))) {
+          btn.classList.add('bg-zinc-950', 'text-white');
+          btn.classList.remove('bg-white', 'text-zinc-700', 'border');
+        } else {
+          btn.classList.remove('bg-zinc-950', 'text-white');
+          btn.classList.add('bg-white', 'text-zinc-700', 'border');
+        }
+      });
+
+      const cards = document.querySelectorAll('.resource-card');
+      cards.forEach(card => {
+        if (cat === 'All' || card.getAttribute('data-category') === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function searchGuides(query) {
+      const q = query.toLowerCase();
+      const cards = document.querySelectorAll('.resource-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(q)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
