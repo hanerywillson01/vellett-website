@@ -134,7 +134,7 @@ def publish_article(preset_idx=0, custom_title=None, custom_category=None):
       <div class="my-10 p-8 rounded-xl border-2 border-zinc-950 bg-white">
         <h3 class="font-serif text-xl font-bold text-zinc-950">Need Help Onboarding This Manufacturer Line?</h3>
         <p class="text-xs text-zinc-600 mt-2">
-          Vellett prepares production-ready 5-sheet item master workbooks with embedded thumbnails and footnote audits within 48 hours.
+          Vellett prepares production-ready 5-sheet item master workbooks with embedded thumbnails and footnote audits with zero obligation.
         </p>
         <a href="/#sample-request" class="mt-4 inline-block rounded bg-zinc-950 px-4 py-2 text-xs font-bold text-white hover:bg-blue-900">
           Request a 10-SKU Free Proof of Concept ($0)
