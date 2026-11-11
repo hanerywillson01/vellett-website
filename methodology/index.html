@@ -96,11 +96,7 @@
     "opens": "08:00",
     "closes": "18:00"
   },
-  "founder": {
-    "@type": "Person",
-    "name": "Ayush Bijalwan",
-    "jobTitle": "Principal Catalog Engineer & Managing Director"
-  },
+  "legalName": "Vellett Industrial Catalog Engineering LLC",
   "areaServed": "United States",
   "priceRange": "$1,500 - $12,000 / month"
 }
@@ -112,9 +108,9 @@
   "headline": "The 5-Sheet Catalog Engineering Methodology for Industrial Distributors",
   "description": "Comprehensive engineering standard for transforming dense manufacturer PDF datasheets into audited, 20-attribute item masters for ERP and B2B eCommerce.",
   "author": {
-    "@type": "Person",
-    "name": "Ayush Bijalwan",
-    "jobTitle": "Principal Catalog Engineer & Managing Director"
+    "@type": "Organization",
+    "name": "Vellett Industrial Catalog Engineering LLC",
+    "url": "https://vellett.com/"
   },
   "publisher": {
     "@type": "Organization",
@@ -183,8 +179,6 @@
         <a href="/services/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Services</a>
         <a href="/pricing/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Pricing</a>
         <a href="/resources/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Guides</a>
-        <a href="/contact/" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Contact</a>
-        
         </nav>
 
         <div class="flex items-center space-x-3">
@@ -193,9 +187,9 @@
             <span>(919) 339-1208</span>
           </a>
           
-          <a href="/contact/" class="inline-flex items-center justify-center text-xs font-semibold uppercase tracking-wider text-white bg-zinc-950 hover:bg-zinc-800 px-4 sm:px-5 py-2 sm:py-2.5 transition-colors shadow-sm">
+          <button type="button" onclick="openSampleIntake(event)" class="inline-flex items-center justify-center text-xs font-semibold uppercase tracking-wider text-white bg-zinc-950 hover:bg-zinc-800 px-4 sm:px-5 py-2 sm:py-2.5 transition-colors shadow-sm cursor-pointer">
             Request Sample
-          </a>
+          </button>
 
           <!-- Mobile Hamburger Toggle -->
           <button type="button" onclick="toggleMobileNav()" class="md:hidden inline-flex items-center justify-center p-2 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 border border-zinc-300 focus:outline-none" aria-label="Toggle navigation menu">
@@ -213,17 +207,15 @@
         <a href="/services/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Services</a>
         <a href="/pricing/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Pricing</a>
         <a href="/resources/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Guides</a>
-        <a href="/contact/" class="block text-sm text-zinc-700 py-1.5 hover:text-zinc-950 transition-colors">Contact</a>
-        
-      </div>
+        </div>
       <div class="pt-4 border-t border-zinc-100 space-y-3">
         <a href="tel:+19193391208" class="flex items-center justify-center gap-2 w-full text-xs font-mono font-bold text-zinc-950 border border-zinc-950 py-3 bg-zinc-50 hover:bg-zinc-100 transition-colors">
           <svg class="w-4 h-4 text-zinc-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           <span>Call Direct: (919) 339-1208</span>
         </a>
-        <a href="/contact/" class="block text-center w-full bg-zinc-950 text-white text-xs font-semibold uppercase tracking-wider py-3 hover:bg-zinc-800 transition-colors">
+        <button type="button" onclick="openSampleIntake(event)" class="block text-center w-full bg-zinc-950 text-white text-xs font-semibold uppercase tracking-wider py-3 hover:bg-zinc-800 transition-colors cursor-pointer">
           Request 10-SKU Sample
-        </a>
+        </button>
       </div>
     </div>
   </header>
@@ -255,7 +247,7 @@
         </p>
 
         <div class="pt-6 border-t border-zinc-200 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-zinc-500 font-mono">
-          <span>Principal Author: <strong class="text-zinc-900">Ayush Bijalwan</strong></span>
+          <span>Engineering Desk: <strong class="text-zinc-900">Vellett Catalog Engineering</strong></span>
           <span>&bull;</span>
           <span>Target ERPs: Prophet 21, Infor CSD, NetSuite, SAP</span>
           <span>&bull;</span>
@@ -492,7 +484,7 @@
         Test The 5-Sheet Methodology On Your Own Supplier PDF
       </h2>
       <p class="text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed mb-8 font-sans">
-        Send us an unformatted manufacturer PDF datasheet. Principal Catalog Engineer Ayush Bijalwan will extract 10 real SKUs into the complete 5-sheet workbook at zero cost.
+        Send us an unformatted manufacturer PDF datasheet. Our catalog engineering desk will extract 10 real SKUs into the complete 5-sheet workbook at zero cost.
       </p>
       <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
         <a href="/contact/" class="bg-white text-zinc-950 hover:bg-zinc-200 px-8 py-3.5 text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm">
@@ -518,7 +510,7 @@
             <span class="text-[10px] tracking-widest uppercase text-zinc-400 font-mono">Industrial Catalog Engineering LLC</span>
           </div>
           <p class="text-sm text-zinc-400 leading-relaxed max-w-sm mb-6">
-            We turn dense manufacturer PDF datasheets into audited, 20-attribute item masters ready for Epicor Prophet 21, Infor CSD, and B2B eCommerce. Directed by Ayush Bijalwan.
+            We turn dense manufacturer PDF datasheets into audited, 20-attribute item masters ready for Epicor Prophet 21, Infor CSD, and B2B eCommerce. 
           </p>
           <div class="space-y-2 text-xs font-mono text-zinc-400">
             <div><span class="text-zinc-500">Corporate HQ:</span> 1201 N Orange St, Suite 700, Wilmington, DE 19801</div>
@@ -553,12 +545,12 @@
         </div>
 
         <div>
-          <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-white mb-4">Firm & Contact</h4>
+          <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-white mb-4">Firm & Intake</h4>
           <ul class="space-y-2.5 text-xs text-zinc-400">
             <li><a href="/pricing/" class="hover:text-white transition-colors">Pricing</a></li>
             <li><a href="/pricing/#faq" class="hover:text-white transition-colors">Engagement Terms & FAQ</a></li>
             <li><a href="/resources/" class="hover:text-white transition-colors">Technical Guides Hub</a></li>
-            <li><a href="/contact/" class="hover:text-white transition-colors">Request 10-SKU Sample</a></li>
+            <li><a href="/#sample-audit" onclick="openSampleIntake(event)" class="hover:text-white transition-colors">Request 10-SKU Sample</a></li>
             <li><a href="tel:+19193391208" class="text-zinc-200 hover:text-white font-mono transition-colors">Direct Desk: (919) 339-1208</a></li>
           </ul>
         </div>
@@ -567,7 +559,7 @@
 
       <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-500 gap-4">
         <div>
-          &copy; 2026 Vellett Industrial Catalog Engineering LLC. All rights reserved. Directed by Ayush Bijalwan.
+          &copy; 2026 Vellett Industrial Catalog Engineering LLC. All rights reserved. 
         </div>
         <div class="flex space-x-6">
           <span>Epicor Prophet 21&reg; and Infor&reg; are trademarks of their respective owners.</span>
@@ -587,5 +579,6 @@
     }
   </script>
 
+  <script src="/vellett-ai.js" defer></script>
 </body>
 </html>

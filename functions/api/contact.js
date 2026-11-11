@@ -25,7 +25,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    console.log("[VELLETT LEAD DISPATCHED TO AYUSH BIJALWAN]", {
+    console.log("[VELLETT LEAD DISPATCHED TO ENGINEERING DESK]", {
       timestamp: new Date().toISOString(),
       name: data.name,
       email: data.email,
@@ -37,9 +37,25 @@ export async function onRequestPost(context) {
       notes: data.notes || ""
     });
 
+    // Asynchronously forward to Web3Forms for immediate email delivery to inquiries@vellett.com
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          access_key: "64696b99-e6c1-4b10-8b1b-2ce8288544e3",
+          subject: `[VELLETT NEW LEAD] ${data.name} - ${data.company || "Distributor"} (${data.phone || "No phone"})`,
+          to: "inquiries@vellett.com",
+          ...data
+        })
+      });
+    } catch (e) {
+      // Non-blocking forward
+    }
+
     return new Response(JSON.stringify({
       success: true,
-      message: "Catalog intake request logged successfully. Ayush Bijalwan will respond within 2 business hours.",
+      message: "Catalog intake request logged successfully. Our engineering desk will respond within 2 business hours.",
       reference_id: "VEL-" + Date.now().toString(36).toUpperCase()
     }), {
       status: 200,
@@ -53,7 +69,7 @@ export async function onRequestPost(context) {
     console.error("[VELLETT LEAD DISPATCH ERROR]", error);
     return new Response(JSON.stringify({
       success: false,
-      error: "Internal dispatch error. Please call direct at (919) 339-1208 or email ayush@vellett.com."
+      error: "Internal dispatch error. Please call direct at (919) 339-1208 or email inquiries@vellett.com."
     }), {
       status: 500,
       headers: { "Content-Type": "application/json" }

@@ -1,7 +1,7 @@
 # Vellett Industrial Catalog Engineering - Complete Technical Reference
 
 ## Company Overview
-Vellett Industrial Catalog Engineering LLC is an enterprise product data engineering consultancy headquartered in Wilmington, Delaware. Directed by Principal Catalog Engineer Ayush Bijalwan, the firm specializes in solving the catalog onboarding backlog for industrial distributors carrying fluid power, valves, fittings, instrumentation, and PVF product lines.
+Vellett Industrial Catalog Engineering LLC is an enterprise product data engineering consultancy headquartered in Wilmington, Delaware. Directed by Principal Catalog Engineer Ayush Bijlwan, the firm specializes in solving the catalog onboarding backlog for industrial distributors carrying fluid power, valves, fittings, instrumentation, and PVF product lines.
 
 ## The Problem Solved
 Industrial distributors lose significant revenue and suffer customer returns due to three core friction points:
