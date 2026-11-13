@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Extract Technical Specs from Scanned PDF Datasheets (Without Re-Typing) | Vellett</title>
+  <meta name="description" content="Why optical character recognition fails on engineering drawings and technical tables, and how computer-vision extraction produces verified master CSVs.">
+  <link rel="canonical" href="https://vellett.com/resources/extract-product-specs-scanned-pdf-datasheets/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Extract Technical Specs from Scanned PDF Datasheets (Without Re-Typing) | Vellett">
+  <meta property="og:description" content="Why optical character recognition fails on engineering drawings and technical tables, and how computer-vision extraction produces verified master CSVs.">
+  <meta property="og:url" content="https://vellett.com/resources/extract-product-specs-scanned-pdf-datasheets/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background-color: #F4F4F0; padding: 0.15rem 0.35rem; border-radius: 0.25rem; border: 1px solid #E4E4E7; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How to Extract Technical Specs from Scanned PDF Datasheets (Without Re-Typing)",
+    "description": "Why optical character recognition fails on engineering drawings and technical tables, and how computer-vision extraction produces verified master CSVs.",
+    "datePublished": "2026-11-13",
+    "dateModified": "2026-11-13",
+    "author": {
+      "@type": "Organization",
+      "name": "Vellett Industrial Catalog Engineering LLC",
+      "url": "https://vellett.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vellett Industrial Catalog Engineering LLC",
+      "url": "https://vellett.com/"
+    }
+  }
+  </script>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden md:inline text-zinc-700">|</span>
+        <span class="hidden md:inline">Wilmington, DE</span>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="tel:+19193391208" class="text-zinc-200 hover:text-white font-mono font-semibold flex items-center space-x-1.5 transition-colors group">
+          <svg class="w-3.5 h-3.5 text-zinc-400 group-hover:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span class="text-white underline decoration-zinc-600 underline-offset-2">(919) 339-1208</span>
+        </a>
+        <a href="mailto:inquiries@vellett.com" class="text-zinc-400 hover:text-zinc-200 transition-colors">inquiries@vellett.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="border-b border-zinc-200 bg-white/95 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+      <a href="../../index.html" class="flex flex-col group py-1">
+        <span class="text-2xl font-bold tracking-tight font-sans text-zinc-950 group-hover:text-zinc-700 transition-colors">VELLETT</span>
+        <span class="text-[10px] tracking-widest uppercase text-zinc-500 font-mono -mt-1">Industrial Catalog Engineering</span>
+      </a>
+
+      <div class="flex items-center space-x-6 lg:space-x-8">
+        <nav class="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <a href="../../methodology/index.html" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Methodology</a>
+          <a href="../../services/index.html" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Services</a>
+          <a href="../../pricing/index.html" class="text-xs lg:text-sm text-zinc-600 hover:text-zinc-950 transition-colors pb-0.5">Pricing</a>
+          <a href="../../resources/index.html" class="text-xs lg:text-sm text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-0.5">Guides</a>
+        </nav>
+
+        <a href="../../index.html#sample-intake" class="inline-flex items-center justify-center text-xs font-semibold uppercase tracking-wider text-white bg-zinc-950 hover:bg-zinc-800 px-4 sm:px-5 py-2 sm:py-2.5 transition-colors shadow-sm">
+          Request Sample
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Body -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 py-12">
+    
+    <nav aria-label="Breadcrumb" class="mb-6 font-mono text-xs text-zinc-500">
+      <div class="flex items-center space-x-2">
+        <a href="../../index.html" class="hover:text-zinc-950 transition-colors">Home</a>
+        <span class="text-zinc-300">/</span>
+        <a href="../index.html" class="hover:text-zinc-950 transition-colors">Guides</a>
+        <span class="text-zinc-300">/</span>
+        <span class="text-zinc-900 font-semibold">Data Extraction</span>
+      </div>
+    </nav>
+
+    <header class="border-b border-zinc-200 pb-8 mb-8">
+      <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-zinc-500 mb-4">
+        <span class="bg-zinc-100 text-zinc-900 px-2 py-0.5 font-semibold border border-zinc-200">Data Extraction</span>
+        <span>&bull;</span>
+        <span>4 min read</span>
+        <span>&bull;</span>
+        <span>November 13, 2026</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif font-bold text-zinc-950 tracking-tight leading-[1.15] mb-6">
+        How to Extract Technical Specs from Scanned PDF Datasheets (Without Re-Typing)
+      </h1>
+      <p class="text-base sm:text-lg text-zinc-600 font-sans leading-relaxed">
+        Why optical character recognition fails on engineering drawings and technical tables, and how computer-vision extraction produces verified master CSVs.
+      </p>
+    </header>
+
+    <article class="prose max-w-none text-zinc-800 font-sans space-y-6">
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">Independent industrial distributors often carry specialty product lines from regional manufacturers who have been in business for 40 years. These manufacturers make exceptional mechanical pumps, regulators, or instrumentation hardware, but their technical documentation exists only as vintage paper catalogs scanned into low-resolution, skewed PDF files. Inside sales teams are forced to manually transcribe hundreds of specification rows by hand.</p>
+
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">Traditional OCR software fails miserably on technical datasheets. Engineering drawings with dimension arrows, subscripts for chemical formulas (like <code>H2S</code> or <code>CO2</code>), and dual-unit fractions (like <code>3/8" [9.5mm]</code>) confuse standard text recognition engines. Numbers merge with grid lines, decimal points disappear, and high-pressure ratings get corrupted from <code>6000 PSI</code> into <code>600 PSI</code>, introducing severe catalog risks.</p>
+
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">Accurate extraction from legacy scans requires a specialized multi-pass pipeline. The first stage applies computer vision to deskew the page, remove background grain, and isolate tabular grid boundaries from technical CAD schematics. The second stage deploys layout-aware spatial models that preserve column hierarchies and associate detached footnotes with their respective table cells.</p>
+
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">For tables that span across multiple consecutive pages with varying header structures, algorithmic stitchers must reconcile column alignment without creating orphaned data rows. Subscript annotations indicating specialized test standards (such as API 598 shell testing or ANSI Class 150 flanged ratings) must be bound directly to the matching component row rather than discarded as margin noise.</p>
+
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">The final stage passes the extracted strings through an engineering validation dictionary that verifies physical feasibility: ensuring gauge dial sizes match standard ASME increments and that temperature limits conform to elastomeric limits. This transforms illegible vintage scans into pristine, verified ERP catalog data in days without risking transcription typos.</p>
+
+      <div class="mt-12 border border-zinc-300 bg-white p-8 shadow-sm">
+        <div class="max-w-2xl">
+          <span class="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold block mb-2">Zero-Risk Engineering Validation</span>
+          <h3 class="text-2xl font-serif font-bold text-zinc-950 mb-3">Eliminate Catalog Friction in Your ERP</h3>
+          <p class="text-xs sm:text-sm text-zinc-600 font-sans mb-6">
+            Upload any manufacturer PDF catalog or complex price list. Vellett delivers a fully unrolled, 20-attribute audit file configured for Epicor Prophet 21 or Infor CSD in 48 hours at zero cost.
+          </p>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="../../index.html#sample-intake" class="inline-flex items-center text-xs font-mono font-bold uppercase tracking-wider px-5 py-2.5 bg-zinc-950 text-white hover:bg-zinc-800 transition-colors">
+              Request 10-SKU Pilot Audit &rarr;
+            </a>
+            <a href="tel:+19193391208" class="text-xs font-mono text-zinc-700 hover:text-zinc-950 underline font-semibold">
+              Direct Desk: (919) 339-1208
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-white py-12 px-4 sm:px-8 mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-zinc-500 font-mono">
+      <div>
+        &copy; 2026 Vellett Industrial Catalog Engineering LLC. All rights reserved.
+      </div>
+      <div class="flex space-x-6">
+        <a href="../../methodology/index.html" class="hover:text-zinc-950">Methodology</a>
+        <a href="../../services/index.html" class="hover:text-zinc-950">Services</a>
+        <a href="../../pricing/index.html" class="hover:text-zinc-950">Pricing</a>
+        <a href="../../resources/index.html" class="hover:text-zinc-950">Guides</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../vellett-ai.js"></script>
+</body>
+</html>
