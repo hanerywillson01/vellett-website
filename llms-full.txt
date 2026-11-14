@@ -29,3 +29,15 @@ Every catalog onboarded by Vellett is delivered as a 5-tab Excel workbook:
 - Inquiries: inquiries@vellett.com
 - Principal Desk: ayush@vellett.com
 - Address: 1201 N Orange St, Suite 700, Wilmington, DE 19801, USA
+
+## Published Technical Knowledge Base & Guides
+- Prophet 21 UOM Conversion Traps: https://vellett.com/resources/prophet-21-uom-conversion-traps-ea-pk-bx/
+- Managing Raw Material Surcharges in ERPs: https://vellett.com/resources/managing-material-surcharges-copper-steel-erp/
+- Why EDI 832 Vendor Catalog Feeds Fail: https://vellett.com/resources/why-edi-832-vendor-catalog-feeds-fail-distributors/
+- Discontinued SKU Lifecycle Management: https://vellett.com/resources/discontinued-sku-lifecycle-management-prophet-21-csd/
+- Standardizing Industrial Thread Types: https://vellett.com/resources/thread-type-filter-standardization-npt-bsp-sae-orb/
+- Hidden Cost of Dirty Catalog Data on Quoting Speed: https://vellett.com/resources/hidden-cost-dirty-catalog-data-inside-sales-speed/
+- Handling Minimum Order Quantities (MOQ) in ERP: https://vellett.com/resources/packaging-discrepancies-minimum-order-quantities-erp/
+- B2B Customer-Specific Price Matrices (CPQ): https://vellett.com/resources/b2b-customer-specific-price-matrices-cpq-erp/
+- Pressure Ratings vs Temperature Derating Curves: https://vellett.com/resources/pressure-ratings-temperature-derating-curves-valves/
+- The Cost of Outsourcing to Generic Virtual Assistants: https://vellett.com/resources/cost-outsourcing-catalog-data-generic-virtual-assistants/
