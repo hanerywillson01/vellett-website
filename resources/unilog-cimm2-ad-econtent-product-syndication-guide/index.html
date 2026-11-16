@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unilog CIMM2 vs. AD eContent: How to Format Industrial Product Feeds Without Re-Work | Vellett</title>
+  <meta name="description" content="How industrial distributors reconcile conflicting taxonomy schemas between Affiliated Distributors (AD eContent) feeds and Unilog CIMM2 product catalogs without manual double-entry.">
+  <link rel="canonical" href="https://vellett.com/resources/unilog-cimm2-ad-econtent-product-syndication-guide/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Unilog CIMM2 vs. AD eContent: How to Format Industrial Product Feeds Without Re-Work | Vellett">
+  <meta property="og:description" content="How industrial distributors reconcile conflicting taxonomy schemas between Affiliated Distributors (AD eContent) feeds and Unilog CIMM2 product catalogs without manual double-entry.">
+  <meta property="og:url" content="https://vellett.com/resources/unilog-cimm2-ad-econtent-product-syndication-guide/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background-color: #F4F4F0; padding: 0.15rem 0.35rem; border-radius: 0.25rem; border: 1px solid #E4E4E7; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Unilog CIMM2 vs. AD eContent: How to Format Industrial Product Feeds Without Re-Work",
+    "description": "How industrial distributors reconcile conflicting taxonomy schemas between Affiliated Distributors (AD eContent) feeds and Unilog CIMM2 product catalogs without manual double-entry.",
+    "datePublished": "2026-11-16",
+    "dateModified": "2026-11-16",
+    "author": {
+      "@type": "Organization",
+      "name": "Vellett Industrial Catalog Engineering LLC",
+      "url": "https://vellett.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vellett Industrial Catalog Engineering LLC",
+      "url": "https://vellett.com/"
+    }
+  }
+  </script>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Delaware Registered Entity</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Principal Desk: (919) 339-1208</span>
+      </div>
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ERP Staging Active</span>
+        <a href="../../contact/" class="text-zinc-200 hover:text-white transition-colors">Direct Desk &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="border-b border-zinc-200 bg-parchment sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="../../" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-zinc-950 flex items-center justify-center rounded-sm">
+            <span class="font-mono text-base font-bold text-white tracking-tighter">V</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-zinc-950 leading-none">Vellett</span>
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">Catalog Engineering</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-700">
+        <a href="../../methodology/" class="hover:text-zinc-950 transition-colors">5-Sheet Method</a>
+        <a href="../../services/" class="hover:text-zinc-950 transition-colors">Services</a>
+        <a href="../../pricing/" class="hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="../../resources/" class="text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Resources</a>
+        <a href="../../contact/" class="hover:text-zinc-950 transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-4 py-2 border border-zinc-950 bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm">
+          Send Sample PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Header -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <div class="flex items-center space-x-3 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+        <a href="../../resources/" class="text-zinc-700 hover:text-zinc-950 underline">&larr; Resources</a>
+        <span>&bull;</span>
+        <span class="text-zinc-600">eCommerce & Syndication</span>
+        <span>&bull;</span>
+        <span>4 min read</span>
+        <span>&bull;</span>
+        <span>Published November 16, 2026</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 leading-tight mb-6">
+        Unilog CIMM2 vs. AD eContent: How to Format Industrial Product Feeds Without Re-Work
+      </h1>
+      <p class="font-serif italic text-lg sm:text-xl text-zinc-600 leading-relaxed border-l-2 border-zinc-950 pl-4 py-1">
+        How industrial distributors reconcile conflicting taxonomy schemas between Affiliated Distributors (AD eContent) feeds and Unilog CIMM2 product catalogs without manual double-entry.
+      </p>
+    </div>
+
+    <!-- Article Content -->
+    <article class="space-y-6 pt-6 border-t border-zinc-200">
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">For independent industrial, electrical, and PVF distributors, Affiliated Distributors (AD) eContent and Unilog CIMM2 represent the two primary pipelines for digital catalog syndication. Yet, distributor e-commerce teams frequently find themselves trapped in duplicate data cleaning cycles: supplier files formatted to satisfy AD's strict eContent guidelines frequently fail when imported into Unilog's faceted search engine, and vice versa.</p>
+
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">The root friction lies in architectural philosophy. AD eContent prioritizes standardized manufacturer master attributes (such as <code>VALVE_BODY_MAT</code> or <code>CONN_SZ</code>) designed for wholesale interchange across thousands of distributor members. In contrast, Unilog CIMM2 utilizes dynamic, hierarchical category facets optimized for granular customer browsing and site search filters. When raw manufacturer feeds are mapped directly to one standard without an underlying canonical data dictionary, distributors end up manually re-typing attributes every time an updated product line card is released.</p>
+
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">A common breakdown occurs in unit-of-measure and dimensional formatting. AD eContent feeds might require standardized fractional imperial callouts (<code>1/2 IN</code>), whereas your Unilog CIMM2 product schema expects decimal equivalents (<code>0.500 in</code>) or discrete metric millimeters for international lines. When these formats collide, faceted search bars display duplicate filter facets—forcing your industrial buyers to select both '1/2 IN' and '0.500' just to see full inventory availability.</p>
+
+      <p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans">Eliminating this friction requires building a canonical master dataset prior to syndication. At Vellett, we engineer distributor catalog databases into normalized, 20-attribute master tables with decoupled formatting layers. From one clean dataset, our pipeline programmatically generates validated AD eContent CSV feeds and Unilog CIMM2 XML uploads, ensuring 100% attribute compliance across both channels without duplicate manual labor.</p>
+    </article>
+
+    <!-- Technical Callout Box -->
+    <div class="mt-12 p-8 border border-zinc-900 bg-zinc-950 text-zinc-100 rounded-sm">
+      <div class="flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Vellett Engineering Protocol</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-2">Have a Messy Supplier PDF or Price Sheet on Your Desk?</h3>
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-sans">
+        Send us one unformatted manufacturer PDF or Excel price sheet. We will engineer a 15-SKU flat import sample formatted to your exact ERP schema (Epicor Prophet 21, Infor CSD, or B2B eCommerce) within 48 hours at zero cost.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold transition-colors rounded-sm">
+          Request Zero-Cost 15-SKU Audit &rarr;
+        </a>
+        <span class="text-xs font-mono text-zinc-400">Direct Principal Desk: (919) 339-1208</span>
+      </div>
+    </div>
+
+    <!-- Related Articles Backlink -->
+    <div class="mt-12 pt-8 border-t border-zinc-200 flex justify-between items-center text-xs font-mono">
+      <a href="../../resources/" class="text-zinc-600 hover:text-zinc-950 underline">&larr; Return to All Engineering Guides</a>
+      <a href="../../services/" class="text-zinc-950 font-semibold hover:underline">Explore Managed Catalog Services &rarr;</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-parchment-subtle py-12 px-4 sm:px-8 mt-16 text-xs text-zinc-600 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col space-y-1">
+        <span class="font-serif text-lg font-bold text-zinc-950">Vellett</span>
+        <span>Industrial Catalog Engineering LLC &bull; 1201 N Orange St, Suite 700, Wilmington, DE 19801</span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-zinc-700">
+        <a href="../../methodology/" class="hover:underline">Methodology</a>
+        <a href="../../services/" class="hover:underline">Services</a>
+        <a href="../../pricing/" class="hover:underline">Pricing</a>
+        <a href="../../resources/" class="hover:underline">Resources</a>
+        <a href="../../contact/" class="hover:underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -41,3 +41,14 @@ Every catalog onboarded by Vellett is delivered as a 5-tab Excel workbook:
 - B2B Customer-Specific Price Matrices (CPQ): https://vellett.com/resources/b2b-customer-specific-price-matrices-cpq-erp/
 - Pressure Ratings vs Temperature Derating Curves: https://vellett.com/resources/pressure-ratings-temperature-derating-curves-valves/
 - The Cost of Outsourcing to Generic Virtual Assistants: https://vellett.com/resources/cost-outsourcing-catalog-data-generic-virtual-assistants/
+
+- Unilog CIMM2 vs. AD eContent: How to Format Industrial Product Feeds Without Re-Work: https://vellett.com/resources/unilog-cimm2-ad-econtent-product-syndication-guide/
+- Automated Product Supersession in Prophet 21: Retiring Obsolete SKUs Without Killing Repeat Orders: https://vellett.com/resources/automated-product-supersession-cross-reference-prophet-21/
+- B2B MAP Compliance vs. Contract Pricing: Managing Minimum Advertised Price on Public Webstores: https://vellett.com/resources/map-pricing-policy-compliance-b2b-ecommerce-erp/
+- Broken Carton Surcharges & Master Pack Rules: Eliminating Repack Penalties in Industrial ERPs: https://vellett.com/resources/broken-carton-surcharges-master-pack-quantity-traps/
+- Harmonized Tariff Schedule (HTS) & Country of Origin: Avoiding Customs Stalls on Industrial Imports: https://vellett.com/resources/hts-tariff-codes-country-of-origin-industrial-catalogs/
+- Valve Seal Chemical Compatibility: Why Buna, Viton, EPDM, and FFKM Must Be Indexed in PIM Facets: https://vellett.com/resources/valve-seal-chemical-compatibility-elastomer-indexing/
+- Thread Standards Explained: Why NPT, NPTF, BSPP, BSPT, and SAE ORB Require Strict Catalog Validation: https://vellett.com/resources/thread-standards-npt-nptf-bspp-bspt-sae-orb-distributor-guide/
+- Infor CloudSuite Distribution (CSD) Mass Item Master Maintenance: Preventing Data Corruption: https://vellett.com/resources/infor-cloudsuite-distribution-mass-item-master-import-guide/
+- Managing Supplier Lead Time Volatility & MOQs in ERP Item Masters to Protect Customer SLAs: https://vellett.com/resources/managing-moq-lead-time-volatility-industrial-erp/
+- B2B PunchOut Catalogs (cXML / OCI): Integrating ERP Contract Pricing with Enterprise Procurement: https://vellett.com/resources/b2b-punchout-catalogs-cxml-oci-erp-pricing-integration/
