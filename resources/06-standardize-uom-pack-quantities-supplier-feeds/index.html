@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Do You Fix UOM and Pack-Quantity Mismatches (EA vs. BX vs. CS) Across Vendor Spreadsheets? | Vellett Industrial Catalog Engineering</title>
+  <meta name="description" content="To fix Unit of Measure (UOM) and packaging mismatches across vendor spreadsheets, distributors must establish a single primary Stocking UOM (typically "Each"), map distinct Purchasing and Pricing UOM conversion factors in the ERP database, programmatically normalize inconsistent vendor packaging strings (`Box of 50`, `C`, `BX50`), and enforce mathematical price-per-unit verification before importing records.">
+  <link rel="canonical" href="https://vellett.com/resources/06-standardize-uom-pack-quantities-supplier-feeds/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Do You Fix UOM and Pack-Quantity Mismatches (EA vs. BX vs. CS) Across Vendor Spreadsheets? | Vellett">
+  <meta property="og:description" content="To fix Unit of Measure (UOM) and packaging mismatches across vendor spreadsheets, distributors must establish a single primary Stocking UOM (typically "Each"), map distinct Purchasing and Pricing UOM conversion factors in the ERP database, programmatically normalize inconsistent vendor packaging strings (`Box of 50`, `C`, `BX50`), and enforce mathematical price-per-unit verification before importing records.">
+  <meta property="og:url" content="https://vellett.com/resources/06-standardize-uom-pack-quantities-supplier-feeds/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How Do You Fix UOM and Pack-Quantity Mismatches (EA vs. BX vs. CS) Across Vendor Spreadsheets?",
+      "description": "Engineering guide on standardizing Unit of Measure (UOM) and packaging quantities across supplier spreadsheets for error-free ERP and e-commerce operations.",
+      "author": {
+        "@type": "Person",
+        "name": "Ayush Bijlwan",
+        "url": "https://vellett.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Vellett",
+        "url": "https://vellett.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://vellett.com/logo.png"
+        }
+      },
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "mainEntityOfPage": "https://vellett.com/resources/06-standardize-uom-pack-quantities-supplier-feeds/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What happens if our ERP stocks in 'Box' but customers order in 'Each'?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This creates 'breaking bulk' inventory discrepancies. Opening a box to sell individual units without a base stocking unit of Each causes phantom inventory counts. Setting the base UOM to Each with a Box purchasing multiplier solves the problem."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does UOM standardization impact B2B e-commerce platforms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clear UOM data eliminates buyer confusion by displaying dual pricing: the per-unit cost alongside the minimum packaging purchase quantity (e.g., $6.00/EA, sold in boxes of 25)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do vendors use 'C' and 'M' instead of plain numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "These are legacy Roman numeral notations (C=100, M=1,000) common in industrial fasteners and metals. They must be mathematically converted to integer multipliers before importing into modern databases."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Delaware Registered Entity</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Principal Desk: (919) 339-1208</span>
+      </div>
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ERP Staging Active</span>
+        <a href="../../contact/" class="text-zinc-200 hover:text-white transition-colors">Direct Desk &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="border-b border-zinc-200 bg-parchment sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="../../" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-zinc-950 flex items-center justify-center rounded-sm">
+            <span class="font-mono text-base font-bold text-white tracking-tighter">V</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-zinc-950 leading-none">Vellett</span>
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">Catalog Engineering</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-700">
+        <a href="../../methodology/" class="hover:text-zinc-950 transition-colors">5-Sheet Method</a>
+        <a href="../../services/" class="hover:text-zinc-950 transition-colors">Services</a>
+        <a href="../../pricing/" class="hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="../../resources/" class="text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Resources</a>
+        <a href="../../blog/" class="hover:text-zinc-950 transition-colors">Blog</a>
+        <a href="../../contact/" class="hover:text-zinc-950 transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-4 py-2 border border-zinc-950 bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm">
+          Send Sample PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Header -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <div class="flex items-center space-x-3 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+        <a href="../" class="text-zinc-700 hover:text-zinc-950 underline">&larr; Resources</a>
+        <span>&bull;</span>
+        <span class="text-zinc-600">Data Hygiene</span>
+        <span>&bull;</span>
+        <span>8 min read</span>
+        <span>&bull;</span>
+        <span>Published November 20, 2026</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 leading-tight mb-6">
+        How Do You Fix UOM and Pack-Quantity Mismatches (EA vs. BX vs. CS) Across Vendor Spreadsheets?
+      </h1>
+      <p class="font-serif italic text-lg sm:text-xl text-zinc-600 leading-relaxed border-l-2 border-zinc-950 pl-4 py-1">
+        To fix Unit of Measure (UOM) and packaging mismatches across vendor spreadsheets, distributors must establish a single primary Stocking UOM (typically "Each"), map distinct Purchasing and Pricing UOM conversion factors in the ERP database, programmatically normalize inconsistent vendor packaging strings (`Box of 50`, `C`, `BX50`), and enforce mathematical price-per-unit verification before importing records.
+      </p>
+    </div>
+
+    <!-- Article Content -->
+    <article class="space-y-4 pt-6 border-t border-zinc-200">
+<div class="my-6 p-4 sm:p-5 border-l-4 border-zinc-950 bg-parchment-subtle text-zinc-900 text-sm sm:text-base leading-relaxed rounded-r-sm font-sans italic"><strong class="font-semibold text-zinc-950">TL;DR:</strong> To fix Unit of Measure (UOM) and packaging mismatches across vendor spreadsheets, distributors must establish a single primary Stocking UOM (typically "Each"), map distinct Purchasing and Pricing UOM conversion factors in the ERP database, programmatically normalize inconsistent vendor packaging strings (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Box of 50</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX50</code>), and enforce mathematical price-per-unit verification before importing records.</div>
+<hr class="my-8 border-zinc-200">
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">In wholesale industrial distribution, few catalog data defects cause more operational chaos, customer friction, and acute margin destruction than Unit of Measure (UOM) mismatches. Every manufacturer formats packaging and pricing data differently:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li>A fastener manufacturer quotes hex cap screws at <strong class="font-semibold text-zinc-950">$84.50 per C</strong> (per hundred).</li>
+  <li>An electrical supplier prices terminal lugs at <strong class="font-semibold text-zinc-950">$420.00 per M</strong> (per thousand), packaged <strong class="font-semibold text-zinc-950">100 per Box</strong>.</li>
+  <li>A fluid power vendor sells O-rings in <strong class="font-semibold text-zinc-950">Bags of 250</strong>, but your inside sales team quotes them in <strong class="font-semibold text-zinc-950">Each (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code>)</strong>.</li>
+  <li>A hose manufacturer invoices hydraulic line in <strong class="font-semibold text-zinc-950">Reels of 500 Feet</strong>, while your branch counter cuts and sells by the individual <strong class="font-semibold text-zinc-950">Foot (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code>)</strong>.</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">When an unformatted vendor price sheet is imported directly into an ERP like Epicor Prophet 21 (P21) or Infor SX.e without rigorously normalizing UOM conversion multipliers, disaster follows. If a distributor buys an item by the box of 50 for $50.00, but the ERP defaults the stocking unit to "Box" while sales reps assume the price is per "Each", the distributor inadvertently sells a $50 box of fittings for $1.00—or quotes an industrial customer $50.00 for a single screw, losing the bid instantly.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">According to enterprise distribution research by <a href="https://www.rocktonsoftware.com/pricing-intelligence-platform/industrial-distribution-software-rpm/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Rockton Software</a>, manual spreadsheet errors and pricing unit misalignments drive an average <strong class="font-semibold text-zinc-950">8.73% margin leakage</strong> across B2B distributors. Furthermore, <a href="https://zilliant.com/blog/the-hidden-cost-of-manual-pricing-in-b2b-how-small-errors-become-million-dollar-problems" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Zilliant's pricing study</a> identifies packaging unit confusion as a primary driver of unrecoverable billing disputes, credit memos, and warehouse pick errors.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">1. The 3-Tier UOM Architecture in Industrial ERPs</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">To eliminate UOM errors, distribution teams must understand how modern ERP systems handle multi-tier packaging relationships. In Prophet 21 and Infor, an item does not have a single "unit of measure." It possesses three distinct operational UOM layers:</p>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>                          ┌────────────────────────┐
+                          │   Stocking UOM (Base)  │
+                          │        e.g., EA        │
+                          └───────────┬────────────┘
+                                      │
+               ┌──────────────────────┴──────────────────────┐
+               ▼                                             ▼
+  ┌────────────────────────┐                    ┌────────────────────────┐
+  │     Purchasing UOM     │                    │      Pricing UOM       │
+  │ e.g., BX (Factor: 100) │                    │ e.g., C (Factor: 100)  │
+  │ Vendor invoices $45/BX │                    │ Quoted as $45.00 / C   │
+  │ Inventory adds 100 EA  │                    │ System charges $0.45/EA│
+  └────────────────────────┘                    └────────────────────────┘</code></pre>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Stocking UOM (Base Inventory Layer):</strong> The atomic unit by which physical inventory is counted, binned, and relieved on the warehouse floor. For 95% of discrete manufactured items (valves, fittings, bearings, tools), the primary Stocking UOM should strictly be <strong class="font-semibold text-zinc-950">Each (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code>)</strong>.</li>
+  <li><strong class="font-semibold text-zinc-950">Purchasing UOM (Replenishment Layer):</strong> The packaging unit by which the vendor accepts purchase orders. If Parker Hannifin or Brennan Industries only ships fittings in packs of 25, the Purchasing UOM is <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code> with a conversion multiplier of <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">25.0</code>. When purchasing issues a PO for 2 <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code>, P21 automatically expects 50 <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code> into stock.</li>
+  <li><strong class="font-semibold text-zinc-950">Pricing / Selling UOM (Commercial Layer):</strong> The unit by which pricing is quoted to the customer. Fasteners are often quoted per hundred (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code>) or per thousand (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">M</code>), while bulk tubing is quoted per foot (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code>) or hundred feet (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">CFT</code>). The ERP calculates the true extended price by multiplying the base unit cost by the pricing factor.</li>
+</ol>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">2. Standard UOM Code Master Reference & Conversion Matrix</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">When ingesting vendor spreadsheets, unstandardized human strings must be mapped to rigid, ANSI/P21-compliant two-character database codes:</p>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">Vendor String Variant</th><th class="py-3 px-4 font-semibold text-left">Normalized P21 Code</th><th class="py-3 px-4 font-semibold text-left">Common Industry</th><th class="py-3 px-4 font-semibold text-left">Base Stocking Unit</th><th class="py-3 px-4 font-semibold text-left">Multiplier Logic</th><th class="py-3 px-4 font-semibold text-left">Conversion Formula</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Each</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Ea</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PC</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Piece</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">All Industrial</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">1.0</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Baseline (No conversion)</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Box</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX-50</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Box of 100</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Fasteners / Fittings</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Variable (Pack Size)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Unit Cost = Box Price / Pack Qty</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Case</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">CS</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Carton</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">CTN</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">CA</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Adhesives / Hardware</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Variable (Case Qty)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Unit Cost = Case Price / Case Qty</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Hundred</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Per 100</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">CWT</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Fasteners / Stampings</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">100.0</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Unit Cost = Cost per C / 100</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Thousand</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">M</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Per 1,000</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">TH</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">M</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Electrical Terminals</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">1000.0</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Unit Cost = Cost per M / 1000</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Foot</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Linear Foot</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">LF</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Hose / Tubing / Wire</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">1.0</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Baseline length</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Reel</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">RL</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Spool</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Coil</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">RL</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Bulk Hose / Cable</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Variable (Feet / Reel)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Cost per FT = Reel Price / Reel Length</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Pair</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PR</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PR</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Gloves / Safety</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PR</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">1.0</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Specialty unit</td></tr>
+    </tbody>
+  </table>
+</div>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">3. Real-World Transformation: Vendor Sheet Mismatches vs. Clean ERP Data</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Consider how three raw vendor spreadsheet lines arrive from suppliers versus how they must be normalized before importing into an ERP Mass Update template:</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Raw Supplier Price Feed (Causes Severe Margin Loss)</h3>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>Vendor A (Fastener Mfr):
+Part: HCS050-200 | Desc: 1/2-13 X 2 HEX CAP SCREW | Price: $125.00 | UOM: Box of 50 | Std Pkg: 100
+
+Vendor B (Electrical Mfr):
+Part: LUG-4/0-38 | Desc: 4/0 COPPER LUG 3/8 STUD  | Price: $850.00 | UOM: M         | Pack: 50 EA
+
+Vendor C (Pneumatic Tubing):
+Part: PU-04-BLK  | Desc: 1/4 OD POLYURETHANE TUBE | Price: $145.00 | UOM: Reel      | Length: 500 FT</code></pre>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Normalized ERP Staging Table (100% Import Safe)</h3>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">item_id</th><th class="py-3 px-4 font-semibold text-left">supplier_part_no</th><th class="py-3 px-4 font-semibold text-left">item_desc</th><th class="py-3 px-4 font-semibold text-left">base_stocking_uom</th><th class="py-3 px-4 font-semibold text-left">purchase_uom</th><th class="py-3 px-4 font-semibold text-left">purchase_multiplier</th><th class="py-3 px-4 font-semibold text-left">supplier_unit_cost</th><th class="py-3 px-4 font-semibold text-left">default_sell_uom</th><th class="py-3 px-4 font-semibold text-left">price_1_unit</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">HCS050200</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">HCS050-200</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">1/2-13X2 HEX CAP SCREW GR8</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">50</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">$2.5000</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">$4.1667</strong></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">LUG4038</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">LUG-4/0-38</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">4/0 COPPER LUG 3/8 STUD</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">50</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">$0.8500</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">$1.4167</strong></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">PU04BLK</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">PU-04-BLK</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">1/4 OD BLK POLYURETHANE TUBE</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">RL</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">500</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">$0.2900</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">$0.5800</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Mathematical Normalization Rules Applied:</h3>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Fastener Row:</strong> The vendor quoted <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$125.00</code> per Box of 50. The normalized table establishes <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code> as the base stocking unit, setting unit cost at <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$2.5000</code> (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$125.00 / 50</code>). When inside sales reps sell by the hundred (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code>), the system correctly quotes <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$416.67 / C</code> (reflecting a 40% margin on unit cost), completely eliminating the risk of selling a box of 50 for the price of a single screw.</li>
+  <li><strong class="font-semibold text-zinc-950">Electrical Terminal Row:</strong> The vendor quoted <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$850.00 per M</code> (per 1,000 pieces). The normalized table converts the baseline unit cost to <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$0.8500</code> (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$850.00 / 1000</code>) and records the purchasing pack quantity of 50 pieces per box.</li>
+  <li><strong class="font-semibold text-zinc-950">Tubing Row:</strong> The reel price of <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$145.00</code> for 500 feet is converted to a base unit cost of <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$0.2900 per FT</code>. When a customer orders 75 feet from the warehouse reel, the ERP invoices exactly <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$43.50</code> rather than attempting to bill a fractional reel.</li>
+</ol>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">4. The 4-Step Engineering Protocol to Standardize Vendor UOMs</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Before uploading any supplier price file into Prophet 21, Infor SX.e, or an e-commerce platform, apply this programmatic validation sequence:</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Step 1: Text Disambiguation & Pattern Extraction</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Never trust raw text descriptions for pack quantities. Use regex parsing to scan vendor description columns for hidden packaging designations like <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">(50/PK)</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">B50</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">CS/12</code>, or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">QTY: 100</code>. If the vendor's UOM column says <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code> but the description says <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BOX OF 100</code>, flag the record for verification before proceeding.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Step 2: Establish the Immutable Base UOM</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Enforce a database-level policy: all discrete parts stock in <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code>; all bulk materials stock in linear <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">FT</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">LBS</code>. Never allow new items to be created with non-standard base units like <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">SET</code> unless the item can never, under any circumstance, be broken down or sold as individual components.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Step 3: Populate the ERP UOM Conversion Table</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">In Prophet 21, configure the <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">uom_conversion_table</code> to explicitly link packaging codes to the base unit:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1 BX = 50 EA</code></li>
+  <li><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1 CA = 10 BX = 500 EA</code></li>
+  <li><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1 C = 100 EA</code></li>
+  <li><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1 M = 1000 EA</code></li>
+</ul>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Step 4: Deterministic Mathematical Assertion</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Run an automated assertion across the spreadsheet prior to import:</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Expected Line Total = Quantity × (Unit Cost × UOM Multiplier)</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">If any calculated price per each deviates from historical invoice costs by more than ±25%, quarantine the SKU. This prevents a 100-pack box price from accidentally overwriting an each price.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Frequently Asked Questions</h2>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">What happens if our ERP stocks in "Box" but customers order in "Each"?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">This is called "breaking bulk." If an ERP stocks in <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code>, a warehouse worker who opens a box to fulfill an order for 5 <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code> creates inventory desynchronization. The ERP believes 1 whole box remains in inventory until an inventory adjustment is keyed. Always set the base stocking unit to <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code> and use <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code> as a packaging multiplier.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How does UOM standardization impact B2B e-commerce platforms?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">E-commerce buyers demand transparency. If a web product page displays "$150.00" without clearly indicating whether that price buys 1 individual fitting or a box of 25, the buyer will not convert. Standardizing UOM data allows web stores to display dual pricing: "$6.00 / Each (Sold in Boxes of 25 for $150.00)".</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Why do vendors use "C" and "M" instead of plain numbers?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">The Roman numeral abbreviations <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code> (100) and <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">M</code> (1,000) are legacy conventions rooted in industrial manufacturing and steel fabrication. While human buyers recognize them, relational databases and e-commerce filters do not understand Roman numerals natively, requiring systematic conversion into integer multipliers.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Eliminate UOM Headaches and Pricing Errors with Vellett</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Standardizing units of measure, calculating packaging multipliers, and untangling messy supplier spreadsheets is exhausting manual work that frequently results in costly warehouse and invoicing mistakes.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Vellett provides a specialized <strong class="font-semibold text-zinc-950">Industrial Catalog & Margin Protection Desk</strong> for wholesale distributors:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Flawless UOM Normalization:</strong> We systematically convert vendor pricing strings (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">M</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Reel</code>) into validated base-unit costs and ERP packaging multipliers.</li>
+  <li><strong class="font-semibold text-zinc-950">2-Tab Architecture:</strong> Receive flat, import-ready ERP mass-update workbooks (Prophet 21, Infor SX.e, Eclipse) paired with clean e-commerce packaging schemas.</li>
+  <li><strong class="font-semibold text-zinc-950">Zero Margin Squeeze:</strong> Ensure your sales reps never quote an individual unit at a box cost or sell a pack at an each price.</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><strong class="font-semibold text-zinc-950">Clean up your vendor price sheets with zero risk:</strong> Send us one messy supplier spreadsheet with mixed UOMs (50–100 SKUs). We will normalize the units, calculate the packaging factors, and return an import-ready workbook within 48 hours for free.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Contact Ayush Bijlwan at <strong class="font-semibold text-zinc-950">ayush@vellett.com</strong> or visit <a href="https://vellett.com" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">vellett.com</a>.</p>
+<hr class="my-8 border-zinc-200">
+    </article>
+
+    <!-- Technical Callout Box -->
+    <div class="mt-12 p-8 border border-zinc-900 bg-zinc-950 text-zinc-100 rounded-sm">
+      <div class="flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Vellett Engineering Protocol</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-2">Have a Messy Supplier PDF or Price Sheet on Your Desk?</h3>
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-sans">
+        Send us one unformatted manufacturer PDF or Excel price sheet. We will engineer a 15-SKU flat import sample formatted to your exact ERP schema (Epicor Prophet 21, Infor CSD, or B2B eCommerce) within 48 hours at zero cost.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold transition-colors rounded-sm">
+          Request Zero-Cost 15-SKU Audit &rarr;
+        </a>
+        <span class="text-xs font-mono text-zinc-400">Direct Principal Desk: (919) 339-1208</span>
+      </div>
+    </div>
+
+    <!-- Related Articles Backlink -->
+    <div class="mt-12 pt-8 border-t border-zinc-200 flex justify-between items-center text-xs font-mono">
+      <a href="../" class="text-zinc-600 hover:text-zinc-950 underline">&larr; Return to All Engineering Guides</a>
+      <a href="../../services/" class="text-zinc-950 font-semibold hover:underline">Explore Managed Catalog Services &rarr;</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-parchment-subtle py-12 px-4 sm:px-8 mt-16 text-xs text-zinc-600 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col space-y-1">
+        <span class="font-serif text-lg font-bold text-zinc-950">Vellett</span>
+        <span>Industrial Catalog Engineering LLC &bull; 1201 N Orange St, Suite 700, Wilmington, DE 19801</span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-zinc-700">
+        <a href="../../methodology/" class="hover:underline">Methodology</a>
+        <a href="../../services/" class="hover:underline">Services</a>
+        <a href="../../pricing/" class="hover:underline">Pricing</a>
+        <a href="../../resources/" class="hover:underline">Resources</a>
+        <a href="../../blog/" class="hover:underline">Blog</a>
+        <a href="../../contact/" class="hover:underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Do B2B Distributors Extract Technical Specs From Manufacturer PDFs Into E-Commerce Filter Attributes? | Vellett Industrial Catalog Engineering</title>
+  <meta name="description" content="To extract technical specifications from manufacturer PDFs into e-commerce filter attributes, distributors must parse tabular PDF data, isolate model configuration logic, normalize raw dimensional strings into discrete numerical values and units of measure (e.g., separating "1/4 NPT" into thread standard and nominal size), and map those parameters into structured Product Information Management (PIM) schemas.">
+  <link rel="canonical" href="https://vellett.com/resources/03-extract-technical-specs-from-manufacturer-pdfs/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Do B2B Distributors Extract Technical Specs From Manufacturer PDFs Into E-Commerce Filter Attributes? | Vellett">
+  <meta property="og:description" content="To extract technical specifications from manufacturer PDFs into e-commerce filter attributes, distributors must parse tabular PDF data, isolate model configuration logic, normalize raw dimensional strings into discrete numerical values and units of measure (e.g., separating "1/4 NPT" into thread standard and nominal size), and map those parameters into structured Product Information Management (PIM) schemas.">
+  <meta property="og:url" content="https://vellett.com/resources/03-extract-technical-specs-from-manufacturer-pdfs/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How Do B2B Distributors Extract Technical Specs From Manufacturer PDFs Into E-Commerce Filter Attributes?",
+      "description": "Technical guide explaining how industrial distributors extract, normalize, and map complex engineering specifications from manufacturer PDFs into e-commerce PIM schemas.",
+      "author": {
+        "@type": "Person",
+        "name": "Ayush Bijlwan",
+        "url": "https://vellett.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Vellett",
+        "url": "https://vellett.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://vellett.com/logo.png"
+        }
+      },
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "mainEntityOfPage": "https://vellett.com/resources/03-extract-technical-specs-from-manufacturer-pdfs/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why can't we just attach the manufacturer PDF to our website product page instead of extracting specs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Attaching a PDF makes specs visible only after a user lands on the page. Because search filters cannot query PDF text, unextracted products remain invisible to site search and faceted navigation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does extracting technical attributes improve B2B SEO and AI search visibility?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Structured tabular data mapped to schema.org product attributes allows search engines and AI assistants to index precise technical specifications, generating rich snippets and direct answers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it typically take to extract a 100-page manufacturer catalog?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Manual internal entry requires 120 to 200 hours. A specialized catalog engineering desk extracts, normalizes, and validates that volume within 48 to 72 hours."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Delaware Registered Entity</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Principal Desk: (919) 339-1208</span>
+      </div>
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ERP Staging Active</span>
+        <a href="../../contact/" class="text-zinc-200 hover:text-white transition-colors">Direct Desk &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="border-b border-zinc-200 bg-parchment sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="../../" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-zinc-950 flex items-center justify-center rounded-sm">
+            <span class="font-mono text-base font-bold text-white tracking-tighter">V</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-zinc-950 leading-none">Vellett</span>
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">Catalog Engineering</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-700">
+        <a href="../../methodology/" class="hover:text-zinc-950 transition-colors">5-Sheet Method</a>
+        <a href="../../services/" class="hover:text-zinc-950 transition-colors">Services</a>
+        <a href="../../pricing/" class="hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="../../resources/" class="text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Resources</a>
+        <a href="../../blog/" class="hover:text-zinc-950 transition-colors">Blog</a>
+        <a href="../../contact/" class="hover:text-zinc-950 transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-4 py-2 border border-zinc-950 bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm">
+          Send Sample PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Header -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <div class="flex items-center space-x-3 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+        <a href="../" class="text-zinc-700 hover:text-zinc-950 underline">&larr; Resources</a>
+        <span>&bull;</span>
+        <span class="text-zinc-600">Catalog Engineering</span>
+        <span>&bull;</span>
+        <span>8 min read</span>
+        <span>&bull;</span>
+        <span>Published November 20, 2026</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 leading-tight mb-6">
+        How Do B2B Distributors Extract Technical Specs From Manufacturer PDFs Into E-Commerce Filter Attributes?
+      </h1>
+      <p class="font-serif italic text-lg sm:text-xl text-zinc-600 leading-relaxed border-l-2 border-zinc-950 pl-4 py-1">
+        To extract technical specifications from manufacturer PDFs into e-commerce filter attributes, distributors must parse tabular PDF data, isolate model configuration logic, normalize raw dimensional strings into discrete numerical values and units of measure (e.g., separating "1/4 NPT" into thread standard and nominal size), and map those parameters into structured Product Information Management (PIM) schemas.
+      </p>
+    </div>
+
+    <!-- Article Content -->
+    <article class="space-y-4 pt-6 border-t border-zinc-200">
+<div class="my-6 p-4 sm:p-5 border-l-4 border-zinc-950 bg-parchment-subtle text-zinc-900 text-sm sm:text-base leading-relaxed rounded-r-sm font-sans italic"><strong class="font-semibold text-zinc-950">TL;DR:</strong> To extract technical specifications from manufacturer PDFs into e-commerce filter attributes, distributors must parse tabular PDF data, isolate model configuration logic, normalize raw dimensional strings into discrete numerical values and units of measure (e.g., separating "1/4 NPT" into thread standard and nominal size), and map those parameters into structured Product Information Management (PIM) schemas.</div>
+<hr class="my-8 border-zinc-200">
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">For B2B industrial distributors, the manufacturer PDF is both the definitive source of engineering truth and the single greatest obstacle to digital commerce. When factory engineers design valves, pneumatic actuators, hydraulic hose ends, or industrial bearings, they publish comprehensive, multi-page PDF catalogs. These documents contain dense tabular matrices, dimensional cross-sections, flow curves, and alphanumeric model selection charts.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">While an engineer can review a 200-page Parker, SMC, or Timken PDF and manually configure a part number, an e-commerce faceted search engine cannot read pixels or unindexed PDF text blocks. When a distributor’s web catalog lacks granular specifications—such as port size, maximum operating pressure, flow coefficient (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Cv</code>), coil voltage, or seal material—online buyers cannot filter products. They bounce to competitors like McMaster-Carr or Grainger, or flood inside sales reps with basic specification questions over the phone.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Bridging the gap between static PDF catalogs and dynamic, search-optimized web stores requires a systematic extraction and normalization pipeline. According to product information management research by <a href="https://catsy.com/blog/ecommerce-faceted-search-with-pim/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Catsy</a>, separating unstructured product text into normalized, discrete attributes is the fundamental prerequisite for B2B faceted navigation, directly determining whether commercial buyers find and purchase complex industrial parts online.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">1. Why Standard OCR Fails on Industrial PDFs</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Many distribution IT teams attempt to solve the catalog data bottleneck using standard optical character recognition (OCR) or off-the-shelf generative AI document parsers. These tools almost universally fail on industrial catalogs due to three architectural obstacles:</p>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>┌─────────────────────────────────────────────────────────────┐
+│             TYPICAL INDUSTRIAL CATALOG PDF PAGE             │
+├─────────────────────────────────────────────────────────────┤
+│  [Dimensional Drawing]          [Ordering Matrix Key]       │
+│  Port A: 1/4" NPTF             Model: 4V210 - 08 - AC110V   │
+│  Bore: 25mm                    Series: 4V210                │
+│                                Port Size: 08 = 1/4"         │
+│  [Multi-Column Table]          Voltage: AC110V              │
+│  Part No | Body | PSI | Cv     [Footnote]                   │
+│  4V210-06| Alum | 120 | 0.89   *Optional Viton Seal: Add -V │
+│  4V210-08| Alum | 120 | 1.10   **Excludes DIN Connector     │
+└─────────────────────────────────────────────────────────────┘
+                               │
+               Standard OCR / LLM Blind Parser
+                               ▼
+Result: Hallucinated SKUs, merged adjacent table cells, 
+misassociated footnotes, and flattened unstructured strings.</code></pre>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Matrix-Driven Model Builders:</strong> Manufacturers often do not list every distinct SKU in a table. Instead, they provide a "How to Order" string matrix (e.g., <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Prefix [4V210] + Port [08] + Voltage [A2] + Seal [V] = 4V210-08-A2-V</code>). Generic OCR tools capture fragments of the diagram but fail to enumerate the actual sellable manufacturer part numbers.</li>
+  <li><strong class="font-semibold text-zinc-950">Columnar Misalignment Across Spans:</strong> In engineering catalogs, multiple table headers frequently span across sub-columns (e.g., a top header labeled "Dimensions (Inches)" with sub-headers "A", "B", "C", "D"). When scanned, standard parsers flatten the spatial hierarchy, assigning the letter "A" or an unrelated millimeter dimension to the part number column.</li>
+  <li><strong class="font-semibold text-zinc-950">Implicit Engineering Context:</strong> A PDF chart will state "Pressure: 15–150" at the top of a column and omit the unit of measure in the cells below. A human recognizes the values as pounds per square inch (PSI), but an uncalibrated extraction script extracts raw numbers devoid of technical context, rendering the data useless for faceted search.</li>
+</ol>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">2. Engineering Extraction Approaches: Comparison</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Distributors generally utilize one of three workflows to extract technical data from vendor documentation:</p>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">Evaluation Metric</th><th class="py-3 px-4 font-semibold text-left">Manual Copy-Paste Entry</th><th class="py-3 px-4 font-semibold text-left">Off-The-Shelf OCR / Generic AI</th><th class="py-3 px-4 font-semibold text-left">Dedicated Industrial Catalog Desk (Vellett)</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Extraction Accuracy</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">High (Human Verified), High Fatigue</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Low (<70% on technical matrices)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">99.8%+ Verified Database Accuracy</strong></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Processing Speed</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Extremely Slow (3–5 SKUs / Hour)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Fast (Seconds / Document)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Fast (500–2,000 SKUs / 48 Hours)</strong></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Unit Normalization</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Inconsistent (Reps use <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1/4</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">0.25</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">.250</code>)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Broken (Fails on fractions and symbols)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Deterministic (Standardized Decimal & Fraction)</strong></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Handling Model Builders</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Prone to missing orderable combinations</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Completely fails on string construction</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Systematic Enumeration of Full Series Matrix</strong></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Attribute Granularity</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Lumps specs into long paragraph text</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Produces dirty, unseparated strings</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Strict Discrete Attribute Columns (PIM Ready)</strong></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Cost per 1,000 SKUs</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">High ($1,500–$2,500 internal salary)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Hidden rework costs exceed software price</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Predictable Flat Pricing ($1,500/Month Desk)</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">3. Real-World Transformation: PDF Snippet to Faceted PIM Schema</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">To illustrate what clean technical extraction looks like, consider a 3-way solenoid valve from a fluid power manufacturer's PDF catalog:</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Raw Vendor PDF Text Representation</h3>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>Series EV Electronic Mouse Valve
+Port: 10-32 Female. Pressure Range: 0 to 105 psig. Flow: 0.6 scfm @ 100 psig. 
+Power: 0.67 Watts. Response Time: 5 to 10 ms. Available voltages: 12 VDC, 24 VDC.
+Part Numbers:
+EV-2-12 (12 VDC, 2-Way Normally Closed)
+EV-2-24 (24 VDC, 2-Way Normally Closed)
+EV-3-12 (12 VDC, 3-Way Normally Closed)
+EV-3-24 (24 VDC, 3-Way Normally Closed)</code></pre>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Extracted, Normalized PIM Schema (Import-Ready)</h3>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">Mfr_Part_Number</th><th class="py-3 px-4 font-semibold text-left">Brand</th><th class="py-3 px-4 font-semibold text-left">Series</th><th class="py-3 px-4 font-semibold text-left">Valve_Type</th><th class="py-3 px-4 font-semibold text-left">Port_Size</th><th class="py-3 px-4 font-semibold text-left">Operating_Pressure_PSI</th><th class="py-3 px-4 font-semibold text-left">Flow_Rate_SCFM</th><th class="py-3 px-4 font-semibold text-left">Voltage</th><th class="py-3 px-4 font-semibold text-left">Wattage</th><th class="py-3 px-4 font-semibold text-left">Response_Time_MS</th><th class="py-3 px-4 font-semibold text-left">Body_Material</th><th class="py-3 px-4 font-semibold text-left">Datasheet_URL</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">EV-2-12</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Clippard</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Minimatic</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">2-Way NC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">10-32 UNF</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0–105 PSI</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.6 SCFM</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">12 VDC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.67 W</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">5–10 ms</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Plated Brass</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">https://.../EV-2-12</code></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">EV-2-24</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Clippard</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Minimatic</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">2-Way NC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">10-32 UNF</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0–105 PSI</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.6 SCFM</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">24 VDC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.67 W</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">5–10 ms</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Plated Brass</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">https://.../EV-2-24</code></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">EV-3-12</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Clippard</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Minimatic</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">3-Way NC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">10-32 UNF</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0–105 PSI</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.6 SCFM</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">12 VDC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.67 W</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">5–10 ms</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Plated Brass</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">https://.../EV-3-12</code></td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">EV-3-24</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Clippard</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Minimatic</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">3-Way NC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">10-32 UNF</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0–105 PSI</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.6 SCFM</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">24 VDC</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">0.67 W</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">5–10 ms</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Plated Brass</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">https://.../EV-3-24</code></td></tr>
+    </tbody>
+  </table>
+</div>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Why This Extraction Drives E-Commerce Conversions:</h3>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Discrete Voltage Filtering:</strong> A customer can immediately click <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">12 VDC</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">24 VDC</code> on the distributor's website search filter and see the matching valve.</li>
+  <li><strong class="font-semibold text-zinc-950">Port Standard Normalization:</strong> Rather than an ambiguous string <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">"10-32"</code>, the field is normalized to standard unified fine thread (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">10-32 UNF</code>), matching electrical and pneumatic engineering taxonomies.</li>
+  <li><strong class="font-semibold text-zinc-950">Numeric Precision:</strong> Pressure and flow rates are stored as clean quantitative attributes, enabling range-slider filtering (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">0–105 PSI</code>) on platforms like Magento, BigCommerce B2B, or Shopify Plus.</li>
+</ul>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">4. The 4-Stage Industrial Data Extraction Protocol</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Building a reliable catalog extraction workflow requires four operational disciplines:</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Stage 1: Spatial Document Decomposition</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Rather than feeding entire multi-megabyte PDFs into automated scrapers, isolate target pages containing tabular data. Segment vector PDF elements to distinguish between line drawing coordinates, dimensional callouts, and tabular grid cells.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Stage 2: Matrix Permutation Enumeration</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">When dealing with configured part numbers (e.g., pneumatic cylinders with variable bore, stroke, mount, and magnetic switch options), extract the base part construction rules and generate the exact universe of orderable SKUs. Cross-reference this list against the manufacturer's active price sheet to eliminate theoretical configurations that the factory does not produce.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Stage 3: Deterministic Unit & Fraction Normalization</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Standardize engineering units into consistent database values:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Thread Standards:</strong> Map raw text strings like <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1/4" NPT</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1/4 NPTF</code>, and <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1/4-18 National Pipe</code> into a single controlled vocabulary term (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1/4" NPT</code>).</li>
+  <li><strong class="font-semibold text-zinc-950">Fractional Invariance:</strong> Maintain consistent fractional values for commercial searchers (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1/4"</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">3/8"</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1/2"</code>) alongside decimal equivalents (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">0.250"</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">0.375"</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">0.500"</code>) in search backend metadata.</li>
+  <li><strong class="font-semibold text-zinc-950">Pressure & Flow Units:</strong> Ensure pneumatic ratings are cleanly categorized into standard CFM (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">SCFM</code>) or liters per minute (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">L/min</code>), and pressure is normalized to <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PSI</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Bar</code>.</li>
+</ul>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Stage 4: Dual-Tab Export Architecture</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Never attempt to force both ERP pricing data and website search specifications into a single spreadsheet. Deliver data in a clean <strong class="font-semibold text-zinc-950">2-tab architecture</strong>:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Tab 1: ERP_Standard_Import:</strong> Flat 9-column format containing vendor codes, part numbers, short/extended descriptions, UOM, and list pricing for Prophet 21, Infor, or Epicor Eclipse.</li>
+  <li><strong class="font-semibold text-zinc-950">Tab 2: Website_Exact_Schema_Match:</strong> Granular, category-specific 12-column table designed for direct import into PIM software (Catsy, Akeneo, Salsify) or e-commerce platforms.</li>
+</ul>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Frequently Asked Questions</h2>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Why can't we just attach the manufacturer PDF to our website product page instead of extracting specs?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Attaching a PDF datasheet allows human engineers to research a part once they find the page, but it renders the part completely invisible to e-commerce site search, Google search indexers, and faceted navigation filters. If a buyer searches for a "3-way 24V solenoid valve 10-32 port", products without extracted attributes will not appear in search results, resulting in lost sales.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How does extracting technical attributes improve B2B SEO and AI search visibility?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Search engines (Google, Perplexity, ChatGPT Search) index structured tabular data far more effectively than binary PDF attachments. Clean attributes mapped to schema.org product metadata allow search engines to display rich snippets, price comparisons, and direct specification answers in search overviews.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How long does it typically take to extract a 100-page manufacturer catalog?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Manual data entry for a 100-page industrial catalog (representing 2,000–5,000 SKUs) typically consumes 120 to 200 internal labor hours. Vellett’s specialized industrial catalog desk processes and validates that same volume within 48 to 72 hours, delivering import-ready ERP and PIM workbooks.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Unlock Your Technical Catalog Data With Vellett</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Stop letting valuable engineering specifications remain trapped inside manufacturer PDF catalogs while your e-commerce search remains unpopulated.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Vellett provides a turnkey <strong class="font-semibold text-zinc-950">Catalog & Margin Protection Desk</strong> built specifically for industrial, fluid power, bearing, and electrical distributors. We extract, normalize, and validate complex technical specifications from manufacturer PDFs, delivering ready-to-import workbooks:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Tab 1:</strong> Standard ERP price and item imports (Prophet 21, Infor SX.e, Eclipse).</li>
+  <li><strong class="font-semibold text-zinc-950">Tab 2:</strong> Full faceted-search attribute schemas matching your specific web taxonomy.</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><strong class="font-semibold text-zinc-950">Test our extraction speed and accuracy:</strong> Send us one manufacturer PDF catalog (50–100 SKUs). We will extract the technical specifications into your exact e-commerce schema and return an import-ready workbook within 48 hours for free.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Contact Ayush Bijlwan at <strong class="font-semibold text-zinc-950">ayush@vellett.com</strong> or visit <a href="https://vellett.com" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">vellett.com</a>.</p>
+<hr class="my-8 border-zinc-200">
+    </article>
+
+    <!-- Technical Callout Box -->
+    <div class="mt-12 p-8 border border-zinc-900 bg-zinc-950 text-zinc-100 rounded-sm">
+      <div class="flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Vellett Engineering Protocol</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-2">Have a Messy Supplier PDF or Price Sheet on Your Desk?</h3>
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-sans">
+        Send us one unformatted manufacturer PDF or Excel price sheet. We will engineer a 15-SKU flat import sample formatted to your exact ERP schema (Epicor Prophet 21, Infor CSD, or B2B eCommerce) within 48 hours at zero cost.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold transition-colors rounded-sm">
+          Request Zero-Cost 15-SKU Audit &rarr;
+        </a>
+        <span class="text-xs font-mono text-zinc-400">Direct Principal Desk: (919) 339-1208</span>
+      </div>
+    </div>
+
+    <!-- Related Articles Backlink -->
+    <div class="mt-12 pt-8 border-t border-zinc-200 flex justify-between items-center text-xs font-mono">
+      <a href="../" class="text-zinc-600 hover:text-zinc-950 underline">&larr; Return to All Engineering Guides</a>
+      <a href="../../services/" class="text-zinc-950 font-semibold hover:underline">Explore Managed Catalog Services &rarr;</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-parchment-subtle py-12 px-4 sm:px-8 mt-16 text-xs text-zinc-600 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col space-y-1">
+        <span class="font-serif text-lg font-bold text-zinc-950">Vellett</span>
+        <span>Industrial Catalog Engineering LLC &bull; 1201 N Orange St, Suite 700, Wilmington, DE 19801</span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-zinc-700">
+        <a href="../../methodology/" class="hover:underline">Methodology</a>
+        <a href="../../services/" class="hover:underline">Services</a>
+        <a href="../../pricing/" class="hover:underline">Pricing</a>
+        <a href="../../resources/" class="hover:underline">Resources</a>
+        <a href="../../blog/" class="hover:underline">Blog</a>
+        <a href="../../contact/" class="hover:underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

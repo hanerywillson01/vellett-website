@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Do You Prevent Long Manufacturer Part Number (MPN) Truncation and Cross-Reference Mismatches in ERP? | Vellett Industrial Catalog Engineering</title>
+  <meta name="description" content="To prevent Manufacturer Part Number (MPN) truncation and cross-reference mismatches in ERP systems, distributors must establish clean, normalized internal Item IDs that fit core database column constraints (30–40 characters), preserve the unabridged factory part code in dedicated manufacturer cross-reference tables, and implement punctuation-agnostic search indexing to capture customer hyphen and space variations.">
+  <link rel="canonical" href="https://vellett.com/resources/08-manufacturer-part-number-truncation-cross-reference/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Do You Prevent Long Manufacturer Part Number (MPN) Truncation and Cross-Reference Mismatches in ERP? | Vellett">
+  <meta property="og:description" content="To prevent Manufacturer Part Number (MPN) truncation and cross-reference mismatches in ERP systems, distributors must establish clean, normalized internal Item IDs that fit core database column constraints (30–40 characters), preserve the unabridged factory part code in dedicated manufacturer cross-reference tables, and implement punctuation-agnostic search indexing to capture customer hyphen and space variations.">
+  <meta property="og:url" content="https://vellett.com/resources/08-manufacturer-part-number-truncation-cross-reference/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How Do You Prevent Long Manufacturer Part Number (MPN) Truncation and Cross-Reference Mismatches in ERP?",
+      "description": "Engineering best practices for industrial distributors to prevent manufacturer part number truncation, database errors, and cross-reference mismatches in ERP systems.",
+      "author": {
+        "@type": "Person",
+        "name": "Ayush Bijlwan",
+        "url": "https://vellett.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Vellett",
+        "url": "https://vellett.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://vellett.com/logo.png"
+        }
+      },
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "mainEntityOfPage": "https://vellett.com/resources/08-manufacturer-part-number-truncation-cross-reference/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can we just expand the database column size in our ERP to 100 characters?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Modifying core ERP database column sizes voids software maintenance contracts and breaks future software upgrade paths. The standard architectural solution is using built-in manufacturer cross-reference tables."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do customer-specific part numbers interact with manufacturer cross-references?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Customer part numbers link directly to the internal Item ID via customer cross-reference tables, allowing inside sales reps to enter plant-specific customer codes and instantly pull the verified manufacturer SKU."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does resolving MPN truncation improve EDI order processing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clean, untruncated MPNs mapped to EDI segment LIN03 prevent supplier EDI 855 purchase order rejections, ensuring automated replenishment orders execute without manual intervention."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Delaware Registered Entity</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Principal Desk: (919) 339-1208</span>
+      </div>
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ERP Staging Active</span>
+        <a href="../../contact/" class="text-zinc-200 hover:text-white transition-colors">Direct Desk &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="border-b border-zinc-200 bg-parchment sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="../../" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-zinc-950 flex items-center justify-center rounded-sm">
+            <span class="font-mono text-base font-bold text-white tracking-tighter">V</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-zinc-950 leading-none">Vellett</span>
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">Catalog Engineering</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-700">
+        <a href="../../methodology/" class="hover:text-zinc-950 transition-colors">5-Sheet Method</a>
+        <a href="../../services/" class="hover:text-zinc-950 transition-colors">Services</a>
+        <a href="../../pricing/" class="hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="../../resources/" class="text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Resources</a>
+        <a href="../../blog/" class="hover:text-zinc-950 transition-colors">Blog</a>
+        <a href="../../contact/" class="hover:text-zinc-950 transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-4 py-2 border border-zinc-950 bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm">
+          Send Sample PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Header -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <div class="flex items-center space-x-3 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+        <a href="../" class="text-zinc-700 hover:text-zinc-950 underline">&larr; Resources</a>
+        <span>&bull;</span>
+        <span class="text-zinc-600">Database Engineering</span>
+        <span>&bull;</span>
+        <span>7 min read</span>
+        <span>&bull;</span>
+        <span>Published November 20, 2026</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 leading-tight mb-6">
+        How Do You Prevent Long Manufacturer Part Number (MPN) Truncation and Cross-Reference Mismatches in ERP?
+      </h1>
+      <p class="font-serif italic text-lg sm:text-xl text-zinc-600 leading-relaxed border-l-2 border-zinc-950 pl-4 py-1">
+        To prevent Manufacturer Part Number (MPN) truncation and cross-reference mismatches in ERP systems, distributors must establish clean, normalized internal Item IDs that fit core database column constraints (30–40 characters), preserve the unabridged factory part code in dedicated manufacturer cross-reference tables, and implement punctuation-agnostic search indexing to capture customer hyphen and space variations.
+      </p>
+    </div>
+
+    <!-- Article Content -->
+    <article class="space-y-4 pt-6 border-t border-zinc-200">
+<div class="my-6 p-4 sm:p-5 border-l-4 border-zinc-950 bg-parchment-subtle text-zinc-900 text-sm sm:text-base leading-relaxed rounded-r-sm font-sans italic"><strong class="font-semibold text-zinc-950">TL;DR:</strong> To prevent Manufacturer Part Number (MPN) truncation and cross-reference mismatches in ERP systems, distributors must establish clean, normalized internal Item IDs that fit core database column constraints (30–40 characters), preserve the unabridged factory part code in dedicated manufacturer cross-reference tables, and implement punctuation-agnostic search indexing to capture customer hyphen and space variations.</div>
+<hr class="my-8 border-zinc-200">
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">In modern industrial distribution, manufacturer part numbers (MPNs) are not simple sequential codes. They are complex, descriptive alphanumeric strings that encode technical specifications:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li>A Festo valve terminal manifold: <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">VTSA-MP-NPT-FB-1-52E-A1-T-8M</code> (29 characters)</li>
+  <li>An Eaton Vickers directional valve: <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">DG4V-3-2A-M-U-D6-20-EN45-JA</code> (27 characters)</li>
+  <li>A Danfoss proportional hydraulic valve: <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PVG32-157B3171-157B4128-157B5111</code> (35 characters)</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">When these highly specific part numbers meet the relational database constraints of legacy or mid-market ERP systems—such as Epicor Prophet 21 (P21), Infor SX.e, or Epicor Eclipse—data integrity breaks down. Historically, many distribution ERP tables were engineered with strict character width limits (e.g., 24, 30, or 40 characters for <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code>).</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">When a distributor attempts to upload a 35-character factory part code into a 30-character field, the database parser silently truncates the tail end of the string. A part number ending in <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">-24VDC</code> becomes <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">-24V</code>, or an engineered seal option code like <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">-VITON</code> is chopped off entirely.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">The consequences are immediate and severe: purchasing generates purchase orders with incomplete part numbers that the factory rejects; warehouse receiving cannot match incoming packing slips to open PO lines; and customer service reps quote standard pricing on expensive, custom-modified assemblies.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">As highlighted in <a href="https://wizcommerce.com/blog/epicor-integration-ai-order-entry-software/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">WizCommerce's analysis of Epicor ERP order entry and catalog integrations</a>, manual part number re-keying and character truncation represent major friction points that degrade order accuracy and increase administrative overhead in B2B supply chains.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">1. The Anatomy of Part Number Truncation</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">The danger of part number truncation is that it frequently occurs without raising a fatal system error. Depending on your ERP's database configuration, an import script may execute successfully while silently corrupting records in the background:</p>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>Full Manufacturer String (34 Chars):
+[  4V210-08-AC110V-LED-EX-HAZARDOUS  ]
+                   │
+         Imported into 30-Char Column
+                   ▼
+Silent Truncation to 30 Chars:
+[  4V210-08-AC110V-LED-EX-HAZARD  ] 
+                   │
+                   ▼
+1. Factory fails PO: "Invalid Model Code"
+2. Hazardous explosion-proof rating stripped from database
+3. Standard valve shipped to dangerous industrial plant floor</code></pre>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Truncation errors typically originate in one of three environments:</p>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Excel Column Truncation:</strong> Legacy Excel exports format part numbers with arbitrary text boundaries. When saving as fixed-width text files, long strings are lopped off before they even reach the ERP import staging folder.</li>
+  <li><strong class="font-semibold text-zinc-950">ERP Primary Key Length Limits:</strong> In older versions of Prophet 21, the core <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> column was bounded at 40 characters. If your internal numbering logic includes vendor prefixes (e.g., <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PAR-DG4V-3-2A-M-U-D6-20-EN45-JA</code>), the prefix forces the critical specification suffix out of the column boundary.</li>
+  <li><strong class="font-semibold text-zinc-950">Electronic Data Interchange (EDI) 850 Mapping:</strong> Outgoing purchase orders transmitted via ANSI X12 EDI map part numbers to segment <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">LIN03</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PO1</code>. If your EDI translation map specifies a 30-character maximum, your ERP may hold the full part number, but the purchase order transmitted to the manufacturer arrives truncated.</li>
+</ol>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">According to pricing and catalog research from <a href="https://www.rocktonsoftware.com/pricing-intelligence-platform/industrial-distribution-software-rpm/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Rockton Software</a>, catalog indexing errors and mismatched cross-references contribute directly to the <strong class="font-semibold text-zinc-950">8.73% margin leakage</strong> distributors endure through invoice disputes and misquoted assemblies.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">2. ERP System Field Limits & Resolution Strategies</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Different distribution ERPs handle string limits and part aliases differently. The table below outlines common character constraints and safe engineering architectures:</p>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">ERP Platform</th><th class="py-3 px-4 font-semibold text-left">Primary <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> Limit</th><th class="py-3 px-4 font-semibold text-left">Dedicated Mfr Part Field</th><th class="py-3 px-4 font-semibold text-left">Truncation Risk Level</th><th class="py-3 px-4 font-semibold text-left">Recommended Engineering Architecture</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Epicor Prophet 21 (P21)</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">40 Characters</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">mfr_part_number</code> (40 chars)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Moderate</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Keep <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> clean; use <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">mfr_part_number</code> and <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_cross_ref</code> for long codes</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Infor SX.e / CSD</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">24–30 Characters</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Alternate Part Table</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">High</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Maintain concise internal item IDs; store full factory strings in Cross-Reference</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Epicor Eclipse</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">35 Characters</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Catalog Part Table</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Moderate</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Normalize punctuation; map exact manufacturer string to Buy List tables</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">NetSuite</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">60 Characters</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Vendor Part Number (100)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Low</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Map full string to <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">vendor_code</code>; index clean SKU for customer search</td></tr>
+    </tbody>
+  </table>
+</div>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">3. Real-World Transformation: Truncated SKU vs. Normalized Cross-Reference</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">To eliminate truncation and search failures, distributors must decouple the <strong class="font-semibold text-zinc-950">Internal Item ID</strong> from the <strong class="font-semibold text-zinc-950">Manufacturer Cross-Reference</strong>. Consider an engineered Danfoss proportional hydraulic valve assembly:</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Raw Supplier String (37 Characters)</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PVG32-157B3171-157B4128-157B5111-24V</code></p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Flawed Direct ERP Import (Truncated at 30 Characters)</h3>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Stored <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code>:</strong> <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PVG32-157B3171-157B4128-157B</code></li>
+  <li><strong class="font-semibold text-zinc-950">Result:</strong> Coil voltage (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">-24V</code>) and critical module suffix are deleted. Purchasing buys an unpowered mechanical spool block; inside sales quotes the wrong assembly.</li>
+</ul>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Correct Relational ERP Architecture (Vellett Standard)</h3>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">Database Table</th><th class="py-3 px-4 font-semibold text-left">Column Name</th><th class="py-3 px-4 font-semibold text-left">Stored Value</th><th class="py-3 px-4 font-semibold text-left">Function & Behavior</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_mast</code> (Item Master)</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">DAN-PVG32-3171-24V</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Clean, unique 19-char primary key for warehouse picking & accounting</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_mast</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_desc</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">DANFOSS PVG32 PROP VALVE 24V</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Standard 30-char ERP display description</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_loc</code> (Location)</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">supplier_part_no</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PVG32-157B3171-157B4128-157B5111-24V</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Full 37-char string mapped for outgoing EDI POs and factory orders</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">mfr_cross_ref</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">clean_part_number</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PVG32157B3171157B4128157B511124V</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Punctuation-stripped index for 100% order-entry search matching</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">mfr_cross_ref</code></strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">competitor_code</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">REXROTH-M4-15-24V</code></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Functional competitor cross-reference for automated alternate quoting</td></tr>
+    </tbody>
+  </table>
+</div>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">4. The Punctuation Paradox: Hyphens, Slashes, and Spaces</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Even when an MPN fits comfortably within character limits, distributors face search failures caused by punctuation mismatches:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li>A customer’s purchasing agent emails a request for: <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV 2 12</code></li>
+  <li>The manufacturer catalog lists the part as: <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV-2-12</code></li>
+  <li>An inside sales rep types: <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV212</code></li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">If your ERP or e-commerce search engine requires exact character string matches, two of those three queries will return "Item Not Found," leading your sales reps to tell a paying customer that you don't stock the part.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">The 3-Step Normalization Protocol:</h3>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">The Pure Alphanumeric Shadow Index:</strong> In your ERP cross-reference table (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_cross_ref</code> in P21), store a normalized "shadow" version of every part number with all hyphens, slashes, periods, and spaces stripped out (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV212</code>).</li>
+  <li><strong class="font-semibold text-zinc-950">Punctuation-Agnostic Search Logic:</strong> Configure order entry and website search parsers to strip whitespace and symbols from customer search queries before executing SQL or Elasticsearch lookup queries.</li>
+  <li><strong class="font-semibold text-zinc-950">Leading Zero Preservation:</strong> Enforce text data-type locks (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">@</code>) on all part number columns during spreadsheet import to prevent automated tools from stripping leading zeros (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">0104-4-4</code> vs <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">104-4-4</code>).</li>
+</ol>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Frequently Asked Questions</h2>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Can we just expand the database column size in our ERP to 100 characters?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Altering core database schemas in platforms like Prophet 21 or Infor SX.e is strongly discouraged. Custom database schema modifications void software maintenance agreements, break future version upgrade paths, and risk crashing reporting views. The safe, enterprise-grade approach is utilizing built-in cross-reference tables.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How do customer-specific part numbers interact with manufacturer cross-references?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Modern ERPs maintain distinct tables for <strong class="font-semibold text-zinc-950">Customer Part Numbers</strong> (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">cust_part_cross_ref</code>) and <strong class="font-semibold text-zinc-950">Manufacturer Part Numbers</strong> (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">mfr_part_cross_ref</code>). When a customer places an order using their internal plant asset tag (e.g., <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PLANT-VALVE-402</code>), the ERP maps that tag directly to your internal <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code>, ensuring the correct manufacturer part is ordered and shipped.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How does resolving MPN truncation improve EDI order processing?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Automated EDI ordering requires 100% character precision. If an outgoing EDI 850 purchase order transmits a truncated part number, the manufacturer’s automated ingestion system rejects the transaction via an EDI 855 PO Acknowledgment error, halting your replenishment pipeline.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Eliminate Part Number Errors and Truncation With Vellett</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Don't let legacy database constraints and messy manufacturer part numbers cause stockouts, purchasing rejections, and lost sales.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Vellett provides a dedicated <strong class="font-semibold text-zinc-950">Catalog & Margin Protection Desk</strong> engineered specifically for industrial distributors:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Clean Cross-Reference Architectures:</strong> We build concise, collision-free internal Item IDs while preserving complete, unabridged manufacturer part codes in your ERP cross-reference tables.</li>
+  <li><strong class="font-semibold text-zinc-950">Punctuation Normalization:</strong> We generate punctuation-stripped shadow indices so your team and customers find parts instantly, whether they type hyphens, spaces, or raw alphanumeric strings.</li>
+  <li><strong class="font-semibold text-zinc-950">Import-Ready 2-Tab Files:</strong> Receive flat, verified ERP mass-update workbooks (Prophet 21, Infor SX.e, Eclipse) paired with complete e-commerce technical schemas.</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><strong class="font-semibold text-zinc-950">Audit your part number cross-references today:</strong> Send us one complex manufacturer catalog or messy vendor price sheet (50–100 SKUs). We will build your validated cross-reference architecture and return an import-ready workbook within 48 hours for free.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Contact Ayush Bijlwan at <strong class="font-semibold text-zinc-950">ayush@vellett.com</strong> or visit <a href="https://vellett.com" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">vellett.com</a>.</p>
+<hr class="my-8 border-zinc-200">
+    </article>
+
+    <!-- Technical Callout Box -->
+    <div class="mt-12 p-8 border border-zinc-900 bg-zinc-950 text-zinc-100 rounded-sm">
+      <div class="flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Vellett Engineering Protocol</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-2">Have a Messy Supplier PDF or Price Sheet on Your Desk?</h3>
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-sans">
+        Send us one unformatted manufacturer PDF or Excel price sheet. We will engineer a 15-SKU flat import sample formatted to your exact ERP schema (Epicor Prophet 21, Infor CSD, or B2B eCommerce) within 48 hours at zero cost.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold transition-colors rounded-sm">
+          Request Zero-Cost 15-SKU Audit &rarr;
+        </a>
+        <span class="text-xs font-mono text-zinc-400">Direct Principal Desk: (919) 339-1208</span>
+      </div>
+    </div>
+
+    <!-- Related Articles Backlink -->
+    <div class="mt-12 pt-8 border-t border-zinc-200 flex justify-between items-center text-xs font-mono">
+      <a href="../" class="text-zinc-600 hover:text-zinc-950 underline">&larr; Return to All Engineering Guides</a>
+      <a href="../../services/" class="text-zinc-950 font-semibold hover:underline">Explore Managed Catalog Services &rarr;</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-parchment-subtle py-12 px-4 sm:px-8 mt-16 text-xs text-zinc-600 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col space-y-1">
+        <span class="font-serif text-lg font-bold text-zinc-950">Vellett</span>
+        <span>Industrial Catalog Engineering LLC &bull; 1201 N Orange St, Suite 700, Wilmington, DE 19801</span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-zinc-700">
+        <a href="../../methodology/" class="hover:underline">Methodology</a>
+        <a href="../../services/" class="hover:underline">Services</a>
+        <a href="../../pricing/" class="hover:underline">Pricing</a>
+        <a href="../../resources/" class="hover:underline">Resources</a>
+        <a href="../../blog/" class="hover:underline">Blog</a>
+        <a href="../../contact/" class="hover:underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
