@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Blog & Industrial Catalog Research | Vellett</title>
+  <meta name="description" content="In-depth technical guides for industrial distributors on Epicor Prophet 21 mass updates, B2B faceted search schemas, margin protection, and PDF spec extraction.">
+  <link rel="canonical" href="https://vellett.com/blog/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Engineering Blog & Industrial Catalog Research | Vellett">
+  <meta property="og:description" content="Technical research and guides for industrial distributors, P21 admins, and B2B eCommerce directors.">
+  <meta property="og:url" content="https://vellett.com/blog/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+  </style>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Delaware Registered Entity</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Principal Desk: (919) 339-1208</span>
+      </div>
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ERP Staging Active</span>
+        <a href="../contact/" class="text-zinc-200 hover:text-white transition-colors">Direct Desk &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="border-b border-zinc-200 bg-parchment sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="../" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-zinc-950 flex items-center justify-center rounded-sm">
+            <span class="font-mono text-base font-bold text-white tracking-tighter">V</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-zinc-950 leading-none">Vellett</span>
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">Catalog Engineering</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-700">
+        <a href="../methodology/" class="hover:text-zinc-950 transition-colors">5-Sheet Method</a>
+        <a href="../services/" class="hover:text-zinc-950 transition-colors">Services</a>
+        <a href="../pricing/" class="hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="../resources/" class="hover:text-zinc-950 transition-colors">Resources</a>
+        <a href="./" class="text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Blog</a>
+        <a href="../contact/" class="hover:text-zinc-950 transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="../contact/" class="inline-flex items-center justify-center px-4 py-2 border border-zinc-950 bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm">
+          Send Sample PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div class="max-w-3xl mb-12">
+      <div class="text-xs font-mono uppercase tracking-widest text-emerald-600 font-semibold mb-2">Technical Publications</div>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-zinc-950 leading-tight mb-4">
+        Vellett Engineering Blog
+      </h1>
+      <p class="text-base sm:text-lg text-zinc-600 font-sans leading-relaxed">
+        Peer-to-peer technical guides, database architectures, and operational research for wholesale industrial distributors managing Epicor Prophet 21, Infor SX.e, and B2B eCommerce platforms.
+      </p>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">ERP Integration</span>
+              <span>&bull;</span>
+              <span>8 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="01-prophet-21-mass-update-excel-import-errors/" class="hover:text-zinc-700 transition-colors">How Do I Format Supplier Price Sheets for Epicor Prophet 21 (P21) Mass Update Without Import Errors?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              To format supplier price sheets for Epicor Prophet 21 (P21) Mass Update without errors, export the standard P21 Excel template, preserve immutable `item_id` keys, strip all currency symbols and thousand-separators, enforce text formatting on alphanumeric part numbers to prevent leading-zero truncation, align purchasing Unit of Measure (UOM) codes to existing system tables, and ensure Row 1 headers match the import schema exactly.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="01-prophet-21-mass-update-excel-import-errors/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Margin Protection</span>
+              <span>&bull;</span>
+              <span>7 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="02-stop-margin-leakage-supplier-price-increases/" class="hover:text-zinc-700 transition-colors">How Much Gross Margin Do Industrial Distributors Lose From Delayed Supplier Price Updates?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              Industrial distributors lose between 1.2% and 8.73% of gross margin when supplier price updates are delayed by 30 to 90 days. Because ERP pricing matrices calculate sales prices from outdated replacement costs, distributors continue quoting customers legacy prices while paying higher manufacturer acquisition costs, creating permanent, unrecoverable margin compression on every outgoing order.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="02-stop-margin-leakage-supplier-price-increases/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Catalog Engineering</span>
+              <span>&bull;</span>
+              <span>8 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="03-extract-technical-specs-from-manufacturer-pdfs/" class="hover:text-zinc-700 transition-colors">How Do B2B Distributors Extract Technical Specs From Manufacturer PDFs Into E-Commerce Filter Attributes?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              To extract technical specifications from manufacturer PDFs into e-commerce filter attributes, distributors must parse tabular PDF data, isolate model configuration logic, normalize raw dimensional strings into discrete numerical values and units of measure (e.g., separating "1/4 NPT" into thread standard and nominal size), and map those parameters into structured Product Information Management (PIM) schemas.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="03-extract-technical-specs-from-manufacturer-pdfs/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">B2B eCommerce</span>
+              <span>&bull;</span>
+              <span>7 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="04-b2b-faceted-search-industrial-parts-schema/" class="hover:text-zinc-700 transition-colors">Why Do Industrial Buyers Bounce From Distributor Websites—and What Filter Attributes Fix Faceted Search?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              Industrial buyers bounce from distributor websites because generic keyword searches return hundreds of irrelevant results when technical attributes are missing. Maintenance managers, engineers, and purchasing agents buy by exact physical specifications—port size, pressure rating, thread pitch, and metallurgy. Without granular faceted search filters, buyers abandon regional distributor portals for McMaster-Carr or Grainger.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="04-b2b-faceted-search-industrial-parts-schema/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Lifecycle Management</span>
+              <span>&bull;</span>
+              <span>8 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="05-handle-discontinued-superseded-skus-erp/" class="hover:text-zinc-700 transition-colors">How Should Distributors Manage Superseded and Discontinued Manufacturer SKUs in ERP and E-Commerce?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              To manage superseded and discontinued SKUs, distributors must preserve immutable historical ERP Item IDs, update item status flags to prevent unfulfillable purchasing, link replacement part numbers in the ERP substitution table (`inv_sub`), and maintain live e-commerce product pages with 301 redirects or prominent "Superseded By" cross-reference links to protect organic SEO authority.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="05-handle-discontinued-superseded-skus-erp/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Data Hygiene</span>
+              <span>&bull;</span>
+              <span>8 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="06-standardize-uom-pack-quantities-supplier-feeds/" class="hover:text-zinc-700 transition-colors">How Do You Fix UOM and Pack-Quantity Mismatches (EA vs. BX vs. CS) Across Vendor Spreadsheets?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              To fix Unit of Measure (UOM) and packaging mismatches across vendor spreadsheets, distributors must establish a single primary Stocking UOM (typically "Each"), map distinct Purchasing and Pricing UOM conversion factors in the ERP database, programmatically normalize inconsistent vendor packaging strings (`Box of 50`, `C`, `BX50`), and enforce mathematical price-per-unit verification before importing records.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="06-standardize-uom-pack-quantities-supplier-feeds/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Architecture</span>
+              <span>&bull;</span>
+              <span>7 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="07-flat-erp-import-vs-pim-attribute-schema/" class="hover:text-zinc-700 transition-colors">What Is the Difference Between an ERP Mass-Update Sheet and a Website PIM Attribute Schema?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              An ERP mass-update sheet is a flat, transactional data table strictly designed for accounting, inventory valuation, purchasing rules, and price tier calculations. A website PIM attribute schema is a multi-dimensional, category-specific specification matrix engineered for faceted search filtering, customer specification validation, digital merchandising, and SEO discovery.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="07-flat-erp-import-vs-pim-attribute-schema/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Database Engineering</span>
+              <span>&bull;</span>
+              <span>7 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="08-manufacturer-part-number-truncation-cross-reference/" class="hover:text-zinc-700 transition-colors">How Do You Prevent Long Manufacturer Part Number (MPN) Truncation and Cross-Reference Mismatches in ERP?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              To prevent Manufacturer Part Number (MPN) truncation and cross-reference mismatches in ERP systems, distributors must establish clean, normalized internal Item IDs that fit core database column constraints (30–40 characters), preserve the unabridged factory part code in dedicated manufacturer cross-reference tables, and implement punctuation-agnostic search indexing to capture customer hyphen and space variations.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="08-manufacturer-part-number-truncation-cross-reference/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Taxonomy & Specs</span>
+              <span>&bull;</span>
+              <span>7 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="09-pneumatic-hydraulic-fastener-category-taxonomy/" class="hover:text-zinc-700 transition-colors">What Exact Specification Columns Should Industrial Distributors Use for Valves, Hydraulics, Bearings, and Fasteners?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              To build high-converting e-commerce faceted search and structured PIM catalogs, industrial distributors must deploy category-specific taxonomy tables with 8 core engineering attributes: dimensional size, pressure/load rating, metallurgy/material, connection/thread type, sealing/elastomer compound, dynamic performance, tolerance/grade, and official manufacturer datasheet URLs.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="09-pneumatic-hydraulic-fastener-category-taxonomy/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+
+        <div class="border border-zinc-200 bg-white p-6 rounded-sm shadow-sm hover:border-zinc-950 transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center space-x-2 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+              <span class="text-emerald-700 font-semibold">Strategy & ROI</span>
+              <span>&bull;</span>
+              <span>7 min read</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-zinc-950 mb-3 leading-snug">
+              <a href="10-outsource-catalog-data-cleanup-vs-hiring-pim-analyst/" class="hover:text-zinc-700 transition-colors">Should a 20–200 Person Distributor Hire a Full-Time Catalog Analyst, Buy a PIM, or Use a Catalog Engineering Desk?</a>
+            </h2>
+            <p class="text-sm text-zinc-600 leading-relaxed font-sans mb-6">
+              For a 20–200 person industrial distributor, buying PIM software alone does not clean data, and hiring an in-house catalog analyst costs $85,000+ with high turnover risk. An outsourced catalog engineering desk delivers the fastest time-to-value at a fraction of the cost ($1,500/month), transforming messy vendor PDFs and price sheets into validated, import-ready ERP and PIM workbooks within 48 hours.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+            <a href="10-outsource-catalog-data-cleanup-vs-hiring-pim-analyst/" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 hover:underline">Read Complete Guide &rarr;</a>
+            <span class="text-xs font-mono text-zinc-400">November 20, 2026</span>
+          </div>
+        </div>
+    </div>
+
+    <!-- Technical Callout Box -->
+    <div class="mt-16 p-8 border border-zinc-900 bg-zinc-950 text-zinc-100 rounded-sm">
+      <div class="flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Vellett Engineering Protocol</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-2">Need a Custom Schema or Price Sheet Audited?</h3>
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-sans">
+        Send over one unformatted manufacturer price sheet or catalog PDF (50–100 SKUs). We will engineer an import-ready 2-tab workbook formatted specifically for your ERP and web store within 48 hours for free.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="../contact/" class="inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold transition-colors rounded-sm">
+          Request Zero-Cost 15-SKU Audit &rarr;
+        </a>
+        <span class="text-xs font-mono text-zinc-400">Direct Principal Desk: (919) 339-1208</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-parchment-subtle py-12 px-4 sm:px-8 mt-16 text-xs text-zinc-600 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col space-y-1">
+        <span class="font-serif text-lg font-bold text-zinc-950">Vellett</span>
+        <span>Industrial Catalog Engineering LLC &bull; 1201 N Orange St, Suite 700, Wilmington, DE 19801</span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-zinc-700">
+        <a href="../methodology/" class="hover:underline">Methodology</a>
+        <a href="../services/" class="hover:underline">Services</a>
+        <a href="../pricing/" class="hover:underline">Pricing</a>
+        <a href="../resources/" class="hover:underline">Resources</a>
+        <a href="./" class="hover:underline">Blog</a>
+        <a href="../contact/" class="hover:underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Do I Format Supplier Price Sheets for Epicor Prophet 21 (P21) Mass Update Without Import Errors? | Vellett Industrial Catalog Engineering</title>
+  <meta name="description" content="To format supplier price sheets for Epicor Prophet 21 (P21) Mass Update without errors, export the standard P21 Excel template, preserve immutable `item_id` keys, strip all currency symbols and thousand-separators, enforce text formatting on alphanumeric part numbers to prevent leading-zero truncation, align purchasing Unit of Measure (UOM) codes to existing system tables, and ensure Row 1 headers match the import schema exactly.">
+  <link rel="canonical" href="https://vellett.com/blog/01-prophet-21-mass-update-excel-import-errors/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Do I Format Supplier Price Sheets for Epicor Prophet 21 (P21) Mass Update Without Import Errors? | Vellett">
+  <meta property="og:description" content="To format supplier price sheets for Epicor Prophet 21 (P21) Mass Update without errors, export the standard P21 Excel template, preserve immutable `item_id` keys, strip all currency symbols and thousand-separators, enforce text formatting on alphanumeric part numbers to prevent leading-zero truncation, align purchasing Unit of Measure (UOM) codes to existing system tables, and ensure Row 1 headers match the import schema exactly.">
+  <meta property="og:url" content="https://vellett.com/blog/01-prophet-21-mass-update-excel-import-errors/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How Do I Format Supplier Price Sheets for Epicor Prophet 21 (P21) Mass Update Without Import Errors?",
+      "description": "Step-by-step engineering guide for industrial distributors on formatting vendor spreadsheets for Epicor Prophet 21 Mass Update without data type errors or margin loss.",
+      "author": {
+        "@type": "Person",
+        "name": "Ayush Bijlwan",
+        "url": "https://vellett.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Vellett",
+        "url": "https://vellett.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://vellett.com/logo.png"
+        }
+      },
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "mainEntityOfPage": "https://vellett.com/blog/01-prophet-21-mass-update-excel-import-errors/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does Prophet 21 change part numbers with leading zeros to scientific notation or strip the zero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Excel treats numbers with leading zeros as integers unless explicitly forced to text format. If opened without proper text delimiter importation, Excel strips the zeros or converts long numbers into scientific notation. Pre-format all part number columns as Text (@) prior to data entry."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I prevent P21 Mass Update from overwriting existing customer contract pricing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "P21 separates base price tables from customer-specific contract pricing tables. Importing into inv_loc or supplier_price_page updates standard replacement costs and baseline list prices without altering customer-specific contract library records."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the safest way to update pricing across 10+ branch locations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Export the exact inv_loc records for all target locations, apply price updates with deterministic column calculations, and upload the file with explicit item_id and location_id keys per row rather than using global 'apply-all' triggers."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Delaware Registered Entity</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Principal Desk: (919) 339-1208</span>
+      </div>
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ERP Staging Active</span>
+        <a href="../../contact/" class="text-zinc-200 hover:text-white transition-colors">Direct Desk &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="border-b border-zinc-200 bg-parchment sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="../../" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-zinc-950 flex items-center justify-center rounded-sm">
+            <span class="font-mono text-base font-bold text-white tracking-tighter">V</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-zinc-950 leading-none">Vellett</span>
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">Catalog Engineering</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-700">
+        <a href="../../methodology/" class="hover:text-zinc-950 transition-colors">5-Sheet Method</a>
+        <a href="../../services/" class="hover:text-zinc-950 transition-colors">Services</a>
+        <a href="../../pricing/" class="hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="../../resources/" class="hover:text-zinc-950 transition-colors">Resources</a>
+        <a href="../" class="text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Blog</a>
+        <a href="../../contact/" class="hover:text-zinc-950 transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-4 py-2 border border-zinc-950 bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm">
+          Send Sample PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Header -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <div class="flex items-center space-x-3 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+        <a href="../" class="text-zinc-700 hover:text-zinc-950 underline">&larr; Vellett Blog</a>
+        <span>&bull;</span>
+        <span class="text-zinc-600">ERP Integration</span>
+        <span>&bull;</span>
+        <span>8 min read</span>
+        <span>&bull;</span>
+        <span>Published November 20, 2026</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 leading-tight mb-6">
+        How Do I Format Supplier Price Sheets for Epicor Prophet 21 (P21) Mass Update Without Import Errors?
+      </h1>
+      <p class="font-serif italic text-lg sm:text-xl text-zinc-600 leading-relaxed border-l-2 border-zinc-950 pl-4 py-1">
+        To format supplier price sheets for Epicor Prophet 21 (P21) Mass Update without errors, export the standard P21 Excel template, preserve immutable `item_id` keys, strip all currency symbols and thousand-separators, enforce text formatting on alphanumeric part numbers to prevent leading-zero truncation, align purchasing Unit of Measure (UOM) codes to existing system tables, and ensure Row 1 headers match the import schema exactly.
+      </p>
+    </div>
+
+    <!-- Article Content -->
+    <article class="space-y-4 pt-6 border-t border-zinc-200">
+<div class="my-6 p-4 sm:p-5 border-l-4 border-zinc-950 bg-parchment-subtle text-zinc-900 text-sm sm:text-base leading-relaxed rounded-r-sm font-sans italic"><strong class="font-semibold text-zinc-950">TL;DR:</strong> To format supplier price sheets for Epicor Prophet 21 (P21) Mass Update without errors, export the standard P21 Excel template, preserve immutable <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> keys, strip all currency symbols and thousand-separators, enforce text formatting on alphanumeric part numbers to prevent leading-zero truncation, align purchasing Unit of Measure (UOM) codes to existing system tables, and ensure Row 1 headers match the import schema exactly.</div>
+<hr class="my-8 border-zinc-200">
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Updating catalog pricing in Epicor Prophet 21 (P21) should be an administrative routine. In practice, uploading vendor price increases is one of the most frustrating choke points in wholesale distribution. When a manufacturer sends over an unformatted 8,000-row spreadsheet with merged header cells, mixed currency formatting, and floating unit-of-measure (UOM) designations, dropping that file directly into P21 Mass Update triggers immediate fatal syntax errors, corrupted cost tiers, or silent failures where price updates apply to the wrong branch locations.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">According to research from <a href="https://www.rocktonsoftware.com/pricing-intelligence-platform/industrial-distribution-software-rpm/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Rockton Software</a>, distributors experience an average <strong class="font-semibold text-zinc-950">8.73% margin leakage</strong> when managing pricing updates through manual spreadsheet processes. The operational friction stems from an impedance mismatch: manufacturers format spreadsheets for human eyes, while the P21 Mass Update engine requires strict, relational database hygiene.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">As outlined in <a href="https://www.atlasprecon.com/p21-mass-update-editing-excel-exports/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Atlas Precon's P21 Mass Update analysis</a>, editing and uploading Excel files into Prophet 21 requires obeying rigid structural constraints. Below is the operational protocol for transforming messy supplier price sheets into error-free P21 Mass Update imports.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">1. The 6 Fatal Excel Formatting Traps in Prophet 21</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">When the P21 import parser processes an Excel worksheet, it does not interpret context. If a single cell contains an unexpected character type or invisible whitespace, the batch halts or corrupts inventory valuation records.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">A. Number Formatting and Currency Symbols</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">P21 expects raw floating-point numbers or integers for cost and price fields (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">14.50</code>, not <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$14.50</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">14.50 USD</code>). If an Excel column contains formatting strings like dollar signs, accounting parentheses for negative numbers, or thousand-separator commas (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1,250.00</code>), the database staging table rejects the row with a type conversion exception (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Invalid Cast Specifier</code>).</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">B. Stripped Leading Zeros on Manufacturer Part Numbers</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Excel aggressively evaluates alphanumeric strings as integers. If an industrial part number begins with a leading zero (e.g., Parker fitting <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">0104-4-4</code> or ASCO valve <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">08210G002</code>), opening a vendor CSV or Excel workbook can silently strip the zero, converting the identifier to <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">104-4-4</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">8210G002</code>. When imported, P21 fails to match the existing <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> or manufacturer cross-reference, creating duplicate ghost items.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">C. The Multi-Branch Location Cost "Apply All" Trap</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">In multi-branch Prophet 21 environments, inventory costs reside at the location level (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_loc</code>). If your supplier sheet provides a national list price and your P21 import template does not explicitly declare the target <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">location_id</code>—or if the import profile is inadvertently configured with "Apply to All Locations" on standard cost rather than replacement cost—you risk instantly overwriting local branch FIFO/LIFO layers and average cost ledgers.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">D. Invisible Whitespace and Non-Printing Carriage Returns</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Manufacturer spreadsheets exported from legacy ERPs frequently contain trailing spaces (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">"EV-2-12 "</code> vs <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">"EV-2-12"</code>) or hidden line breaks (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">\r\n</code>) inside description fields. In P21, string matching on item keys is exact. A trailing space will cause lookup queries to fail, forcing customer service reps into manual SKU overrides at order entry.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">E. Purchasing UOM vs. Pricing UOM vs. Stocking UOM Mismatches</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">A manufacturer issues a price increase for Hex Head Cap Screws: "$45.00 per Box." However, your P21 system stocks the item in "Each" (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code>) with a packaging conversion factor of 100 per Box (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code>), or quotes in hundreds (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">C</code>) and thousands (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">M</code>). Uploading the raw vendor cost without recalculating against your stocking UOM multiplier creates catastrophic gross margin errors—selling a 100-pack for the price of a single screw.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">F. Multi-Tab Workbooks and Merged Header Rows</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">P21 Mass Update reads only the active primary worksheet, starting strictly at Row 1 for column definitions and Row 2 for data records. Vendor spreadsheets with promotional graphics, notes across rows 1–5, or nested tabs will break the parser before data validation begins.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">2. P21 Mass Update Schema Comparison</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Before running an import, cross-check the supplier's incoming structure against Prophet 21's ingestion parameters:</p>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">Parameter</th><th class="py-3 px-4 font-semibold text-left">Raw Supplier Spreadsheet</th><th class="py-3 px-4 font-semibold text-left">P21 Mass Update Target Schema</th><th class="py-3 px-4 font-semibold text-left">Failure Mode if Ignored</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Row 1 Headers</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Marketing titles, merged cells, row 4 starts data</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Pure database field names, strictly Row 1</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Parser fails on record 0; aborts batch</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Item Key</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Vendor Part Number or Catalog Code</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Verified P21 <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> (or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">mfr_part_number</code>)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Creates orphan records; fails to update prices</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Cost Fields</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Formatted currency (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$12.45</code>), commas (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1,000</code>)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Plain numeric decimals (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">12.45</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1000.00</code>)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Data type casting error / SQL rejection</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Numeric Formats</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">General / Number (leading zeros dropped)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Text-formatted strings (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">@</code>)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Corrupts part numbers (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">041-D</code> becomes <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">41-D</code>)</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">UOM Identifiers</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Inconsistent strings (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Box</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Pkg</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Ea</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">Case</code>)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Normalized P21 codes (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">BX</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">PK</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code>, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">CA</code>)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Invalid UOM code validation error</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Cost Location</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Flat single price column</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Explicit <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">location_id</code> mapping</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Overwrites national replacement costs incorrectly</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Obsolete Status</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Blank, or text notes in description</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Standardized status codes (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">A</code> Active, <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">I</code> Inactive)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Discontinued parts remain orderable</td></tr>
+    </tbody>
+  </table>
+</div>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">3. Before and After: Real-World P21 Price Sheet Transformation</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Consider a typical pricing notification sheet from a pneumatic fittings manufacturer versus the sanitized, flat data model required for Prophet 21 Mass Update:</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Raw Supplier Price Sheet (Fails P21 Mass Update)</h3>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>Row 1: [MERGED] "Parker Hannifin - Fluid Connectors Group - 2026 Price List"
+Row 2: "Effective Date: April 1, 2026 | Currency: USD"
+Row 3: Part No.      | Description                   | UOM   | List Price | Std Pkg
+Row 4: 0104-4-4      | MALE CONNECTOR 1/4" NPT       | Each  | $14.85     | 25
+Row 5: 0104-6-4      | MALE CONNECTOR 3/8" X 1/4" NPT| Box25 | $385.00    | 1
+Row 6: 0108-4-4-OBS  | OBSOLETE - REPLACED BY 0104   | Ea    | $18.20     | 10</code></pre>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Sanitized P21 Mass Update File (Imports Cleanly)</h3>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>Row 1: item_id | supplier_part_no | item_desc | default_uom | supplier_cost | price_1 | location_id | item_status
+Row 2: 10444   | 0104-4-4         | MALE CONN 1/4 NPT BRASS | EA | 8.9100 | 14.8500 | 1001 | A
+Row 3: 10464   | 0104-6-4         | MALE CONN 3/8 X 1/4 NPT | EA | 9.2400 | 15.4000 | 1001 | A
+Row 4: 10844   | 0108-4-4         | DISCONTINUED MALE CONN  | EA | 10.9200| 18.2000 | 1001 | D</code></pre>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Key Engineering Transformations Applied:</h3>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Header Normalization:</strong> Stripped decorative marketing banners; row 1 contains exact database column names.</li>
+  <li><strong class="font-semibold text-zinc-950">UOM Normalization & Math:</strong> Row 5 in the supplier sheet listed a 25-pack box price of <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$385.00</code>. The file converted the default UOM to <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EA</code>, dividing <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$385.00 / 25</code> to reflect the true unit price of <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$15.40</code> and unit cost of <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$9.24</code>.</li>
+  <li><strong class="font-semibold text-zinc-950">Data Type Cleansing:</strong> Removed currency symbols (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">$</code>), normalized item descriptions to uppercase without invalid quotation marks, and set all numbers as plain decimals.</li>
+  <li><strong class="font-semibold text-zinc-950">Lifecycle Segmentation:</strong> Identified the obsolete item in row 6, mapped it to the internal <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code>, and flagged <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_status</code> as <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">D</code> (Discontinued) or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">I</code> (Inactive) while updating the replacement cost.</li>
+</ol>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">4. Step-by-Step SOP: Pre-Flight Verification Checklist</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Before importing any vendor workbook into production Prophet 21:</p>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Dump into Text/CSV First:</strong> Save the vendor Excel file as a CSV (UTF-8), open it in a raw text editor (VS Code or Notepad++), and scan for hidden carriage returns, smart quotes, or unescaped commas inside description fields.</li>
+  <li><strong class="font-semibold text-zinc-950">Apply the Text Format Pre-Lock:</strong> Open the CSV in Excel, ensure columns containing part numbers are explicitly typed as <strong class="font-semibold text-zinc-950">Text (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">@</code>)</strong>, verify that leading zeros are intact, and save as <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">.xlsx</code>.</li>
+  <li><strong class="font-semibold text-zinc-950">Run a Staging VLOOKUP Against P21 Master Item Data:</strong> Match the incoming vendor part numbers against your existing <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_mast</code> export. Flag any unmapped SKUs:</li>
+</ol>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li>Are they brand-new items requiring catalog creation?</li>
+  <li>Are they typographical variations of existing SKUs (e.g., missing hyphens)?</li>
+</ul>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Isolate Location Mapping:</strong> Ensure every pricing line references an explicit branch code (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">location_id</code>) unless intentionally executing a global corporate list price revision.</li>
+  <li><strong class="font-semibold text-zinc-950">Test Upload 5 SKUs First:</strong> Never run an 8,000-row file into production P21 cold. Run a pilot import with 5 SKUs across active, high-volume part numbers. Verify the item in P21 Item Maintenance:</li>
+</ol>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li>Did <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">supplier_cost</code> update correctly?</li>
+  <li>Did the unit margin recalculate properly based on your customer matrix tiers?</li>
+  <li>Did historical purchase orders retain their locked unit pricing?</li>
+</ul>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Frequently Asked Questions</h2>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">Why does Prophet 21 change part numbers with leading zeros to scientific notation or strip the zero?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Excel treats numbers with leading zeros (e.g., <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">001254</code>) as integers unless explicitly forced to text format. If opened without proper text delimiter importation, Excel strips the zeros (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1254</code>) or converts long 12-digit part numbers into scientific notation (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">1.25E+11</code>). When passed to P21, the system cannot find the matching record. Pre-format all part number columns as Text (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">@</code>) prior to data entry.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How do I prevent P21 Mass Update from overwriting existing customer contract pricing?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">P21 separates base price tables from customer-specific contract pricing tables. Importing into <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_loc</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">supplier_price_page</code> updates standard replacement costs and baseline list prices (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">price_1</code> through <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">price_10</code>). As long as your import template targets the standard pricing hierarchy rather than contract library IDs, customer-specific pricing schedules remain protected.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">What is the safest way to update pricing across 10+ branch locations?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Never use global spreadsheet macros that execute blind updates. In P21, export the exact <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_loc</code> records for all target locations, apply the price changes using deterministic column calculations, and upload the file with explicit <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> and <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">location_id</code> keys per row.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Eliminate Supplier Price Sheet Backlogs with Vellett</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Manually reformatting supplier price sheets, calculating UOM multipliers, and debugging failed P21 Mass Update imports drains dozens of operational hours every month while exposing your business to margin slippage.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Vellett provides a dedicated <strong class="font-semibold text-zinc-950">Catalog & Margin Protection Desk</strong> for industrial, fluid power, fastener, and electrical distributors. We take messy supplier PDFs, unformatted vendor spreadsheets, and manufacturer price increase notices, transforming them into validated, error-free 2-tab Excel workbooks:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Tab 1: ERP_Standard_Import</strong> (Formatted specifically for P21, Infor SX.e, or Epicor Eclipse flat import tables).</li>
+  <li><strong class="font-semibold text-zinc-950">Tab 2: Website_Exact_Schema_Match</strong> (Structured with granular technical attributes for faceted search and PIM integration).</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><strong class="font-semibold text-zinc-950">Test our turn-around with zero risk:</strong> Send over one messy supplier PDF or price sheet (50–100 SKUs). We will format, normalize, and return an import-ready workbook matching your exact ERP schema within 48 hours for free.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Contact Ayush Bijlwan at <strong class="font-semibold text-zinc-950">ayush@vellett.com</strong> or visit <a href="https://vellett.com" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">vellett.com</a> to request your free schema test batch.</p>
+<hr class="my-8 border-zinc-200">
+    </article>
+
+    <!-- Technical Callout Box -->
+    <div class="mt-12 p-8 border border-zinc-900 bg-zinc-950 text-zinc-100 rounded-sm">
+      <div class="flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Vellett Engineering Protocol</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-2">Have a Messy Supplier PDF or Price Sheet on Your Desk?</h3>
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-sans">
+        Send us one unformatted manufacturer PDF or Excel price sheet. We will engineer a 15-SKU flat import sample formatted to your exact ERP schema (Epicor Prophet 21, Infor CSD, or B2B eCommerce) within 48 hours at zero cost.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold transition-colors rounded-sm">
+          Request Zero-Cost 15-SKU Audit &rarr;
+        </a>
+        <span class="text-xs font-mono text-zinc-400">Direct Principal Desk: (919) 339-1208</span>
+      </div>
+    </div>
+
+    <!-- Related Articles Backlink -->
+    <div class="mt-12 pt-8 border-t border-zinc-200 flex justify-between items-center text-xs font-mono">
+      <a href="../" class="text-zinc-600 hover:text-zinc-950 underline">&larr; Return to All Blog Articles</a>
+      <a href="../../services/" class="text-zinc-950 font-semibold hover:underline">Explore Managed Catalog Services &rarr;</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-parchment-subtle py-12 px-4 sm:px-8 mt-16 text-xs text-zinc-600 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col space-y-1">
+        <span class="font-serif text-lg font-bold text-zinc-950">Vellett</span>
+        <span>Industrial Catalog Engineering LLC &bull; 1201 N Orange St, Suite 700, Wilmington, DE 19801</span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-zinc-700">
+        <a href="../../methodology/" class="hover:underline">Methodology</a>
+        <a href="../../services/" class="hover:underline">Services</a>
+        <a href="../../pricing/" class="hover:underline">Pricing</a>
+        <a href="../../resources/" class="hover:underline">Resources</a>
+        <a href="../" class="hover:underline">Blog</a>
+        <a href="../../contact/" class="hover:underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

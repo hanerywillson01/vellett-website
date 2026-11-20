@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Should Distributors Manage Superseded and Discontinued Manufacturer SKUs in ERP and E-Commerce? | Vellett Industrial Catalog Engineering</title>
+  <meta name="description" content="To manage superseded and discontinued SKUs, distributors must preserve immutable historical ERP Item IDs, update item status flags to prevent unfulfillable purchasing, link replacement part numbers in the ERP substitution table (`inv_sub`), and maintain live e-commerce product pages with 301 redirects or prominent "Superseded By" cross-reference links to protect organic SEO authority.">
+  <link rel="canonical" href="https://vellett.com/blog/05-handle-discontinued-superseded-skus-erp/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Should Distributors Manage Superseded and Discontinued Manufacturer SKUs in ERP and E-Commerce? | Vellett">
+  <meta property="og:description" content="To manage superseded and discontinued SKUs, distributors must preserve immutable historical ERP Item IDs, update item status flags to prevent unfulfillable purchasing, link replacement part numbers in the ERP substitution table (`inv_sub`), and maintain live e-commerce product pages with 301 redirects or prominent "Superseded By" cross-reference links to protect organic SEO authority.">
+  <meta property="og:url" content="https://vellett.com/blog/05-handle-discontinued-superseded-skus-erp/">
+  <meta property="og:site_name" content="Vellett Industrial Catalog Engineering">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FBFBF9',
+            'parchment-subtle': '#F4F4F0',
+            zinc: { 850: '#18181B', 900: '#09090B', 950: '#040405' }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FBFBF9; color: #09090B; }
+    ::selection { background-color: #18181B; color: #FFFFFF; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How Should Distributors Manage Superseded and Discontinued Manufacturer SKUs in ERP and E-Commerce?",
+      "description": "Technical best practices for industrial distributors managing obsolete, superseded, and discontinued manufacturer part numbers in ERP systems and e-commerce catalogs.",
+      "author": {
+        "@type": "Person",
+        "name": "Ayush Bijlwan",
+        "url": "https://vellett.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Vellett",
+        "url": "https://vellett.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://vellett.com/logo.png"
+        }
+      },
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "mainEntityOfPage": "https://vellett.com/blog/05-handle-discontinued-superseded-skus-erp/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between an alternate part and a substitute part in ERP systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A substitute part is a direct form-fit-function drop-in replacement that requires no customer engineering review. An alternate part is functionally similar but possesses dimensional or material differences requiring customer approval."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do we handle warranty and return claims on discontinued items?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Preserving the immutable Item ID in the ERP ensures complete historical transaction tracking. The system retains original purchase orders, costs, and serial records even when the item status is marked inactive."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should an industrial distributor audit discontinued SKUs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Distributors should audit item lifecycle states semi-annually or whenever manufacturers announce major catalog price and series revisions."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="bg-parchment text-zinc-900 antialiased font-sans">
+
+  <!-- Top Utility Bar -->
+  <div class="border-b border-zinc-200 bg-zinc-950 text-zinc-300 text-xs py-2 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center space-x-4 text-zinc-400">
+        <span class="text-zinc-200 font-medium tracking-wide">Vellett Industrial Catalog Engineering LLC</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Delaware Registered Entity</span>
+        <span class="hidden sm:inline text-zinc-600">|</span>
+        <span class="hidden sm:inline">Principal Desk: (919) 339-1208</span>
+      </div>
+      <div class="flex items-center space-x-6 text-zinc-400">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ERP Staging Active</span>
+        <a href="../../contact/" class="text-zinc-200 hover:text-white transition-colors">Direct Desk &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <header class="border-b border-zinc-200 bg-parchment sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <a href="../../" class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-zinc-950 flex items-center justify-center rounded-sm">
+            <span class="font-mono text-base font-bold text-white tracking-tighter">V</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl font-bold tracking-tight text-zinc-950 leading-none">Vellett</span>
+            <span class="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mt-0.5">Catalog Engineering</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-700">
+        <a href="../../methodology/" class="hover:text-zinc-950 transition-colors">5-Sheet Method</a>
+        <a href="../../services/" class="hover:text-zinc-950 transition-colors">Services</a>
+        <a href="../../pricing/" class="hover:text-zinc-950 transition-colors">Pricing</a>
+        <a href="../../resources/" class="hover:text-zinc-950 transition-colors">Resources</a>
+        <a href="../" class="text-zinc-950 font-semibold border-b-2 border-zinc-950 pb-1">Blog</a>
+        <a href="../../contact/" class="hover:text-zinc-950 transition-colors">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-4 py-2 border border-zinc-950 bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm">
+          Send Sample PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Header -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
+    <div class="mb-8">
+      <div class="flex items-center space-x-3 text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
+        <a href="../" class="text-zinc-700 hover:text-zinc-950 underline">&larr; Vellett Blog</a>
+        <span>&bull;</span>
+        <span class="text-zinc-600">Lifecycle Management</span>
+        <span>&bull;</span>
+        <span>8 min read</span>
+        <span>&bull;</span>
+        <span>Published November 20, 2026</span>
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 leading-tight mb-6">
+        How Should Distributors Manage Superseded and Discontinued Manufacturer SKUs in ERP and E-Commerce?
+      </h1>
+      <p class="font-serif italic text-lg sm:text-xl text-zinc-600 leading-relaxed border-l-2 border-zinc-950 pl-4 py-1">
+        To manage superseded and discontinued SKUs, distributors must preserve immutable historical ERP Item IDs, update item status flags to prevent unfulfillable purchasing, link replacement part numbers in the ERP substitution table (`inv_sub`), and maintain live e-commerce product pages with 301 redirects or prominent "Superseded By" cross-reference links to protect organic SEO authority.
+      </p>
+    </div>
+
+    <!-- Article Content -->
+    <article class="space-y-4 pt-6 border-t border-zinc-200">
+<div class="my-6 p-4 sm:p-5 border-l-4 border-zinc-950 bg-parchment-subtle text-zinc-900 text-sm sm:text-base leading-relaxed rounded-r-sm font-sans italic"><strong class="font-semibold text-zinc-950">TL;DR:</strong> To manage superseded and discontinued SKUs, distributors must preserve immutable historical ERP Item IDs, update item status flags to prevent unfulfillable purchasing, link replacement part numbers in the ERP substitution table (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_sub</code>), and maintain live e-commerce product pages with 301 redirects or prominent "Superseded By" cross-reference links to protect organic SEO authority.</div>
+<hr class="my-8 border-zinc-200">
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Industrial manufacturing is continuous evolution. Factory equipment lines undergo redesigns, environmental directives ban specific polymers or alloys, and manufacturers consolidate older product series into next-generation architectures. When a manufacturer like Festo, Rexroth, Parker, or Danfoss discontinues an older valve or replaces a legacy hydraulic pump with a revised casting, wholesale distributors face a complex catalog maintenance dilemma:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Inside Sales Risk:</strong> If a customer orders an obsolete part number over the counter, does your ERP automatically route the order to the active replacement SKU—or does the purchase order bounce back from the factory two weeks later as unfulfillable?</li>
+  <li><strong class="font-semibold text-zinc-950">E-Commerce & SEO Risk:</strong> If your digital marketing team deletes the discontinued SKU page from your website, does your e-commerce platform return a 404 error, instantly destroying years of accumulated Google ranking equity for high-intent part searches?</li>
+  <li><strong class="font-semibold text-zinc-950">Inventory Valuation Risk:</strong> Does your warehouse still hold obsolete legacy units, and is the ERP valuation correctly tracking depreciation or factory return credits?</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">As detailed in <a href="https://conveyance365.com/blog/how-to-clean-up-data-in-epicor-prophet-21/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Conveyance 365's Prophet 21 data cleanup guide</a>, poor item lifecycle management in ERP databases like Epicor Prophet 21 (P21) pollutes order entry workflows, creates phantom inventory records, and leads directly to customer order delivery delays.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Below is the definitive technical protocol for managing superseded, obsolete, and discontinued manufacturer parts across both ERP backbones and e-commerce storefronts.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">1. Defining the Lifecycle States: Obsolete vs. Discontinued vs. Superseded</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">A primary reason distribution catalogs descend into disorder is that internal teams conflate distinct lifecycle definitions. Treating every inactive item as simply "deleted" breaks inventory accounting and historical sales reporting.</p>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>Incoming Manufacturer Phase-Out Notice
+                 │
+  ┌──────────────┼──────────────┐
+  ▼              ▼              ▼
+Superseded     Discontinued   Obsolete
+(Direct        (End-of-Life,  (No Longer Produced,
+ Drop-In        Factory Stock  Zero Factory Stock,
+ Replacement)   Exhaustion)    No Direct Alternate)
+  │              │              │
+  ▼              ▼              ▼
+Link to New    Sell Down      Flag Inactive,
+Part in        Existing       Provide Engineering
+`inv_sub`      Inventory      Cross-Reference</code></pre>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">Lifecycle State</th><th class="py-3 px-4 font-semibold text-left">Operational Definition</th><th class="py-3 px-4 font-semibold text-left">ERP Action (P21 / Infor SX.e)</th><th class="py-3 px-4 font-semibold text-left">E-Commerce / PIM Action</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Active (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">A</code>)</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Fully supported, actively produced by factory</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Standard purchasing, active replenishment</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Live product page, full cart purchasing</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Superseded (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">S</code>)</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Discontinued by factory, replaced by direct form-fit-function alternate</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Link new SKU in substitution table (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_sub</code>); lock purchasing on old SKU</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Keep page live, disable cart, display prominent "Replaced By [New SKU]" widget</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Discontinued (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">D</code>)</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Factory has halted production; existing distributor stock may be sold</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Allow order entry until QOH = 0; block PO creation to vendor</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Show "Limited Stock Remaining"; do not backorder once stock hits zero</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">Obsolete (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">I</code> / <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">O</code>)</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Dead item; zero stock, zero factory availability, no direct replacement</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Set status to Inactive; preserve record for historical transaction reporting</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">301 Redirect to parent category or closest functional series page</td></tr>
+    </tbody>
+  </table>
+</div>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">According to pricing research from <a href="https://www.rocktonsoftware.com/pricing-intelligence-platform/industrial-distribution-software-rpm/" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">Rockton Software</a>, poor catalog synchronization and obsolete item pricing generate up to <strong class="font-semibold text-zinc-950">8.73% margin leakage</strong>, as sales teams quote legacy discounted pricing on parts that have transitioned to expensive low-volume replacement runs.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">2. ERP Rule #1: Item ID Immutability (Never Overwrite an Old SKU)</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">The single most dangerous shortcut an ERP administrator can take when a manufacturer announces a superseded part number is opening the existing item record and simply renaming the <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> or <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">mfr_part_number</code> to the new code.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><strong class="font-semibold text-zinc-950">Never overwrite an existing Item ID in your ERP.</strong></p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">In Prophet 21, Infor SX.e, or Epicor Eclipse, the <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">item_id</code> is an immutable relational key linked to:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li>Historical customer purchase orders and invoices</li>
+  <li>General ledger cost-of-goods-sold (COGS) postings</li>
+  <li>Physical inventory movement and bin lot histories</li>
+  <li>Customer contract pricing schedules and rebates</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">If you overwrite legacy part number <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV-2-12</code> with new part number <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV-2-12-G2</code>, your reporting engine will falsely attribute 10 years of historical demand to a part that was released yesterday. More critically, when a customer calls three years later requesting an exact invoice copy or warranty replacement for the legacy part, their original item number no longer exists in your historical transaction records.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">The Correct ERP Workflow:</h3>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li>Create a brand-new Item Master record for the replacement SKU (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV-2-12-G2</code>).</li>
+  <li>Populate the replacement item’s cost, list price, and technical specifications.</li>
+  <li>Open the legacy item record (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">EV-2-12</code>), adjust the status code to <strong class="font-semibold text-zinc-950">Discontinued</strong> or <strong class="font-semibold text-zinc-950">Superseded</strong>, and map the new item into the <strong class="font-semibold text-zinc-950">Substitutes / Alternates Table (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_sub</code>)</strong>.</li>
+  <li>Configure P21 Order Entry to trigger an automatic pop-up alert:</li>
+</ol>
+<div class="my-6 p-4 sm:p-5 border-l-4 border-zinc-950 bg-parchment-subtle text-zinc-900 text-sm sm:text-base leading-relaxed rounded-r-sm font-sans italic"><em class="italic">"Item EV-2-12 is Superseded by EV-2-12-G2. Automatically replace line item on sales order? [Yes / No]"</em></div>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">3. Real-World SKU Lifecycle Transformation Table</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">The table below demonstrates how an industrial distributor transforms legacy manufacturer transition notices into database-ready records:</p>
+<div class="overflow-x-auto my-6 border border-zinc-200 rounded-sm shadow-sm">
+  <table class="min-w-full divide-y divide-zinc-200 text-xs sm:text-sm font-sans bg-white">
+    <thead class="bg-zinc-950 text-white font-mono text-xs uppercase tracking-wider">
+      <tr><th class="py-3 px-4 font-semibold text-left">Legacy Part Number</th><th class="py-3 px-4 font-semibold text-left">Manufacturer</th><th class="py-3 px-4 font-semibold text-left">Lifecycle Event</th><th class="py-3 px-4 font-semibold text-left">New Target Part Number</th><th class="py-3 px-4 font-semibold text-left">Form-Fit-Function Compatibility</th><th class="py-3 px-4 font-semibold text-left">ERP P21 Action</th><th class="py-3 px-4 font-semibold text-left">E-Commerce Web Status</th></tr>
+    </thead>
+    <tbody class="divide-y divide-zinc-200">
+      <tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">DG4V-3-2A-M-U-D6-20</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Eaton Vickers</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Series Phase-Out</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">DG4V-3-2A-M-U-D6-60</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">100% Direct Form-Fit-Function Drop-In</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Flag legacy <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">S</code>; map new SKU in <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_sub</code>; set lead time</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Page live; "Superseded by Series 60" banner with 1-click add to cart</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">BIMBA 041-D</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Bimba</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Seal Material Revision</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">BIMBA 041-DV</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Direct replacement with upgraded FKM seals</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Update legacy cost; link <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">041-DV</code> as primary substitute</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Keep old SKU indexed; recommend <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">041-DV</code> for high-temp service</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">SKF 6205-2Z</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">SKF Bearings</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Shield vs Seal Upgrade</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">SKF 6205-2RSH</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Functional alternative (Contact Rubber Seals)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Add note in <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_mast</code>; link as secondary alternate</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Cross-reference tab on both product pages</td></tr><tr class="hover:bg-zinc-50 transition-colors"><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800"><strong class="font-semibold text-zinc-950">MAC 35A-AAA-DDAA-1BA</strong></td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">MAC Valves</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Discontinued Coil Config</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">None (Custom Build Required)</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Custom factory modification required</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">Flag <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">I</code> (Inactive); block PO generation; refer to engineering</td><td class="py-3 px-4 border-t border-zinc-200 text-zinc-800">301 Redirect URL to MAC 35 Series parent category page</td></tr>
+    </tbody>
+  </table>
+</div>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">4. E-Commerce & SEO: The "Never 404" Golden Rule</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">When a manufacturer discontinues a high-volume part number, digital marketing teams frequently make the mistake of deleting the product URL to "clean up" the website.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><strong class="font-semibold text-zinc-950">Deleting discontinued product pages destroys organic revenue.</strong></p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Industrial maintenance technicians and mechanical engineers search by exact legacy part numbers stamped on the side of 15-year-old factory machines. If your website ranks #1 on Google for an obsolete Vickers valve number and you delete the page, you surrender high-intent commercial traffic to competitors.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">The 3-Tier E-Commerce Discontinued SKU Architecture:</h3>
+<pre class="bg-zinc-900 text-zinc-100 p-4 rounded-sm overflow-x-auto text-xs font-mono my-6 border border-zinc-800 leading-relaxed"><code>                      Buyer Searches Obsolete SKU
+                                   │
+                                   ▼
+             Does Legacy Page Have Active Organic Search Traffic?
+                                   │
+                  ┌────────────────┴────────────────┐
+                  ▼                                 ▼
+                 YES                                NO
+                  │                                 │
+   Leave Page Live (Indexed)              Execute 301 Permanent
+   - Disable Add-to-Cart                  Redirect to Closest
+   - Prominent Badge:                     Functional Series or
+     "Superseded By [Active Part]"        Category Page
+   - Embed 1-Click Link to New SKU</code></pre>
+<ol class="list-decimal list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">High-Traffic Obsolete SKUs (Keep Page Live):</strong> Maintain the URL. Keep all original technical specifications, dimensional drawings, and CAD links intact. Disable the "Add to Cart" button, display "Discontinued by Manufacturer", and place a high-contrast banner directing the user to the active replacement SKU.</li>
+  <li><strong class="font-semibold text-zinc-950">Low-Traffic Obsolete SKUs With Direct Replacement (301 Redirect):</strong> If the legacy page receives negligible search traffic, execute a server-level 301 permanent redirect directly to the new product page.</li>
+  <li><strong class="font-semibold text-zinc-950">Obsolete SKUs With No Replacement (Category 301):</strong> If the line is completely extinguished, 301 redirect the URL to the most specific parent category page (e.g., redirecting a dead hydraulic motor page to <code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">/hydraulic-motors/piston-motors/</code>).</li>
+</ol>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Frequently Asked Questions</h2>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">What is the difference between an alternate part and a substitute part in ERP systems?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">A <strong class="font-semibold text-zinc-950">substitute part</strong> is a direct form-fit-function replacement that can be shipped to a customer without engineering approval (e.g., an upgraded series version of the exact same valve). An <strong class="font-semibold text-zinc-950">alternate part</strong> is a functionally similar component (e.g., a competitor’s valve with matching port sizes and flow, or the same valve in stainless steel instead of brass) that requires customer confirmation before substitution.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How do we handle warranty and return claims on discontinued items?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Preserving the legacy Item ID in your ERP allows purchasing and accounting teams to review the original purchase order date, vendor invoice, and serial number. In Prophet 21, the system retains cost history regardless of item status, enabling accurate vendor warranty debits even if the item is flagged as inactive.</p>
+<h3 class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-8 mb-3">How often should an industrial distributor audit discontinued SKUs?</h3>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Distributors should audit their catalog against manufacturer phase-out notices at least semi-annually. Vellett’s catalog engineering desk integrates manufacturer lifecycle updates directly into distributor price updates, ensuring superseded part flags are applied concurrently with price revisions.</p>
+<hr class="my-8 border-zinc-200">
+<h2 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-zinc-950 mt-12 mb-4 pt-4 border-t border-zinc-200">Clean Up Your Catalog Lifecycle With Vellett</h2>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Managing superseded part numbers, substitution tables, and website redirects manually across thousands of industrial SKUs is an operational drain that leads to shipping errors and lost web traffic.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Vellett provides a dedicated <strong class="font-semibold text-zinc-950">Catalog & Margin Protection Desk</strong> designed specifically for wholesale distributors on Epicor Prophet 21, Infor SX.e, and modern e-commerce platforms:</p>
+<ul class="list-disc list-outside ml-6 space-y-2 text-sm sm:text-base text-zinc-800 font-sans my-4">
+  <li><strong class="font-semibold text-zinc-950">Clean Substitution Mapping:</strong> We identify manufacturer phase-outs, create new replacement SKU records, and map substitution tables (<code class="font-mono text-xs bg-zinc-100 text-zinc-900 px-1.5 py-0.5 rounded border border-zinc-200">inv_sub</code>).</li>
+  <li><strong class="font-semibold text-zinc-950">SEO-Safe E-Commerce Feeds:</strong> We format product feeds with explicit "Superseded By" relationships to preserve search engine rankings and eliminate 404 errors.</li>
+  <li><strong class="font-semibold text-zinc-950">Accurate Margin Control:</strong> Ensure obsolete parts never get quoted at legacy replacement costs.</li>
+</ul>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4"><strong class="font-semibold text-zinc-950">Experience seamless catalog management:</strong> Send over one manufacturer line or phase-out notice (50–100 SKUs). We will map the replacements, format the ERP substitution tables, and build your e-commerce cross-reference schema within 48 hours for free.</p>
+<p class="text-sm sm:text-base leading-relaxed text-zinc-800 font-sans my-4">Contact Ayush Bijlwan at <strong class="font-semibold text-zinc-950">ayush@vellett.com</strong> or visit <a href="https://vellett.com" class="text-zinc-950 font-medium underline underline-offset-2 hover:text-zinc-700 transition-colors" target="_blank" rel="noopener noreferrer">vellett.com</a>.</p>
+<hr class="my-8 border-zinc-200">
+    </article>
+
+    <!-- Technical Callout Box -->
+    <div class="mt-12 p-8 border border-zinc-900 bg-zinc-950 text-zinc-100 rounded-sm">
+      <div class="flex items-center space-x-3 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-3">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Vellett Engineering Protocol</span>
+      </div>
+      <h3 class="font-serif text-xl font-bold text-white mb-2">Have a Messy Supplier PDF or Price Sheet on Your Desk?</h3>
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-sans">
+        Send us one unformatted manufacturer PDF or Excel price sheet. We will engineer a 15-SKU flat import sample formatted to your exact ERP schema (Epicor Prophet 21, Infor CSD, or B2B eCommerce) within 48 hours at zero cost.
+      </p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="../../contact/" class="inline-flex items-center justify-center px-6 py-3 bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold transition-colors rounded-sm">
+          Request Zero-Cost 15-SKU Audit &rarr;
+        </a>
+        <span class="text-xs font-mono text-zinc-400">Direct Principal Desk: (919) 339-1208</span>
+      </div>
+    </div>
+
+    <!-- Related Articles Backlink -->
+    <div class="mt-12 pt-8 border-t border-zinc-200 flex justify-between items-center text-xs font-mono">
+      <a href="../" class="text-zinc-600 hover:text-zinc-950 underline">&larr; Return to All Blog Articles</a>
+      <a href="../../services/" class="text-zinc-950 font-semibold hover:underline">Explore Managed Catalog Services &rarr;</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-200 bg-parchment-subtle py-12 px-4 sm:px-8 mt-16 text-xs text-zinc-600 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col space-y-1">
+        <span class="font-serif text-lg font-bold text-zinc-950">Vellett</span>
+        <span>Industrial Catalog Engineering LLC &bull; 1201 N Orange St, Suite 700, Wilmington, DE 19801</span>
+      </div>
+      <div class="flex flex-wrap gap-6 text-zinc-700">
+        <a href="../../methodology/" class="hover:underline">Methodology</a>
+        <a href="../../services/" class="hover:underline">Services</a>
+        <a href="../../pricing/" class="hover:underline">Pricing</a>
+        <a href="../../resources/" class="hover:underline">Resources</a>
+        <a href="../" class="hover:underline">Blog</a>
+        <a href="../../contact/" class="hover:underline">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
